@@ -7,10 +7,12 @@ import Toolbar from "@material-ui/core/Toolbar"
 import Typography from "@material-ui/core/Typography"
 import IconButton from "@material-ui/core/IconButton"
 import MenuIcon from "@material-ui/icons/Menu"
+import ShoppingCartIcon from "@material-ui/icons/ShoppingCart"
 import useScrollTrigger from "@material-ui/core/useScrollTrigger"
 import Slide from "@material-ui/core/Slide"
 import Button from "@material-ui/core/Button"
 import DrawerMenu from "./DrawerMenu"
+import DrawerCart from "./DrawerCart"
 
 function HideOnScroll(props) {
   const { children, window } = props
@@ -36,6 +38,7 @@ const useStyles = makeStyles(theme => ({
   menuButton: {
     marginRight: theme.spacing(2),
   },
+  shoppingCartButton: {},
   hide: {
     display: "none",
   },
@@ -48,13 +51,20 @@ export default function Header(props) {
   const classes = useStyles()
   const theme = useTheme()
   const [open, setOpen] = React.useState(false)
+  const [openCart, setOpenCart] = React.useState(false)
 
   const handleDrawerOpen = () => {
     setOpen(true)
   }
-
   const handleDrawerClose = () => {
     setOpen(false)
+  }
+
+  const handleCartDrawerOpen = () => {
+    setOpenCart(true)
+  }
+  const handleCartDrawerClose = () => {
+    setOpenCart(false)
   }
 
   return (
@@ -75,11 +85,20 @@ export default function Header(props) {
             <Typography variant="h6" className={classes.title}>
               Logo
             </Typography>
-            <Button color="inherit">Cart</Button>
+            <IconButton
+              color="inherit"
+              aria-label="open drawer"
+              onClick={handleCartDrawerOpen}
+              edge="end"
+              className={clsx(classes.shoppingCartButton, open && classes.hide)}
+            >
+              <ShoppingCartIcon />
+            </IconButton>
           </Toolbar>
         </AppBar>
       </HideOnScroll>
       <DrawerMenu onClose={handleDrawerClose} open={open} />
+      <DrawerCart onClose={handleCartDrawerClose} open={openCart} />
     </div>
   )
 }
