@@ -27,6 +27,7 @@ export default props => (
               product {
                 id
                 name
+                images
               }
             }
           }
@@ -38,6 +39,7 @@ export default props => (
         {prices.edges.map(({ node: price }) => {
           const newSku = {
             sku: price.id,
+            image: price.product.images,
             name: price.product.name,
             price: price.unit_amount,
             currency: price.currency,
