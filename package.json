@@ -1,9 +1,9 @@
 {
-  "name": "gatsby-starter-default",
+  "name": "my_store_1",
   "private": true,
-  "description": "A simple starter to get up and developing quickly with Gatsby",
+  "description": "Store",
   "version": "0.1.0",
-  "author": "Kyle Mathews <mathews.kyle@gmail.com>",
+  "author": "Anatol Kerbs <anker2702@gmail.com>",
   "dependencies": {
     "@stripe/stripe-js": "^1.9.0",
     "cross-env": "^7.0.2",

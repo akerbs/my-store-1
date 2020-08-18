@@ -1,16 +1,9 @@
-/**
- * Layout component that queries for data
- * with Gatsby's useStaticQuery component
- *
- * See: https://www.gatsbyjs.org/docs/use-static-query/
- */
-
 import React from "react"
 import PropTypes from "prop-types"
 import { useStaticQuery, graphql } from "gatsby"
-
 import Header from "./header"
 import "./layout.css"
+import "@stripe/stripe-js" // https://github.com/stripe/stripe-js#import-as-a-side-effect
 
 const Layout = ({ children }) => {
   const data = useStaticQuery(graphql`
@@ -34,6 +27,7 @@ const Layout = ({ children }) => {
         }}
       >
         <main>{children}</main>
+
         <footer>
           © {new Date().getFullYear()}, Built with
           {` `}
