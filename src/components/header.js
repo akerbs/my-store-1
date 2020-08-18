@@ -1,42 +1,85 @@
-import { Link } from "gatsby"
-import PropTypes from "prop-types"
 import React from "react"
+import clsx from "clsx"
+import { makeStyles, useTheme } from "@material-ui/core/styles"
+import CssBaseline from "@material-ui/core/CssBaseline"
+import AppBar from "@material-ui/core/AppBar"
+import Toolbar from "@material-ui/core/Toolbar"
+import Typography from "@material-ui/core/Typography"
+import IconButton from "@material-ui/core/IconButton"
+import MenuIcon from "@material-ui/icons/Menu"
+import useScrollTrigger from "@material-ui/core/useScrollTrigger"
+import Slide from "@material-ui/core/Slide"
+import Button from "@material-ui/core/Button"
+import DrawerMenu from "./DrawerMenu"
 
-const Header = ({ siteTitle }) => (
-  <header
-    style={{
-      background: `rebeccapurple`,
-      marginBottom: `1.45rem`,
-    }}
-  >
-    <div
-      style={{
-        margin: `0 auto`,
-        maxWidth: 960,
-        padding: `1.45rem 1.0875rem`,
-      }}
-    >
-      <h1 style={{ margin: 0 }}>
-        <Link
-          to="/"
-          style={{
-            color: `white`,
-            textDecoration: `none`,
-          }}
-        >
-          {siteTitle}
-        </Link>
-      </h1>
+function HideOnScroll(props) {
+  const { children, window } = props
+  // Note that you normally won't need to set the window ref as useScrollTrigger
+  // will default to window.
+  // This is only being set here because the demo is in an iframe.
+  const trigger = useScrollTrigger({ target: window ? window() : undefined })
+
+  return (
+    <Slide appear={false} direction="down" in={!trigger}>
+      {children}
+    </Slide>
+  )
+}
+
+const drawerWidth = 240
+
+const useStyles = makeStyles(theme => ({
+  root: {
+    display: "flex",
+    flexGrow: 1,
+  },
+  menuButton: {
+    marginRight: theme.spacing(2),
+  },
+  hide: {
+    display: "none",
+  },
+  title: {
+    flexGrow: 1,
+  },
+}))
+
+export default function Header(props) {
+  const classes = useStyles()
+  const theme = useTheme()
+  const [open, setOpen] = React.useState(false)
+
+  const handleDrawerOpen = () => {
+    setOpen(true)
+  }
+
+  const handleDrawerClose = () => {
+    setOpen(false)
+  }
+
+  return (
+    <div className={classes.root}>
+      <CssBaseline />
+      <HideOnScroll {...props}>
+        <AppBar>
+          <Toolbar>
+            <IconButton
+              color="inherit"
+              aria-label="open drawer"
+              onClick={handleDrawerOpen}
+              edge="start"
+              className={clsx(classes.menuButton, open && classes.hide)}
+            >
+              <MenuIcon />
+            </IconButton>
+            <Typography variant="h6" className={classes.title}>
+              Logo
+            </Typography>
+            <Button color="inherit">Cart</Button>
+          </Toolbar>
+        </AppBar>
+      </HideOnScroll>
+      <DrawerMenu onClose={handleDrawerClose} open={open} />
     </div>
-  </header>
-)
-
-Header.propTypes = {
-  siteTitle: PropTypes.string,
+  )
 }
-
-Header.defaultProps = {
-  siteTitle: ``,
-}
-
-export default Header
