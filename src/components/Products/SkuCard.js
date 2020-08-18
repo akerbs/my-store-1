@@ -33,6 +33,7 @@ const SkuCard = ({ sku }) => {
     <div style={cardStyles}>
       <img src={sku.image} />
       <h4>{sku.name}</h4>
+      <p>{sku.description}</p>
       <p>
         Price:{" "}
         {formatCurrencyString({

@@ -28,6 +28,7 @@ export default props => (
                 id
                 name
                 images
+                description
               }
             }
           }
@@ -41,6 +42,7 @@ export default props => (
             sku: price.id,
             image: price.product.images,
             name: price.product.name,
+            description: price.product.description,
             price: price.unit_amount,
             currency: price.currency,
           }
