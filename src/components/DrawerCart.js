@@ -6,6 +6,7 @@ import IconButton from "@material-ui/core/IconButton"
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft"
 import ChevronRightIcon from "@material-ui/icons/ChevronRight"
 import CartOverview from "./Cart/CartOverview"
+const window = require("global/window")
 
 const drawerWidth = window.innerWidth <= 599 ? "100vw" : 450
 
