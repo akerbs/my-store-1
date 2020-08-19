@@ -6,7 +6,6 @@ import "./layout.css"
 import "@stripe/stripe-js" // https://github.com/stripe/stripe-js#import-as-a-side-effect
 import { CartProvider } from "use-shopping-cart"
 import { loadStripe } from "@stripe/stripe-js"
-const window = require("global/window")
 
 // const stripePromise = loadStripe(process.env.GATSBY_STRIPE_PUBLISHABLE_KEY)
 const stripePromise = loadStripe(
@@ -29,12 +28,14 @@ const Layout = ({ children }) => {
       <CartProvider
         mode="client-only"
         stripe={stripePromise}
-        currency="USD"
-        successUrl="https://kerbs-store-1.vercel.app/success/"
-        cancelUrl="https://kerbs-store-1.vercel.app/"
+        currency="EUR"
+        // successUrl="https://kerbs-store-1.vercel.app/success/"
+        // cancelUrl="https://kerbs-store-1.vercel.app/"
+        successUrl="http://localhost:8000/success/"
+        cancelUrl="http://localhost:8000/"
         // successUrl={`${window.location.origin}/success/`}
         // cancelUrl={`${window.location.origin}/`}
-        allowedCountries={["US", "GB", "CA"]}
+        allowedCountries={["US", "GB", "CA", "DE"]}
         billingAddressCollection={true}
       >
         <Header />

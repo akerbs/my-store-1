@@ -2,18 +2,13 @@ import React, { useState } from "react"
 import { useShoppingCart } from "use-shopping-cart"
 import CartItem from "./CartItem"
 import { makeStyles } from "@material-ui/core/styles"
+import Button from "@material-ui/core/Button"
+import Typography from "@material-ui/core/Typography"
 
 const useStyles = makeStyles(theme => ({
-  btn: {
-    fontSize: "13px",
+  btnWrapper: {
     textAlign: "center",
-    color: "#fff",
-    outline: "none",
-    padding: "12px",
-    boxShadow: "2px 5px 10px rgba(0,0,0,.1)",
-    backgroundColor: "rgb(255, 178, 56)",
-    borderRadius: "6px",
-    letterSpacing: "1.5px",
+    margin: 20,
   },
 }))
 
@@ -34,8 +29,8 @@ const Cart = () => {
 
   console.log(cartDetails)
 
-  const ttlPriceWithoutDollarSign = formattedTotalPrice.toString().slice(0, -1)
-  const ttlPriceWithEuroSign = `€ ${ttlPriceWithoutDollarSign}`
+  // const ttlPriceWithoutDollarSign = formattedTotalPrice.toString().slice(0, -1)
+  // const ttlPriceWithEuroSign = `€ ${ttlPriceWithoutDollarSign}`
 
   // console.log(ttlPriceWithEuroSign)
 
@@ -59,19 +54,30 @@ const Cart = () => {
       </div>
 
       {/* <p>Number of Items: {cartCount}</p> */}
-      <p>Total: {ttlPriceWithEuroSign}</p>
+      <Typography
+        variant="body2"
+        align="right"
+        color="textPrimary"
+        style={{ marginRight: 10 }}
+      >
+        Subtotal: {formattedTotalPrice}
+      </Typography>
 
       {/* Redirects the user to Stripe */}
-      <button
-        className={classes.btn}
-        disabled={loading}
-        onClick={() => {
-          setLoading(true)
-          redirectToCheckout()
-        }}
-      >
-        {loading ? "Loading..." : "Checkout"}
-      </button>
+      <div className={classes.btnWrapper}>
+        <Button
+          fullWidth
+          variant="contained"
+          color="primary"
+          disabled={loading}
+          onClick={() => {
+            setLoading(true)
+            redirectToCheckout()
+          }}
+        >
+          {loading ? "Loading..." : "Checkout"}
+        </Button>
+      </div>
     </div>
   )
 }

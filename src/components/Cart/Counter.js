@@ -1,10 +1,11 @@
 import React from "react"
 import Button from "@material-ui/core/Button"
 import { makeStyles } from "@material-ui/core/styles"
+import Typography from "@material-ui/core/Typography"
 
 const useStyles = makeStyles(theme => ({
   root: {
-    border: "1px solid black",
+    border: "1px solid rgba(0, 0, 0, 0.12)",
     height: "30px",
     paddingTop: "5px",
     paddingBottom: "7px",
@@ -37,7 +38,9 @@ export default function Counter(props) {
         onClick={() => props.decrementItem(props.sku)}
         disabled={props.quantity <= 1 ? true : false}
       >
-        -
+        <Typography variant="body2" color="textSecondary">
+          -
+        </Typography>
       </Button>
 
       <span style={{ minWidth: "60px" }}>{props.quantity}</span>
@@ -47,7 +50,9 @@ export default function Counter(props) {
         onClick={() => props.incrementItem(props.sku)}
         disabled={props.quantity >= 99 ? true : false}
       >
-        +
+        <Typography variant="body2" color="textSecondary">
+          +
+        </Typography>
       </Button>
     </div>
   )
