@@ -1,6 +1,7 @@
 import React, { useState } from "react"
-
 import { useShoppingCart } from "use-shopping-cart"
+
+import Counter from "./Counter"
 
 const buttonStyles = {
   fontSize: "13px",
@@ -18,6 +19,9 @@ const Cart = () => {
   const [loading, setLoading] = useState(false)
   /* Gets the totalPrice and a method for redirecting to stripe */
   const {
+    incrementItem,
+    decrementItem,
+    removeItem,
     cartDetails,
     formattedTotalPrice,
     redirectToCheckout,
@@ -30,15 +34,19 @@ const Cart = () => {
   return (
     <div>
       {/* This is where we'll render our cart */}
-      {/* {
-  cartDetails.map(item => (
-    return(<p>{item.name}</p>)
-     ))} */}
 
       <div>
         {Object.keys(cartDetails).map((item, idx) => {
           const cartItem = cartDetails[item]
-          return <CartItem key={idx} item={cartItem} />
+          return (
+            <CartItem
+              key={idx}
+              item={cartItem}
+              incrementItem={incrementItem}
+              decrementItem={decrementItem}
+              removeItem={removeItem}
+            />
+          )
         })}
       </div>
 
@@ -65,11 +73,25 @@ const Cart = () => {
 
 export default Cart
 
-const CartItem = ({ item }) => {
+const CartItem = props => {
+  const price = props.item.price.toString()
+  const beforeDot = price.slice(0, -2)
+  const afterDot = price.slice(-2)
+  const corrPrice = `${beforeDot}.${afterDot}`
+
   return (
     <div>
       <h6>
-        {item.name} {item.quantity}
+        {props.item.name}
+        <br />
+        <Counter
+          incrementItem={props.incrementItem}
+          decrementItem={props.decrementItem}
+          quantity={props.item.quantity}
+          sku={props.item.sku}
+        />
+        {" x "}
+        {corrPrice} {props.item.currency}
       </h6>
     </div>
   )

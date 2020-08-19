@@ -1,0 +1,56 @@
+import React from "react"
+import ButtonGroup from "@material-ui/core/ButtonGroup"
+import Button from "@material-ui/core/Button"
+import TextField from "@material-ui/core/TextField"
+import { makeStyles, useTheme } from "@material-ui/core/styles"
+
+const useStyles = makeStyles(theme => ({
+  root: {
+    border: "1px solid black",
+    height: "30px",
+    paddingTop: "5px",
+    paddingBottom: "7px",
+    minWidth: "90px",
+    display: "inline",
+    borderRadius: "8px",
+  },
+  btnLeft: {
+    height: "30px",
+    width: "30px",
+    maxWidth: "30px",
+    minWidth: "30px",
+    borderRadius: "8px 0 0 8px",
+  },
+  btnRight: {
+    height: "30px",
+    width: "30px",
+    maxWidth: "30px",
+    minWidth: "30px",
+    borderRadius: "0 8px 8px 0 ",
+  },
+}))
+
+export default function Counter(props) {
+  const classes = useStyles()
+  return (
+    <div className={classes.root}>
+      <Button
+        className={classes.btnLeft}
+        onClick={() => props.decrementItem(props.sku)}
+        disabled={props.quantity <= 1 ? true : false}
+      >
+        -
+      </Button>
+
+      <span style={{ minWidth: "60px" }}>{props.quantity}</span>
+
+      <Button
+        className={classes.btnRight}
+        onClick={() => props.incrementItem(props.sku)}
+        disabled={props.quantity >= 99 ? true : false}
+      >
+        +
+      </Button>
+    </div>
+  )
+}

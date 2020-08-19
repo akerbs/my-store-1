@@ -7,12 +7,14 @@ import Toolbar from "@material-ui/core/Toolbar"
 import Typography from "@material-ui/core/Typography"
 import IconButton from "@material-ui/core/IconButton"
 import MenuIcon from "@material-ui/icons/Menu"
+import Badge from "@material-ui/core/Badge"
 import ShoppingCartIcon from "@material-ui/icons/ShoppingCart"
 import useScrollTrigger from "@material-ui/core/useScrollTrigger"
 import Slide from "@material-ui/core/Slide"
 import Button from "@material-ui/core/Button"
 import DrawerMenu from "./DrawerMenu"
 import DrawerCart from "./DrawerCart"
+import { useShoppingCart } from "use-shopping-cart"
 
 function HideOnScroll(props) {
   const { children } = props
@@ -64,6 +66,8 @@ export default function Header(props) {
     setOpenCart(false)
   }
 
+  const { cartCount } = useShoppingCart()
+
   return (
     <div className={classes.root}>
       <CssBaseline />
@@ -87,9 +91,14 @@ export default function Header(props) {
               aria-label="open drawer"
               onClick={handleCartDrawerOpen}
               edge="end"
-              className={clsx(classes.shoppingCartButton, openCart && classes.hide)}
+              className={clsx(
+                classes.shoppingCartButton,
+                openCart && classes.hide
+              )}
             >
-              <ShoppingCartIcon />
+              <Badge badgeContent={cartCount} color="secondary">
+                <ShoppingCartIcon />
+              </Badge>
             </IconButton>
           </Toolbar>
         </AppBar>
