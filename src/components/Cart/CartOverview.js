@@ -1,5 +1,7 @@
 import React, { useState } from "react"
 import { useShoppingCart } from "use-shopping-cart"
+import IconButton from "@material-ui/core/IconButton"
+import HighlightOffIcon from "@material-ui/icons/HighlightOff"
 
 import Counter from "./Counter"
 
@@ -31,6 +33,11 @@ const Cart = () => {
 
   console.log(cartDetails)
 
+  const ttlPriceWithoutDollarSign = formattedTotalPrice.toString().slice(0, -1)
+  const ttlPriceWithEuroSign = `€ ${ttlPriceWithoutDollarSign}`
+
+  // console.log(ttlPriceWithEuroSign)
+
   return (
     <div>
       {/* This is where we'll render our cart */}
@@ -50,8 +57,8 @@ const Cart = () => {
         })}
       </div>
 
-      <p>Number of Items: {cartCount}</p>
-      <p>Total: {formattedTotalPrice}</p>
+      {/* <p>Number of Items: {cartCount}</p> */}
+      <p>Total: {ttlPriceWithEuroSign}</p>
 
       {/* Redirects the user to Stripe */}
       <button
@@ -81,18 +88,27 @@ const CartItem = props => {
 
   return (
     <div>
-      <h6>
+      <p>
         {props.item.name}
         <br />
         <Counter
           incrementItem={props.incrementItem}
           decrementItem={props.decrementItem}
+          removeItem={props.removeItem}
           quantity={props.item.quantity}
           sku={props.item.sku}
         />
-        {" x "}
-        {corrPrice} {props.item.currency}
-      </h6>
+        {"  "}
+        {(props.item.currency = "eur" ? "€" : props.item.currency)}
+        {"  "}
+        {corrPrice}
+        <IconButton
+          size="small"
+          onClick={() => props.removeItem(props.item.sku)}
+        >
+          <HighlightOffIcon />
+        </IconButton>
+      </p>
     </div>
   )
 }
