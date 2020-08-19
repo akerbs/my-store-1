@@ -26,8 +26,6 @@ function HideOnScroll(props) {
   )
 }
 
-const drawerWidth = 240
-
 const useStyles = makeStyles(theme => ({
   root: {
     display: "flex",
@@ -36,7 +34,7 @@ const useStyles = makeStyles(theme => ({
   menuButton: {
     marginRight: theme.spacing(2),
   },
-  shoppingCartButton: {},
+
   hide: {
     display: "none",
   },
@@ -101,7 +99,7 @@ export default function Header(props) {
                 openCart && classes.hide
               )}
             >
-              <Badge badgeContent={cartCount} color="secondary">
+              <Badge badgeContent={cartCount} color="secondary" variant="dot">
                 <ShoppingCartIcon />
               </Badge>
             </IconButton>
