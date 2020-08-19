@@ -20,11 +20,10 @@ const Cart = () => {
     incrementItem,
     decrementItem,
     removeItem,
+    cartCount,
     cartDetails,
     formattedTotalPrice,
     redirectToCheckout,
-    cartCount,
-    clearCart,
   } = useShoppingCart()
 
   console.log(cartDetails)
@@ -36,8 +35,6 @@ const Cart = () => {
 
   return (
     <div>
-      {/* This is where we'll render our cart */}
-
       <div>
         {Object.keys(cartDetails).map((item, idx) => {
           const cartItem = cartDetails[item]
@@ -53,31 +50,37 @@ const Cart = () => {
         })}
       </div>
 
-      {/* <p>Number of Items: {cartCount}</p> */}
-      <Typography
-        variant="body2"
-        align="right"
-        color="textPrimary"
-        style={{ marginRight: 10 }}
-      >
-        Subtotal: {formattedTotalPrice}
-      </Typography>
+      {!cartCount ? (
+        <Typography variant="body2" align="center" color="textSecondary">
+          Cart is empty...
+        </Typography>
+      ) : (
+        <>
+          <Typography
+            variant="body2"
+            align="right"
+            color="textPrimary"
+            style={{ marginRight: 10 }}
+          >
+            Subtotal: {formattedTotalPrice}
+          </Typography>
 
-      {/* Redirects the user to Stripe */}
-      <div className={classes.btnWrapper}>
-        <Button
-          fullWidth
-          variant="contained"
-          color="primary"
-          disabled={loading}
-          onClick={() => {
-            setLoading(true)
-            redirectToCheckout()
-          }}
-        >
-          {loading ? "Loading..." : "Checkout"}
-        </Button>
-      </div>
+          <div className={classes.btnWrapper}>
+            <Button
+              fullWidth
+              variant="contained"
+              color="primary"
+              disabled={loading}
+              onClick={() => {
+                setLoading(true)
+                redirectToCheckout()
+              }}
+            >
+              {loading ? "Loading..." : "Checkout"}
+            </Button>
+          </div>
+        </>
+      )}
     </div>
   )
 }

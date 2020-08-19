@@ -48,6 +48,7 @@ export default function Header(props) {
   const theme = useTheme()
   const [open, setOpen] = React.useState(false)
   const [openCart, setOpenCart] = React.useState(false)
+  const { cartCount } = useShoppingCart()
 
   const handleDrawerOpen = () => {
     setOpen(true)
@@ -68,8 +69,6 @@ export default function Header(props) {
     const scrollY = document.body.style.top
     document.body.style.position = ""
   }
-
-  const { cartCount } = useShoppingCart()
 
   return (
     <div className={classes.root}>
