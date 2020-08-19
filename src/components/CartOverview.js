@@ -18,15 +18,30 @@ const Cart = () => {
   const [loading, setLoading] = useState(false)
   /* Gets the totalPrice and a method for redirecting to stripe */
   const {
+    cartDetails,
     formattedTotalPrice,
     redirectToCheckout,
     cartCount,
     clearCart,
   } = useShoppingCart()
 
+  console.log(cartDetails)
+
   return (
     <div>
       {/* This is where we'll render our cart */}
+      {/* {
+  cartDetails.map(item => (
+    return(<p>{item.name}</p>)
+     ))} */}
+
+      <div>
+        {Object.keys(cartDetails).map((item, idx) => {
+          const cartItem = cartDetails[item]
+          return <CartItem key={idx} item={cartItem} />
+        })}
+      </div>
+
       <p>Number of Items: {cartCount}</p>
       <p>Total: {formattedTotalPrice}</p>
 
@@ -49,3 +64,13 @@ const Cart = () => {
 }
 
 export default Cart
+
+const CartItem = ({ item }) => {
+  return (
+    <div>
+      <h6>
+        {item.name} {item.quantity}
+      </h6>
+    </div>
+  )
+}

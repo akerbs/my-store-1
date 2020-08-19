@@ -13,6 +13,7 @@ import ListItemIcon from "@material-ui/core/ListItemIcon"
 import ListItemText from "@material-ui/core/ListItemText"
 import InboxIcon from "@material-ui/icons/MoveToInbox"
 import MailIcon from "@material-ui/icons/Mail"
+import CartOverview from "../components/CartOverview"
 
 const drawerWidth = 240
 
@@ -32,6 +33,9 @@ const useStyles = makeStyles(theme => ({
     ...theme.mixins.toolbar,
     justifyContent: "flex-end",
   },
+  cartTitle: {
+    flexGrow: 1,
+  }
 }))
 
 export default function DrawerCart(props) {
@@ -50,6 +54,9 @@ export default function DrawerCart(props) {
       }}
     >
       <div className={classes.drawerHeader}>
+       <Typography variant="body1" className={classes.cartTitle}>
+              Cart
+            </Typography>
         <IconButton onClick={props.onClose}>
           {theme.direction === "rtl" ? (
             <ChevronLeftIcon />
@@ -58,28 +65,8 @@ export default function DrawerCart(props) {
           )}
         </IconButton>
       </div>
-      <Divider />
-      <List>
-        {["Inbox", "Starred", "Send email", "Drafts"].map((text, index) => (
-          <ListItem button key={text}>
-            <ListItemIcon>
-              {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-            </ListItemIcon>
-            <ListItemText primary={text} />
-          </ListItem>
-        ))}
-      </List>
-      <Divider />
-      <List>
-        {["All mail", "Trash", "Spam"].map((text, index) => (
-          <ListItem button key={text}>
-            <ListItemIcon>
-              {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-            </ListItemIcon>
-            <ListItemText primary={text} />
-          </ListItem>
-        ))}
-      </List>
+
+      <CartOverview />
     </Drawer>
   )
 }

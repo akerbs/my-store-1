@@ -50,6 +50,7 @@ export default function DrawerMenu(props) {
       }}
     >
       <div className={classes.drawerHeader}>
+      
         <IconButton onClick={props.onClose}>
           {theme.direction === "ltr" ? (
             <ChevronLeftIcon />

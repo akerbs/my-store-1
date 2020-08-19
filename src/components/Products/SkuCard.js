@@ -31,7 +31,7 @@ const SkuCard = ({ sku }) => {
 
   return (
     <div style={cardStyles}>
-      <img src={sku.image} />
+      <img src={sku.image} alt={sku.name} />
       <h4>{sku.name}</h4>
       <p>{sku.description}</p>
       <p>

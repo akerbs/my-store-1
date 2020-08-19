@@ -15,11 +15,8 @@ import DrawerMenu from "./DrawerMenu"
 import DrawerCart from "./DrawerCart"
 
 function HideOnScroll(props) {
-  const { children, window } = props
-  // Note that you normally won't need to set the window ref as useScrollTrigger
-  // will default to window.
-  // This is only being set here because the demo is in an iframe.
-  const trigger = useScrollTrigger({ target: window ? window() : undefined })
+  const { children } = props
+  const trigger = useScrollTrigger()
 
   return (
     <Slide appear={false} direction="down" in={!trigger}>
@@ -90,7 +87,7 @@ export default function Header(props) {
               aria-label="open drawer"
               onClick={handleCartDrawerOpen}
               edge="end"
-              className={clsx(classes.shoppingCartButton, open && classes.hide)}
+              className={clsx(classes.shoppingCartButton, openCart && classes.hide)}
             >
               <ShoppingCartIcon />
             </IconButton>
