@@ -6,6 +6,7 @@ import "./layout.css"
 import "@stripe/stripe-js" // https://github.com/stripe/stripe-js#import-as-a-side-effect
 import { CartProvider } from "use-shopping-cart"
 import { loadStripe } from "@stripe/stripe-js"
+const window = require("global/window")
 
 // const stripePromise = loadStripe(process.env.GATSBY_STRIPE_PUBLISHABLE_KEY)
 const stripePromise = loadStripe(
