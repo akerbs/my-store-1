@@ -7,7 +7,7 @@ import ChevronLeftIcon from "@material-ui/icons/ChevronLeft"
 import ChevronRightIcon from "@material-ui/icons/ChevronRight"
 import CartOverview from "./Cart/CartOverview"
 
-const drawerWidth = 240
+const drawerWidth = window.innerWidth <= 599 ? "100vw" : 450
 
 const useStyles = makeStyles(theme => ({
   drawer: {
@@ -37,7 +37,9 @@ export default function DrawerCart(props) {
   return (
     <Drawer
       className={classes.drawer}
-      variant="persistent"
+      onEscapeKeyDown={props.onClose}
+      onBackdropClick={props.onClose}
+      variant="temporary"
       anchor="right"
       open={props.open}
       onClose={props.onClose}

@@ -54,16 +54,22 @@ export default function Header(props) {
 
   const handleDrawerOpen = () => {
     setOpen(true)
+    document.body.style.position = "fixed"
   }
   const handleDrawerClose = () => {
     setOpen(false)
+    const scrollY = document.body.style.top
+    document.body.style.position = ""
   }
 
   const handleCartDrawerOpen = () => {
     setOpenCart(true)
+    document.body.style.position = "fixed"
   }
   const handleCartDrawerClose = () => {
     setOpenCart(false)
+    const scrollY = document.body.style.top
+    document.body.style.position = ""
   }
 
   const { cartCount } = useShoppingCart()

@@ -1,23 +1,24 @@
 import React, { useState } from "react"
 import { useShoppingCart } from "use-shopping-cart"
-import IconButton from "@material-ui/core/IconButton"
-import HighlightOffIcon from "@material-ui/icons/HighlightOff"
+import CartItem from "./CartItem"
+import { makeStyles } from "@material-ui/core/styles"
 
-import Counter from "./Counter"
-
-const buttonStyles = {
-  fontSize: "13px",
-  textAlign: "center",
-  color: "#fff",
-  outline: "none",
-  padding: "12px",
-  boxShadow: "2px 5px 10px rgba(0,0,0,.1)",
-  backgroundColor: "rgb(255, 178, 56)",
-  borderRadius: "6px",
-  letterSpacing: "1.5px",
-}
+const useStyles = makeStyles(theme => ({
+  btn: {
+    fontSize: "13px",
+    textAlign: "center",
+    color: "#fff",
+    outline: "none",
+    padding: "12px",
+    boxShadow: "2px 5px 10px rgba(0,0,0,.1)",
+    backgroundColor: "rgb(255, 178, 56)",
+    borderRadius: "6px",
+    letterSpacing: "1.5px",
+  },
+}))
 
 const Cart = () => {
+  const classes = useStyles()
   const [loading, setLoading] = useState(false)
   /* Gets the totalPrice and a method for redirecting to stripe */
   const {
@@ -62,7 +63,7 @@ const Cart = () => {
 
       {/* Redirects the user to Stripe */}
       <button
-        style={buttonStyles}
+        className={classes.btn}
         disabled={loading}
         onClick={() => {
           setLoading(true)
@@ -71,44 +72,8 @@ const Cart = () => {
       >
         {loading ? "Loading..." : "Checkout"}
       </button>
-      <button style={buttonStyles} onClick={clearCart}>
-        Clear cart
-      </button>
     </div>
   )
 }
 
 export default Cart
-
-const CartItem = props => {
-  const price = props.item.price.toString()
-  const beforeDot = price.slice(0, -2)
-  const afterDot = price.slice(-2)
-  const corrPrice = `${beforeDot}.${afterDot}`
-
-  return (
-    <div>
-      <p>
-        {props.item.name}
-        <br />
-        <Counter
-          incrementItem={props.incrementItem}
-          decrementItem={props.decrementItem}
-          removeItem={props.removeItem}
-          quantity={props.item.quantity}
-          sku={props.item.sku}
-        />
-        {"  "}
-        {(props.item.currency = "eur" ? "€" : props.item.currency)}
-        {"  "}
-        {corrPrice}
-        <IconButton
-          size="small"
-          onClick={() => props.removeItem(props.item.sku)}
-        >
-          <HighlightOffIcon />
-        </IconButton>
-      </p>
-    </div>
-  )
-}

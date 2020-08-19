@@ -14,7 +14,7 @@ import ListItemText from "@material-ui/core/ListItemText"
 import InboxIcon from "@material-ui/icons/MoveToInbox"
 import MailIcon from "@material-ui/icons/Mail"
 
-const drawerWidth = 240
+const drawerWidth = window.innerWidth <= 599 ? "100vw" : 450
 
 const useStyles = makeStyles(theme => ({
   drawer: {
@@ -41,7 +41,9 @@ export default function DrawerMenu(props) {
   return (
     <Drawer
       className={classes.drawer}
-      variant="persistent"
+      onEscapeKeyDown={props.onClose}
+      onBackdropClick={props.onClose}
+      variant="temporary"
       anchor="left"
       open={props.open}
       onClose={props.onClose}
@@ -50,7 +52,6 @@ export default function DrawerMenu(props) {
       }}
     >
       <div className={classes.drawerHeader}>
-      
         <IconButton onClick={props.onClose}>
           {theme.direction === "ltr" ? (
             <ChevronLeftIcon />
