@@ -30,8 +30,8 @@ const Layout = ({ children }) => {
         mode="client-only"
         stripe={stripePromise}
         currency="USD"
-        successUrl={`${window.location.origin}/success/`}
-        cancelUrl={`${window.location.origin}/`}
+        successUrl="/success/"
+        cancelUrl="/"
         allowedCountries={["US", "GB", "CA"]}
         billingAddressCollection={true}
       >
