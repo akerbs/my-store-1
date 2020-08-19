@@ -30,8 +30,10 @@ const Layout = ({ children }) => {
         mode="client-only"
         stripe={stripePromise}
         currency="USD"
-        successUrl="/success/"
-        cancelUrl="/"
+        successUrl="https://kerbs-store-1.vercel.app/success/"
+        cancelUrl="https://kerbs-store-1.vercel.app/"
+        // successUrl={`${window.location.origin}/success/`}
+        // cancelUrl={`${window.location.origin}/`}
         allowedCountries={["US", "GB", "CA"]}
         billingAddressCollection={true}
       >
