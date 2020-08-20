@@ -54,7 +54,7 @@ const SkuCard = ({ sku }) => {
             className={classes.cardMedia}
             component="img"
             alt={sku.name}
-            height="250"
+            height="300"
             image={sku.image}
             title="Contemplative Reptile"
           />

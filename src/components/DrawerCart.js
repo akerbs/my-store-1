@@ -37,6 +37,7 @@ export default function DrawerCart(props) {
 
   return (
     <Drawer
+      transitionDuration={{ enter: 400, exit: 300 }}
       className={classes.drawer}
       onEscapeKeyDown={props.onClose}
       onBackdropClick={props.onClose}

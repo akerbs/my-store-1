@@ -14,6 +14,7 @@ import Slide from "@material-ui/core/Slide"
 import DrawerMenu from "./DrawerMenu"
 import DrawerCart from "./DrawerCart"
 import { useShoppingCart } from "use-shopping-cart"
+import { Link } from "gatsby"
 
 function HideOnScroll(props) {
   const { children } = props
@@ -85,9 +86,11 @@ export default function Header(props) {
             >
               <MenuIcon />
             </IconButton>
+
             <Typography variant="h6" className={classes.title}>
-              Logo
+              <Link to="/p2"> Logo </Link>
             </Typography>
+
             <IconButton
               color="inherit"
               aria-label="open drawer"
