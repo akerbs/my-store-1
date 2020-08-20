@@ -12,7 +12,6 @@ const useStyles = makeStyles(theme => ({
     overflow: "hidden",
     height: "66px",
   },
-  line: {},
 }))
 
 const Title = ({ lineContent, lineContent2 }) => {

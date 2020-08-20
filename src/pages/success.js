@@ -1,16 +1,16 @@
 import React from "react"
-import { Link } from "gatsby"
-
-import Layout from "../components/layout"
+import CssBaseline from "@material-ui/core/CssBaseline"
+import Link from "gatsby-plugin-transition-link"
 import SEO from "../components/seo"
 
 const SuccessPage = () => (
-  <Layout>
+  <>
     <SEO title="Page success" />
+    <CssBaseline />
     <h1>Hi from the success page</h1>
     <p>Successful!!!</p>
     <Link to="/">Go back to the homepage</Link>
-  </Layout>
+  </>
 )
 
 export default SuccessPage

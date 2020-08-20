@@ -13,6 +13,7 @@ import ListItemIcon from "@material-ui/core/ListItemIcon"
 import ListItemText from "@material-ui/core/ListItemText"
 import InboxIcon from "@material-ui/icons/MoveToInbox"
 import MailIcon from "@material-ui/icons/Mail"
+import Link from "gatsby-plugin-transition-link"
 const window = require("global/window")
 
 const drawerWidth = window.innerWidth <= 599 ? "100vw" : 450
@@ -63,26 +64,96 @@ export default function DrawerMenu(props) {
       </div>
       <Divider />
       <List>
-        {["Inbox", "Starred", "Send email", "Drafts"].map((text, index) => (
-          <ListItem button key={text}>
-            <ListItemIcon>
-              {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-            </ListItemIcon>
-            <ListItemText primary={text} />
+        <Link to="#">
+          <ListItem button key={"home"}>
+            <ListItemText primary={"home"} />
           </ListItem>
-        ))}
-      </List>
-      <Divider />
-      <List>
-        {["All mail", "Trash", "Spam"].map((text, index) => (
-          <ListItem button key={text}>
-            <ListItemIcon>
-              {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-            </ListItemIcon>
-            <ListItemText primary={text} />
+        </Link>
+
+        <Link to="#">
+          <ListItem button key={"second"}>
+            <ListItemText primary={"second"} />
           </ListItem>
-        ))}
+        </Link>
+
+        <Link to="#">
+          <ListItem button key={"third"}>
+            <ListItemText primary={"third"} />
+          </ListItem>
+        </Link>
+
+        <Link to="#">
+          <ListItem button key={"contact us"}>
+            <ListItemText primary={"contact us"} />
+          </ListItem>
+        </Link>
       </List>
     </Drawer>
   )
 }
+
+// <Link
+// to="#"
+// // className={classes.drawerItem}
+// // activeClassName={classes.active}
+// // onClick={handleDrawerClose}
+// >
+// <ListItem button key={"HOME"}>
+//   <ListItemText
+//     primary={
+//       <Typography align="center" variant="h6">
+//         HOME
+//       </Typography>
+//     }
+//   />
+// </ListItem>
+// </Link>
+// <Link
+// to="#"
+// // className={classes.drawerItem}
+// // activeClassName={classes.active}
+// // onClick={handleDrawerClose}
+// >
+// <ListItem button key={"ABOUT US"}>
+//   <ListItemText
+//     primary={
+//       <Typography align="center" variant="h6">
+//         ABOUT US
+//       </Typography>
+//     }
+//   />
+// </ListItem>
+// </Link>
+// <Link
+// to="#"
+// // className={classes.drawerItem}
+// // activeClassName={classes.active}
+// // onClick={handleDrawerClose}
+// >
+// <ListItem button key={"TRENDS"}>
+//   <ListItemText
+//     primary={
+//       <Typography align="center" variant="h6">
+//         TRENDS
+//       </Typography>
+//     }
+//   />
+// </ListItem>
+// </Link>
+
+// <Link
+// to="#"
+// // className={classes.drawerItem}
+// // activeClassName={classes.active}
+// // onClick={handleDrawerClose}
+// >
+// <ListItem button key={"CONTACT US"}>
+//   <ListItemText
+//     primary={
+//       <Typography align="center" variant="h6">
+//         CONTACT US
+//       </Typography>
+//     }
+//   />
+// </ListItem>
+// </Link>
