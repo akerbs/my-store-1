@@ -7,20 +7,21 @@ import Header from "../components/header"
 import Footer from "../components/footer"
 import AniLink from "gatsby-plugin-transition-link/AniLink"
 import Container from "@material-ui/core/Container"
+import Grid from "@material-ui/core/Grid"
 
 const useStyles = makeStyles(theme => ({
   root: {
     // backgroundColor: "lime",
   },
   inner: {
-    marginTop: "200px",
+    marginTop: "100px",
     display: "flex",
     justifyContent: "center",
   },
   other: {
     fontFamily: "Poppins",
-    marginTop: "200px",
-    width: "340px",
+    // marginTop: "300px",
+    // width: "340px",
     fontWeight: 300,
     lineHeight: "24px",
     fontSize: "14px",
@@ -36,16 +37,23 @@ const SuccessPage = () => {
       <Header />
       <Container maxWidth="md">
         <div className={classes.inner}>
-          <Title lineContent="Hello World" lineContent2="I'm Anatol K." />
-          <p className={classes.other}>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellendus
-            autem nostrum commodi magnam doloribus laborum sed blanditiis
-            facilis quisquam provident in ipsam similique magni quidem
-            voluptatum, nulla ut? Pariatur saepe odio quia aspernatur ipsam
-            cumque qui ipsa laudantium, mollitia nihil voluptatibus ea aliquid
-            soluta vero nulla sint quas! Libero, id.
-          </p>
+          <Grid container spacing={3}>
+            <Grid item xs={12}>
+              <Title lineContent="Hello World" lineContent2="I'm Anatol K." />
+            </Grid>
+            <Grid item xs={12}>
+              <p className={classes.other}>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                Repellendus autem nostrum commodi magnam doloribus laborum sed
+                blanditiis facilis quisquam provident in ipsam similique magni
+                quidem voluptatum, nulla ut? Pariatur saepe odio quia aspernatur
+                ipsam cumque qui ipsa laudantium, mollitia nihil voluptatibus ea
+                aliquid soluta vero nulla sint quas! Libero, id.
+              </p>
+            </Grid>
+          </Grid>
         </div>
+
         <AniLink
           to="/"
           // paintDrip
@@ -66,11 +74,11 @@ const SuccessPage = () => {
           //////////////////
           // swipe
           // fade
-          duration={3}
+          duration={2}
           direction="up"
-          top="entry"
+          // top="entry"
           // top="exit"
-          entryOffset={80}
+          // entryOffset={80}
         >
           Go to Home Page
         </AniLink>

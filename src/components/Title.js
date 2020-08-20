@@ -7,10 +7,16 @@ const useStyles = makeStyles(theme => ({
     fontFamily: "Bebas Neue",
     fontSize: "52px",
     letterSpacing: "0.1rem",
+    [theme.breakpoints.down("sm")]: {
+      fontSize: "26px",
+    },
   },
   lineWrap: {
     overflow: "hidden",
     height: "66px",
+    [theme.breakpoints.down("sm")]: {
+      height: "33px",
+    },
   },
 }))
 
