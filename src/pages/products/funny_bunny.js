@@ -45,7 +45,11 @@ SwiperCore.use([Thumbs, Zoom, Navigation, EffectFade, Pagination])
 const options = {
   settings: {},
   caption: { showCaption: false },
-  buttons: {},
+  buttons: {
+    showDownloadButton: false,
+    showAutoplayButton: false,
+    size: "50px",
+  },
   thumbnails: { showThumbnails: false },
 }
 
