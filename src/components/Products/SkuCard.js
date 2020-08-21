@@ -11,6 +11,7 @@ import CardMedia from "@material-ui/core/CardMedia"
 import Typography from "@material-ui/core/Typography"
 import { useShoppingCart, formatCurrencyString } from "use-shopping-cart"
 import { makeStyles } from "@material-ui/core/styles"
+import Link from "gatsby-plugin-transition-link"
 
 const useStyles = makeStyles({
   root: {
@@ -46,35 +47,67 @@ const SkuCard = ({ sku }) => {
     setOpenSnackbar(false)
   }
 
+  // const productPage = ({ sku }) => {
+  //   switch (sku.sku) {
+  //     case price_1HGjcwHwITO0GSJrJEhUG0Aq:
+  //       "funny_bunny"
+  //       break
+  //     case price_1HH7DcHwITO0GSJrZz3vg6d9:
+  //       "cat_clock"
+  //       break
+  //     case price_1HHUu9HwITO0GSJrsoWoL51O:
+  //       "magic_hat"
+  //       break
+  //     default:
+  //       ""
+  //   }
+  // }
+
+  const productPage =
+    sku.sku === "price_1HGjcwHwITO0GSJrJEhUG0Aq"
+      ? "funny_bunny"
+      : sku.sku === "price_1HH7DcHwITO0GSJrZz3vg6d9"
+      ? "cat_clock"
+      : sku.sku === "price_1HHUu9HwITO0GSJrsoWoL51O"
+      ? "magic_hat"
+      : ""
+
   return (
     <>
       <Card className={classes.root}>
         <CardActionArea>
-          <CardMedia
-            className={classes.cardMedia}
-            component="img"
-            alt={sku.name}
-            height="300"
-            image={sku.image}
-            title="Contemplative Reptile"
-          />
-          <CardContent>
-            <Typography gutterBottom variant="h5" component="h2">
-              {sku.name}
-            </Typography>
-            <Typography variant="body2" color="textSecondary" component="p">
-              {sku.description}
-              <br />
-              Price:
-              <p style={{ textDecoration: "line-through solid red" }}>
-                {sku.sku === "price_1HGjcwHwITO0GSJrJEhUG0Aq" ? "999,00 €" : ""}
-              </p>{" "}
-              {formatCurrencyString({
-                value: parseInt(sku.price),
-                currency: sku.currency,
-              })}
-            </Typography>
-          </CardContent>
+          <Link
+            to={`/products/${productPage}`}
+            style={{ textDecoration: "none" }}
+          >
+            <CardMedia
+              className={classes.cardMedia}
+              component="img"
+              alt={sku.name}
+              height="300"
+              image={sku.image}
+              title="Contemplative Reptile"
+            />
+            <CardContent>
+              <Typography gutterBottom variant="h5" component="h2">
+                {sku.name}
+              </Typography>
+              <Typography variant="body2" color="textSecondary" component="p">
+                {sku.description}
+                <br />
+                Price:
+                <p style={{ textDecoration: "line-through solid red" }}>
+                  {sku.sku === "price_1HGjcwHwITO0GSJrJEhUG0Aq"
+                    ? "999,00 €"
+                    : ""}
+                </p>{" "}
+                {formatCurrencyString({
+                  value: parseInt(sku.price),
+                  currency: sku.currency,
+                })}
+              </Typography>
+            </CardContent>
+          </Link>
         </CardActionArea>
         <CardActions>
           <Button
