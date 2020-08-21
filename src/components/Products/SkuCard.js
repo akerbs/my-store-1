@@ -65,7 +65,10 @@ const SkuCard = ({ sku }) => {
             <Typography variant="body2" color="textSecondary" component="p">
               {sku.description}
               <br />
-              Price:{" "}
+              Price:
+              <p style={{ textDecoration: "line-through solid red" }}>
+                {sku.sku === "price_1HGjcwHwITO0GSJrJEhUG0Aq" ? "999,00 €" : ""}
+              </p>{" "}
               {formatCurrencyString({
                 value: parseInt(sku.price),
                 currency: sku.currency,
@@ -89,7 +92,7 @@ const SkuCard = ({ sku }) => {
 
       <Snackbar
         anchorOrigin={{
-          vertical: "top",
+          vertical: "bottom",
           horizontal: "center",
         }}
         open={openSnackbar}

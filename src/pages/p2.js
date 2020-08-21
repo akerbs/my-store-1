@@ -1,13 +1,16 @@
-import React from "react"
+import React, { useState, useEffect } from "react"
 import CssBaseline from "@material-ui/core/CssBaseline"
 import { makeStyles } from "@material-ui/core/styles"
 import Title from "../components/Title"
-import TransitionLink from "gatsby-plugin-transition-link"
+
 import Header from "../components/header"
 import Footer from "../components/footer"
 import AniLink from "gatsby-plugin-transition-link/AniLink"
 import Container from "@material-ui/core/Container"
 import Grid from "@material-ui/core/Grid"
+import TransitionLink from "gatsby-plugin-transition-link"
+import { TransitionState } from "gatsby-plugin-transition-link"
+import posed from "react-pose"
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -26,9 +29,14 @@ const useStyles = makeStyles(theme => ({
     lineHeight: "24px",
     fontSize: "14px",
   },
+  box: {
+    backgroundColor: "yellow",
+    width: 100,
+    height: 100,
+  },
 }))
 
-const SuccessPage = () => {
+const SecondPage = () => {
   const classes = useStyles()
 
   return (
@@ -54,38 +62,47 @@ const SuccessPage = () => {
           </Grid>
         </div>
 
-        <AniLink
-          to="/"
-          // paintDrip
-          // color="rebeccapurple"
-          // hex="#334b99"
-          //////////////////
-          cover
-          // bg="#334b99"
-          bg="
-          url(https://source.unsplash.com/random)
-          center / cover   /* position / size */
-          no-repeat        /* repeat */
-          fixed            /* attachment */
-          padding-box      /* origin */
-          content-box      /* clip */
-          white            /* color */
-        "
-          //////////////////
-          // swipe
-          // fade
-          duration={2}
-          direction="up"
-          // top="entry"
-          // top="exit"
-          // entryOffset={80}
-        >
-          Go to Home Page
-        </AniLink>
+        <ALink />
+
         <Footer />
       </Container>
     </div>
   )
 }
 
-export default SuccessPage
+export default SecondPage
+
+const ALink = () => {
+  return (
+    <>
+      <AniLink
+        to="/"
+        // paintDrip
+        // color="rebeccapurple"
+        // hex="#334b99"
+        //////////////////
+        cover
+        // bg="#334b99"
+        bg="
+    url(https://source.unsplash.com/random)
+    center / cover   /* position / size */
+    no-repeat        /* repeat */
+    fixed            /* attachment */
+    padding-box      /* origin */
+    content-box      /* clip */
+    white            /* color */
+  "
+        //////////////////
+        // swipe
+        // fade
+        duration={2}
+        direction="up"
+        // top="entry"
+        // top="exit"
+        // entryOffset={80}
+      >
+        Go to Home Page
+      </AniLink>
+    </>
+  )
+}

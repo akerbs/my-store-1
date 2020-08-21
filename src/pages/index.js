@@ -11,7 +11,7 @@ import { makeStyles } from "@material-ui/core/styles"
 
 const useStyles = makeStyles(theme => ({
   root: {
-    backgroundColor: "tomato",
+    // backgroundColor: "tomato",
   },
 }))
 
@@ -38,8 +38,8 @@ const IndexPage = () => {
           maxime aut itaque molestias amet, et sit commodi nisi! Iusto ratione
           distinctio et aperiam quaerat nisi aut odit optio impedit.
         </p>
-
         <Skus />
+
         <Footer />
       </Container>
     </div>
