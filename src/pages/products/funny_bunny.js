@@ -99,6 +99,10 @@ const FunnyBunny = props => {
                 maxWidth: "100vw",
                 maxHeight: "100vh",
                 position: "absolute",
+                overflow: "hidden",
+                backgroundAttachment: "fixed",
+                backgroundPosition: "center center",
+                backgroundSize: "cover",
               }}
             >
               <MainSwiper
