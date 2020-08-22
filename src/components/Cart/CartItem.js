@@ -8,6 +8,8 @@ import Paper from "@material-ui/core/Paper"
 import Typography from "@material-ui/core/Typography"
 import ButtonBase from "@material-ui/core/ButtonBase"
 import Divider from "@material-ui/core/Divider"
+import { graphql } from "gatsby"
+import Img from "gatsby-image"
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -38,16 +40,29 @@ const CartItem = props => {
   // const afterDot = price.slice(-2)
   // const corrPrice = `${beforeDot}.${afterDot}`
 
+  //   <Img
+  //   fluid={props.data.img1.childImageSharp.fluid}
+  //   alt="Funny bunny 1"
+  // />
+
+  let photo =
+    props.item.sku === "price_1HGjcwHwITO0GSJrJEhUG0Aq"
+      ? "funny_bunny"
+      : props.item.sku === "price_1HH7DcHwITO0GSJrZz3vg6d9"
+      ? "cat_clock"
+      : props.item.sku === "price_1HHUu9HwITO0GSJrsoWoL51O"
+      ? "magic_hat"
+      : ""
+
   return (
     <div className={classes.root}>
       <Paper className={classes.paper} elevation="0">
         <Grid container spacing={2}>
           <Grid item xs={4}>
             <ButtonBase className={classes.image}>
-              <img
-                src={props.item.image}
-                title={props.item.name}
-                className={classes.img}
+              <Img
+                fluid={`props.data.${photo}.childImageSharp.fluid`}
+                alt={props.item.name}
               />
             </ButtonBase>
           </Grid>
@@ -105,3 +120,35 @@ const CartItem = props => {
 }
 
 export default CartItem
+
+export const query = graphql`
+  query {
+    funny_bunny: file(
+      relativePath: { eq: "products/funny_bunny/funny_bunny_1.jpg" }
+    ) {
+      childImageSharp {
+        fluid(maxWidth: 100) {
+          ...GatsbyImageSharpFluid
+        }
+      }
+    }
+    cat_clock: file(
+      relativePath: { eq: "products/cat_clock/cat_clock_1.jpg" }
+    ) {
+      childImageSharp {
+        fluid(maxWidth: 100) {
+          ...GatsbyImageSharpFluid
+        }
+      }
+    }
+    magic_hat: file(
+      relativePath: { eq: "products/magic_hat/magic_hat_1.jpg" }
+    ) {
+      childImageSharp {
+        fluid(maxWidth: 100) {
+          ...GatsbyImageSharpFluid
+        }
+      }
+    }
+  }
+`

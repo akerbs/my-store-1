@@ -98,7 +98,7 @@ const FunnyBunny = props => {
                 zIndex: 999,
                 maxWidth: "100vw",
                 maxHeight: "100vh",
-                position: "fixed",
+                position: "absolute",
               }}
             >
               <MainSwiper
