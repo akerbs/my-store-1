@@ -62,98 +62,74 @@ export default function DrawerMenu(props) {
           )}
         </IconButton>
       </div>
-      <Divider />
+
       <List>
-        <Link to="#">
-          <ListItem button key={"home"}>
-            <ListItemText primary={"home"} />
+        <Link
+          to="#"
+          // className={classes.drawerItem}
+          // activeClassName={classes.active}
+          // onClick={handleDrawerClose}
+        >
+          <ListItem button key={"HOME"}>
+            <ListItemText
+              primary={
+                <Typography align="center" variant="h6">
+                  HOME
+                </Typography>
+              }
+            />
+          </ListItem>
+        </Link>
+        <Link
+          to="#"
+          // className={classes.drawerItem}
+          // activeClassName={classes.active}
+          // onClick={handleDrawerClose}
+        >
+          <ListItem button key={"ABOUT US"}>
+            <ListItemText
+              primary={
+                <Typography align="center" variant="h6">
+                  ABOUT US
+                </Typography>
+              }
+            />
+          </ListItem>
+        </Link>
+        <Link
+          to="#"
+          // className={classes.drawerItem}
+          // activeClassName={classes.active}
+          // onClick={handleDrawerClose}
+        >
+          <ListItem button key={"TRENDS"}>
+            <ListItemText
+              primary={
+                <Typography align="center" variant="h6">
+                  TRENDS
+                </Typography>
+              }
+            />
           </ListItem>
         </Link>
 
-        <Link to="#">
-          <ListItem button key={"second"}>
-            <ListItemText primary={"second"} />
-          </ListItem>
-        </Link>
-
-        <Link to="#">
-          <ListItem button key={"third"}>
-            <ListItemText primary={"third"} />
-          </ListItem>
-        </Link>
-
-        <Link to="#">
-          <ListItem button key={"contact us"}>
-            <ListItemText primary={"contact us"} />
+        <Link
+          to="#"
+          // className={classes.drawerItem}
+          // activeClassName={classes.active}
+          // onClick={handleDrawerClose}
+        >
+          <ListItem button key={"CONTACT US"}>
+            <ListItemText
+              primary={
+                <Typography align="center" variant="h6">
+                  CONTACT US
+                </Typography>
+              }
+            />
           </ListItem>
         </Link>
       </List>
     </Drawer>
   )
 }
-
-// <Link
-// to="#"
-// // className={classes.drawerItem}
-// // activeClassName={classes.active}
-// // onClick={handleDrawerClose}
-// >
-// <ListItem button key={"HOME"}>
-//   <ListItemText
-//     primary={
-//       <Typography align="center" variant="h6">
-//         HOME
-//       </Typography>
-//     }
-//   />
-// </ListItem>
-// </Link>
-// <Link
-// to="#"
-// // className={classes.drawerItem}
-// // activeClassName={classes.active}
-// // onClick={handleDrawerClose}
-// >
-// <ListItem button key={"ABOUT US"}>
-//   <ListItemText
-//     primary={
-//       <Typography align="center" variant="h6">
-//         ABOUT US
-//       </Typography>
-//     }
-//   />
-// </ListItem>
-// </Link>
-// <Link
-// to="#"
-// // className={classes.drawerItem}
-// // activeClassName={classes.active}
-// // onClick={handleDrawerClose}
-// >
-// <ListItem button key={"TRENDS"}>
-//   <ListItemText
-//     primary={
-//       <Typography align="center" variant="h6">
-//         TRENDS
-//       </Typography>
-//     }
-//   />
-// </ListItem>
-// </Link>
-
-// <Link
-// to="#"
-// // className={classes.drawerItem}
-// // activeClassName={classes.active}
-// // onClick={handleDrawerClose}
-// >
-// <ListItem button key={"CONTACT US"}>
-//   <ListItemText
-//     primary={
-//       <Typography align="center" variant="h6">
-//         CONTACT US
-//       </Typography>
-//     }
-//   />
-// </ListItem>
-// </Link>

@@ -7,6 +7,7 @@ import Header from "../../components/header"
 import Footer from "../../components/footer"
 import Container from "@material-ui/core/Container"
 import "swiper/swiper-bundle.css"
+import "./swiper.css"
 import { Swiper, SwiperSlide } from "swiper/react"
 import SwiperCore, {
   Thumbs,
@@ -17,17 +18,21 @@ import SwiperCore, {
 } from "swiper"
 import Grid from "@material-ui/core/Grid"
 import { SRLWrapper } from "simple-react-lightbox"
+import withWidth from "@material-ui/core/withWidth"
+import Hidden from "@material-ui/core/Hidden"
+import PropTypes from "prop-types"
+import Title1 from "../../components/Title1"
 
 const useStyles = makeStyles(theme => ({
-  root: {
-    // backgroundColor: "tomato",
+  contentWrapper: {
+    marginTop: 70,
   },
   mainSlider: {
-    width: "300px",
+    width: "310px",
     height: "100%",
     marginLeft: "27px",
     [theme.breakpoints.down("sm")]: {
-      width: "200px",
+      width: "90vw",
       marginLeft: "0px",
     },
   },
@@ -42,7 +47,7 @@ const useStyles = makeStyles(theme => ({
 
 SwiperCore.use([Thumbs, Zoom, Navigation, EffectFade, Pagination])
 
-const options = {
+const lightboxOptions = {
   settings: {},
   caption: { showCaption: false },
   buttons: {
@@ -53,7 +58,7 @@ const options = {
   thumbnails: { showThumbnails: false },
 }
 
-export default function (props) {
+const FunnyBunny = props => {
   const classes = useStyles()
 
   const [thumbsSwiper, setThumbsSwiper] = useState(null)
@@ -63,49 +68,50 @@ export default function (props) {
       <SEO title="Funny bunny" keywords={[`gatsby`, `application`, `react`]} />
       <CssBaseline />
       <Header />
-      <Container maxWidth="md">
-        <h1>FUNNY BUNNY</h1>
-        <p>Here</p>
-
-        <Grid container spacing={1}>
-          <Grid item md={1} sm={2}>
-            {/* Thumbs Swiper -> store swiper instance */}
-            <Swiper
-              spaceBetween={1}
-              slidesPerView={3}
-              onSwiper={setThumbsSwiper}
-              className={classes.thumbsSlider}
-              direction="vertical"
-            >
-              <SwiperSlide>
-                <Img
-                  fluid={props.data.img1.childImageSharp.fluid}
-                  alt="Funny bunny 1"
-                />
-              </SwiperSlide>
-              <SwiperSlide>
-                <Img
-                  fluid={props.data.img2.childImageSharp.fluid}
-                  alt="Funny bunny 2"
-                />
-              </SwiperSlide>
-              <SwiperSlide>
-                <Img
-                  fluid={props.data.img3.childImageSharp.fluid}
-                  alt="Funny bunny 3"
-                />
-              </SwiperSlide>
-            </Swiper>
-          </Grid>
-          <Grid item md={5} sm={10}>
+      <Container maxWidth="md" className={classes.contentWrapper}>
+        <Title1 lineContent="Funny Bunny" />
+        <Grid container spacing={0}>
+          <Hidden smDown>
+            <Grid item md={1}>
+              {/* Thumbs Swiper -> store swiper instance */}
+              <Swiper
+                spaceBetween={1}
+                slidesPerView={3}
+                onSwiper={setThumbsSwiper}
+                className={classes.thumbsSlider}
+                direction="vertical"
+              >
+                <SwiperSlide>
+                  <Img
+                    fluid={props.data.img1.childImageSharp.fluid}
+                    alt="Funny bunny 1"
+                  />
+                </SwiperSlide>
+                <SwiperSlide>
+                  <Img
+                    fluid={props.data.img2.childImageSharp.fluid}
+                    alt="Funny bunny 2"
+                  />
+                </SwiperSlide>
+                <SwiperSlide>
+                  <Img
+                    fluid={props.data.img3.childImageSharp.fluid}
+                    alt="Funny bunny 3"
+                  />
+                </SwiperSlide>
+              </Swiper>
+            </Grid>
+          </Hidden>
+          <Grid item md={5} sm={12}>
             {/* Main Swiper -> pass thumbs swiper instance */}
-            <SRLWrapper options={options}>
+            <SRLWrapper options={lightboxOptions}>
               <Swiper
                 spaceBetween={0}
                 slidesPerView={1}
                 direction="horizontal"
                 effect="fade"
                 loop
+                navigation
                 className={classes.mainSlider}
                 thumbs={{ swiper: thumbsSwiper }}
               >
@@ -144,6 +150,11 @@ export default function (props) {
     </div>
   )
 }
+
+FunnyBunny.propTypes = {
+  width: PropTypes.oneOf(["lg", "md", "sm", "xl", "xs"]).isRequired,
+}
+export default withWidth()(FunnyBunny)
 
 export const query = graphql`
   query {
