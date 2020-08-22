@@ -1,14 +1,13 @@
 import React, { useState } from "react"
+import { graphql } from "gatsby"
 import CssBaseline from "@material-ui/core/CssBaseline"
 import { makeStyles } from "@material-ui/core/styles"
 import SEO from "../../components/seo"
-import Img from "gatsby-image"
 import Header from "../../components/header"
 import Footer from "../../components/footer"
 import Container from "@material-ui/core/Container"
 import "swiper/swiper-bundle.css"
 import "./swiper.css"
-import { Swiper, SwiperSlide } from "swiper/react"
 import SwiperCore, {
   Thumbs,
   Zoom,
@@ -22,26 +21,15 @@ import withWidth from "@material-ui/core/withWidth"
 import Hidden from "@material-ui/core/Hidden"
 import PropTypes from "prop-types"
 import Title1 from "../../components/Title1"
+import Counter from "../../components/Cart/Counter"
+import { useShoppingCart } from "use-shopping-cart"
+import ThumbsSwiper from "../../components/ProductDetailsPage/ThumbsSwiper"
+import MainSwiper from "../../components/ProductDetailsPage/MainSwiper"
+import Button from "@material-ui/core/Button"
 
 const useStyles = makeStyles(theme => ({
   contentWrapper: {
     marginTop: 70,
-  },
-  mainSlider: {
-    width: "310px",
-    height: "100%",
-    marginLeft: "27px",
-    [theme.breakpoints.down("sm")]: {
-      width: "90vw",
-      marginLeft: "0px",
-    },
-  },
-  thumbsSlider: {
-    width: "95px",
-    height: "100%",
-    [theme.breakpoints.down("sm")]: {
-      width: "52px",
-    },
   },
 }))
 
@@ -63,6 +51,17 @@ const FunnyBunny = props => {
 
   const [thumbsSwiper, setThumbsSwiper] = useState(null)
 
+  const { addItem } = useShoppingCart()
+
+  const ItemInfo = {
+    sku: props.data.stripePrice.id,
+    name: props.data.stripePrice.product.name,
+    price: props.data.stripePrice.unit_amount,
+    currency: props.data.stripePrice.currency,
+    image: props.data.stripePrice.product.images,
+    description: props.data.stripePrice.product.description,
+  }
+
   return (
     <div className={classes.root}>
       <SEO title="Funny bunny" keywords={[`gatsby`, `application`, `react`]} />
@@ -73,70 +72,40 @@ const FunnyBunny = props => {
         <Grid container spacing={0}>
           <Hidden smDown>
             <Grid item md={1}>
-              {/* Thumbs Swiper -> store swiper instance */}
-              <Swiper
-                spaceBetween={1}
-                slidesPerView={3}
-                onSwiper={setThumbsSwiper}
-                className={classes.thumbsSlider}
-                direction="vertical"
-              >
-                <SwiperSlide>
-                  <Img
-                    fluid={props.data.img1.childImageSharp.fluid}
-                    alt="Funny bunny 1"
-                  />
-                </SwiperSlide>
-                <SwiperSlide>
-                  <Img
-                    fluid={props.data.img2.childImageSharp.fluid}
-                    alt="Funny bunny 2"
-                  />
-                </SwiperSlide>
-                <SwiperSlide>
-                  <Img
-                    fluid={props.data.img3.childImageSharp.fluid}
-                    alt="Funny bunny 3"
-                  />
-                </SwiperSlide>
-              </Swiper>
+              <ThumbsSwiper
+                thumbsSwiper={thumbsSwiper}
+                setThumbsSwiper={setThumbsSwiper}
+                data={props.data}
+              />
             </Grid>
           </Hidden>
           <Grid item md={5} sm={12}>
-            {/* Main Swiper -> pass thumbs swiper instance */}
             <SRLWrapper options={lightboxOptions}>
-              <Swiper
-                spaceBetween={0}
-                slidesPerView={1}
-                direction="horizontal"
-                effect="fade"
-                loop
-                navigation
-                className={classes.mainSlider}
-                thumbs={{ swiper: thumbsSwiper }}
-              >
-                <SwiperSlide>
-                  <Img
-                    fluid={props.data.img1.childImageSharp.fluid}
-                    alt="Funny bunny 1"
-                  />
-                </SwiperSlide>
-                <SwiperSlide>
-                  <Img
-                    fluid={props.data.img2.childImageSharp.fluid}
-                    alt="Funny bunny 2"
-                  />
-                </SwiperSlide>
-                <SwiperSlide>
-                  <Img
-                    fluid={props.data.img3.childImageSharp.fluid}
-                    alt="Funny bunny 3"
-                  />
-                </SwiperSlide>
-              </Swiper>
+              <MainSwiper
+                thumbsSwiper={thumbsSwiper}
+                setThumbsSwiper={setThumbsSwiper}
+                data={props.data}
+              />
             </SRLWrapper>
           </Grid>
           <Grid item md={6} sm={12}>
+            <Button
+              size="small"
+              color="primary"
+              onClick={() => {
+                addItem(ItemInfo)
+                // handleClick()
+              }}
+            >
+              ADD TO CART
+            </Button>
+            {/* <Counter
+              incrementItem={props.incrementItem}
+              decrementItem={props.decrementItem}
+              removeItem={props.removeItem}
+              quantity={props.item.quantity}
+              sku={props.item.sku}
+            /> */}
             Lorem ipsum dolor sit, amet consectetur adipisicing elit. Doloribus
             non optio unde quisquam aspernatur praesentium dolorum magni!
             Repellendus esse quis aliquid! Nemo cum aliquam suscipit dolorum
@@ -177,6 +146,17 @@ export const query = graphql`
         fluid(maxWidth: 1000) {
           ...GatsbyImageSharpFluid
         }
+      }
+    }
+
+    stripePrice(id: { eq: "price_1HGjcwHwITO0GSJrJEhUG0Aq" }) {
+      id
+      currency
+      unit_amount
+      product {
+        name
+        description
+        images
       }
     }
   }

@@ -1,6 +1,5 @@
 import React from "react"
 import IconButton from "@material-ui/core/IconButton"
-import HighlightOffIcon from "@material-ui/icons/HighlightOff"
 import CloseIcon from "@material-ui/icons/Close"
 import Counter from "./Counter"
 import { makeStyles } from "@material-ui/core/styles"

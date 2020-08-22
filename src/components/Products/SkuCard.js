@@ -1,8 +1,5 @@
 import React from "react"
 import Button from "@material-ui/core/Button"
-import Snackbar from "@material-ui/core/Snackbar"
-import IconButton from "@material-ui/core/IconButton"
-import CloseIcon from "@material-ui/icons/Close"
 import Card from "@material-ui/core/Card"
 import CardActionArea from "@material-ui/core/CardActionArea"
 import CardActions from "@material-ui/core/CardActions"
@@ -12,6 +9,8 @@ import Typography from "@material-ui/core/Typography"
 import { useShoppingCart, formatCurrencyString } from "use-shopping-cart"
 import { makeStyles } from "@material-ui/core/styles"
 import Link from "gatsby-plugin-transition-link"
+import SnakeBar from "../SnakeBar"
+import OldPrice from "./OldPrice"
 
 const useStyles = makeStyles({
   root: {
@@ -47,22 +46,6 @@ const SkuCard = ({ sku }) => {
     setOpenSnackbar(false)
   }
 
-  // const productPage = ({ sku }) => {
-  //   switch (sku.sku) {
-  //     case price_1HGjcwHwITO0GSJrJEhUG0Aq:
-  //       "funny_bunny"
-  //       break
-  //     case price_1HH7DcHwITO0GSJrZz3vg6d9:
-  //       "cat_clock"
-  //       break
-  //     case price_1HHUu9HwITO0GSJrsoWoL51O:
-  //       "magic_hat"
-  //       break
-  //     default:
-  //       ""
-  //   }
-  // }
-
   const productPage =
     sku.sku === "price_1HGjcwHwITO0GSJrJEhUG0Aq"
       ? "funny_bunny"
@@ -96,11 +79,7 @@ const SkuCard = ({ sku }) => {
                 {sku.description}
                 <br />
                 Price:
-                <p style={{ textDecoration: "line-through solid red" }}>
-                  {sku.sku === "price_1HGjcwHwITO0GSJrJEhUG0Aq"
-                    ? "999,00 €"
-                    : ""}
-                </p>{" "}
+                <OldPrice sku={sku.sku} />{" "}
                 {formatCurrencyString({
                   value: parseInt(sku.price),
                   currency: sku.currency,
@@ -123,27 +102,10 @@ const SkuCard = ({ sku }) => {
         </CardActions>
       </Card>
 
-      <Snackbar
-        anchorOrigin={{
-          vertical: "bottom",
-          horizontal: "center",
-        }}
+      <SnakeBar
         open={openSnackbar}
-        autoHideDuration={1000}
         onClose={handleClose}
         message="Item added into cart"
-        action={
-          <React.Fragment>
-            <IconButton
-              size="small"
-              aria-label="close"
-              color="inherit"
-              onClick={handleClose}
-            >
-              <CloseIcon fontSize="small" />
-            </IconButton>
-          </React.Fragment>
-        }
       />
     </>
   )
