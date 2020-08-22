@@ -8,6 +8,10 @@ import Paper from "@material-ui/core/Paper"
 import Typography from "@material-ui/core/Typography"
 import ButtonBase from "@material-ui/core/ButtonBase"
 import Divider from "@material-ui/core/Divider"
+import Link from "gatsby-plugin-transition-link"
+import funnyBunny from "../../images/products/funny_bunny/funny_bunny_2.jpg"
+import catClock from "../../images/products/cat_clock/cat_clock_1.jpg"
+import magicHat from "../../images/products/magic_hat/magic_hat_1.jpg"
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -18,37 +22,55 @@ const useStyles = makeStyles(theme => ({
     margin: "auto",
     maxWidth: "auto",
   },
-  image: {
+  imgBtn: {
     width: "100px",
-    height: "auto",
+    height: "120px",
   },
   img: {
     margin: "auto",
     display: "block",
     width: "100px",
-    height: "auto",
+    height: "120px",
   },
 }))
 
 const CartItem = props => {
   const classes = useStyles()
 
-  // const price = props.item.price.toString()
-  // const beforeDot = price.slice(0, -2)
-  // const afterDot = price.slice(-2)
-  // const corrPrice = `${beforeDot}.${afterDot}`
+  const productPage =
+    props.item.sku === "price_1HGjcwHwITO0GSJrJEhUG0Aq"
+      ? "funny_bunny"
+      : props.item.sku === "price_1HH7DcHwITO0GSJrZz3vg6d9"
+      ? "cat_clock"
+      : props.item.sku === "price_1HHUu9HwITO0GSJrsoWoL51O"
+      ? "magic_hat"
+      : ""
+
+  const imgLocal =
+    props.item.sku === "price_1HGjcwHwITO0GSJrJEhUG0Aq"
+      ? funnyBunny
+      : props.item.sku === "price_1HH7DcHwITO0GSJrZz3vg6d9"
+      ? catClock
+      : props.item.sku === "price_1HHUu9HwITO0GSJrsoWoL51O"
+      ? magicHat
+      : props.item.image
 
   return (
     <div className={classes.root}>
       <Paper className={classes.paper} elevation="0">
         <Grid container spacing={2}>
           <Grid item xs={4}>
-            <ButtonBase className={classes.image}>
-              <img
-                src={props.item.image}
-                title={props.item.name}
-                className={classes.img}
-              />
+            <ButtonBase className={classes.imgBtn}>
+              <Link
+                to={`/products/${productPage}`}
+                style={{ textDecoration: "none" }}
+              >
+                <img
+                  src={imgLocal}
+                  title={props.item.name}
+                  className={classes.img}
+                />
+              </Link>
             </ButtonBase>
           </Grid>
           <Grid
