@@ -38,33 +38,6 @@ export default props => {
               }
             }
           }
-          funnyBunny: file(
-            relativePath: { eq: "products/funny_bunny/funny_bunny_1.jpg" }
-          ) {
-            childImageSharp {
-              fluid(maxWidth: 1000) {
-                ...GatsbyImageSharpFluid
-              }
-            }
-          }
-          catClock: file(
-            relativePath: { eq: "products/cat_clock/cat_clock_1.jpg" }
-          ) {
-            childImageSharp {
-              fluid(maxWidth: 1000) {
-                ...GatsbyImageSharpFluid
-              }
-            }
-          }
-          magicHat: file(
-            relativePath: { eq: "products/magic_hat/magic_hat_1.jpg" }
-          ) {
-            childImageSharp {
-              fluid(maxWidth: 1000) {
-                ...GatsbyImageSharpFluid
-              }
-            }
-          }
         }
       `}
       render={({ prices }) => (
@@ -72,7 +45,6 @@ export default props => {
           {prices.edges.map(({ node: price }) => {
             const newSku = {
               sku: price.id,
-              image: price.product.images,
               image: price.product.images,
               name: price.product.name,
               description: price.product.description,

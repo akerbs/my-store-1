@@ -11,6 +11,9 @@ import { makeStyles } from "@material-ui/core/styles"
 import Link from "gatsby-plugin-transition-link"
 import SnakeBar from "../SnakeBar"
 import OldPrice from "./OldPrice"
+import funnyBunny from "../../images/products/funny_bunny/funny_bunny_2.jpg"
+import catClock from "../../images/products/cat_clock/cat_clock_1.jpg"
+import magicHat from "../../images/products/magic_hat/magic_hat_1.jpg"
 
 const useStyles = makeStyles({
   root: {
@@ -31,7 +34,7 @@ const useStyles = makeStyles({
   },
 })
 
-const SkuCard = ({ sku }) => {
+const SkuCard = ({ sku }, props) => {
   const classes = useStyles()
   const { addItem } = useShoppingCart()
   const [openSnackbar, setOpenSnackbar] = React.useState(false)
@@ -55,6 +58,15 @@ const SkuCard = ({ sku }) => {
       ? "magic_hat"
       : ""
 
+  const imgLocal =
+    sku.sku === "price_1HGjcwHwITO0GSJrJEhUG0Aq"
+      ? funnyBunny
+      : sku.sku === "price_1HH7DcHwITO0GSJrZz3vg6d9"
+      ? catClock
+      : sku.sku === "price_1HHUu9HwITO0GSJrsoWoL51O"
+      ? magicHat
+      : sku.image
+
   return (
     <>
       <Card className={classes.root}>
@@ -68,7 +80,7 @@ const SkuCard = ({ sku }) => {
               component="img"
               alt={sku.name}
               height="300"
-              image={sku.image}
+              image={imgLocal}
               title="Contemplative Reptile"
             />
             <CardContent>
@@ -78,8 +90,7 @@ const SkuCard = ({ sku }) => {
               <Typography variant="body2" color="textSecondary" component="p">
                 {sku.description}
                 <br />
-                Price:
-                <OldPrice sku={sku.sku} />{" "}
+                Price: <OldPrice sku={sku.sku} />{" "}
                 {formatCurrencyString({
                   value: parseInt(sku.price),
                   currency: sku.currency,
