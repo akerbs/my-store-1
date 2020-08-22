@@ -94,7 +94,12 @@ const FunnyBunny = props => {
             <SRLWrapper
               options={lightboxOptions}
               callbacks={lightboxCallbacks}
-              style={{ zIndex: 1, maxWidth: "100vw", maxHeight: "100vh" }}
+              style={{
+                zIndex: 999,
+                maxWidth: "100vw",
+                maxHeight: "100vh",
+                position: "fixed",
+              }}
             >
               <MainSwiper
                 thumbsSwiper={thumbsSwiper}
