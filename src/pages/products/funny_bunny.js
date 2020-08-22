@@ -91,7 +91,11 @@ const FunnyBunny = props => {
             </Grid>
           </Hidden>
           <Grid item md={5} sm={12}>
-            <SRLWrapper options={lightboxOptions} callbacks={lightboxCallbacks}>
+            <SRLWrapper
+              options={lightboxOptions}
+              callbacks={lightboxCallbacks}
+              style={{ zIndex: 1, maxWidth: "100vw", maxHeight: "100vh" }}
+            >
               <MainSwiper
                 thumbsSwiper={thumbsSwiper}
                 setThumbsSwiper={setThumbsSwiper}
