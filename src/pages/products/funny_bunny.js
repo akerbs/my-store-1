@@ -41,9 +41,20 @@ const lightboxOptions = {
   buttons: {
     showDownloadButton: false,
     showAutoplayButton: false,
+    showFullscreenButton: false,
     size: "50px",
   },
   thumbnails: { showThumbnails: false },
+}
+
+const lightboxCallbacks = {
+  onLightboxOpened: () => {
+    document.body.style.position = "fixed"
+  },
+  onLightboxClosed: () => {
+    const scrollY = document.body.style.top
+    document.body.style.position = ""
+  },
 }
 
 const FunnyBunny = props => {
@@ -80,7 +91,7 @@ const FunnyBunny = props => {
             </Grid>
           </Hidden>
           <Grid item md={5} sm={12}>
-            <SRLWrapper options={lightboxOptions}>
+            <SRLWrapper options={lightboxOptions} callbacks={lightboxCallbacks}>
               <MainSwiper
                 thumbsSwiper={thumbsSwiper}
                 setThumbsSwiper={setThumbsSwiper}
