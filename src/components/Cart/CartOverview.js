@@ -12,7 +12,7 @@ const useStyles = makeStyles(theme => ({
   },
 }))
 
-const Cart = () => {
+const Cart = props => {
   const classes = useStyles()
   const [loading, setLoading] = useState(false)
   /* Gets the totalPrice and a method for redirecting to stripe */
@@ -40,6 +40,8 @@ const Cart = () => {
           const cartItem = cartDetails[item]
           return (
             <CartItem
+              onClose={props.handleCartDrawerClose}
+              open={props.openCart}
               key={idx}
               item={cartItem}
               incrementItem={incrementItem}

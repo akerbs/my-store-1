@@ -60,7 +60,10 @@ const CartItem = props => {
       <Paper className={classes.paper} elevation="0">
         <Grid container spacing={2}>
           <Grid item xs={4}>
-            <ButtonBase className={classes.imgBtn}>
+            <ButtonBase
+              onClick={() => props.handleCartDrawerClose}
+              className={classes.imgBtn}
+            >
               <Link
                 to={`/products/${productPage}`}
                 style={{ textDecoration: "none" }}

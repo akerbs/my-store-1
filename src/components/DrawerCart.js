@@ -62,7 +62,10 @@ export default function DrawerCart(props) {
         </IconButton>
       </div>
 
-      <CartOverview />
+      <CartOverview
+        onClose={props.handleCartDrawerClose}
+        open={props.openCart}
+      />
     </Drawer>
   )
 }
