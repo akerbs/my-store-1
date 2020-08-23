@@ -40,8 +40,8 @@ const Cart = props => {
           const cartItem = cartDetails[item]
           return (
             <CartItem
-              onClose={props.handleCartDrawerClose}
-              open={props.openCart}
+              onClose={props.onClose}
+              open={props.open}
               key={idx}
               item={cartItem}
               incrementItem={incrementItem}

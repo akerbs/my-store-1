@@ -47,15 +47,15 @@ const lightboxOptions = {
   thumbnails: { showThumbnails: false },
 }
 
-const lightboxCallbacks = {
-  onLightboxOpened: () => {
-    document.body.style.position = "fixed"
-  },
-  onLightboxClosed: () => {
-    const scrollY = document.body.style.top
-    document.body.style.position = ""
-  },
-}
+// const lightboxCallbacks = {
+//   onLightboxOpened: () => {
+//     document.body.style.position = "fixed"
+//   },
+//   onLightboxClosed: () => {
+//     const scrollY = document.body.style.top
+//     document.body.style.position = ""
+//   },
+// }
 
 const FunnyBunny = props => {
   const classes = useStyles()
@@ -91,7 +91,10 @@ const FunnyBunny = props => {
             </Grid>
           </Hidden>
           <Grid item md={5} sm={12}>
-            <SRLWrapper options={lightboxOptions} callbacks={lightboxCallbacks}>
+            <SRLWrapper
+              options={lightboxOptions}
+              // callbacks={lightboxCallbacks}
+            >
               <MainSwiper
                 thumbsSwiper={thumbsSwiper}
                 setThumbsSwiper={setThumbsSwiper}

@@ -61,7 +61,9 @@ const CartItem = props => {
         <Grid container spacing={2}>
           <Grid item xs={4}>
             <ButtonBase
-              onClick={() => props.handleCartDrawerClose}
+              onClick={() => {
+                props.onClose()
+              }}
               className={classes.imgBtn}
             >
               <Link
