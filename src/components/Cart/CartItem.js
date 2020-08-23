@@ -105,11 +105,6 @@ const CartItem = props => {
                   {/* {corrPrice} */} {props.item.formattedValue}
                 </Typography>
               </Grid>
-              {/* <Grid item>
-                <Typography variant="body2" style={{ cursor: "pointer" }}>
-                  Remove
-                </Typography>
-              </Grid> */}
             </Grid>
             <Grid item>
               <Typography variant="subtitle1">
