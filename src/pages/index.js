@@ -10,7 +10,12 @@ import { makeStyles } from "@material-ui/core/styles"
 
 const useStyles = makeStyles(theme => ({
   root: {
-    // backgroundColor: "tomato",
+    display: "flex",
+    flexDirection: "column",
+    minHeight: "100vh",
+  },
+  contentWrapper: {
+    flex: "1 0 auto",
   },
 }))
 
@@ -18,11 +23,11 @@ const IndexPage = () => {
   const classes = useStyles()
 
   return (
-    <div className={classes.root}>
+    <div className={classes.root} id="root">
       <SEO title="Home" keywords={[`gatsby`, `application`, `react`]} />
       <CssBaseline />
       <Header />
-      <Container maxWidth="md">
+      <Container maxWidth="md" className={classes.contentWrapper}>
         <h1>Hi people</h1>
         <p>
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum modi
@@ -38,9 +43,21 @@ const IndexPage = () => {
           distinctio et aperiam quaerat nisi aut odit optio impedit.
         </p>
         <Skus />
-
-        <Footer />
+        <p>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum modi
+          itaque ratione. Omnis, dolores voluptas quia recusandae similique
+          corrupti quae vero veniam id blanditiis beatae, nobis est totam. Dicta
+          voluptates illo ipsum excepturi ipsam saepe dolorum molestiae,
+          quisquam officia rerum illum, eaque in quaerat corporis omnis repellat
+          vero sint. Exercitationem, libero, nisi ab quod atque accusantium
+          voluptatum recusandae quibusdam asperiores eligendi, incidunt amet.
+          Ipsa qui consequatur laboriosam libero omnis. Magnam omnis, soluta
+          ipsam quaerat ut, impedit reprehenderit placeat ipsum repudiandae
+          maxime aut itaque molestias amet, et sit commodi nisi! Iusto ratione
+          distinctio et aperiam quaerat nisi aut odit optio impedit.
+        </p>
       </Container>
+      <Footer />
     </div>
   )
 }

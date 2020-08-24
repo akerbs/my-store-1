@@ -38,7 +38,11 @@ export default function Counter(props) {
         onClick={() => props.decrementItem(props.sku)}
         disabled={props.quantity <= 1 ? true : false}
       >
-        <Typography variant="body2" color="textSecondary">
+        <Typography
+          variant="body2"
+          color="textSecondary"
+          style={{ marginBottom: 2 }}
+        >
           -
         </Typography>
       </Button>
@@ -50,7 +54,11 @@ export default function Counter(props) {
         onClick={() => props.incrementItem(props.sku)}
         disabled={props.quantity >= 99 ? true : false}
       >
-        <Typography variant="body2" color="textSecondary">
+        <Typography
+          variant="body2"
+          color="textSecondary"
+          style={{ marginBottom: 2 }}
+        >
           +
         </Typography>
       </Button>

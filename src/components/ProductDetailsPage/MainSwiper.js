@@ -5,9 +5,10 @@ import { Swiper, SwiperSlide } from "swiper/react"
 
 const useStyles = makeStyles(theme => ({
   mainSlider: {
-    width: "400px",
+    width: "430px",
     height: "100%",
-    marginLeft: "27px",
+    margin: 0,
+
     [theme.breakpoints.down("sm")]: {
       width: "100vw",
       height: "auto",

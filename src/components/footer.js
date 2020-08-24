@@ -3,7 +3,13 @@ import PropTypes from "prop-types"
 
 const Footer = () => {
   return (
-    <div>
+    <div
+      style={{
+        backgroundColor: "tomato",
+        minHeight: "50px",
+
+      }}
+    >
       © {new Date().getFullYear()}, Built with
       {` `}
       <a href="https://www.gatsbyjs.org">Gatsby</a>

@@ -29,9 +29,17 @@ import Button from "@material-ui/core/Button"
 import { DrawerCartContext } from "../../context/DrawerCartContext"
 
 const useStyles = makeStyles(theme => ({
-  root: {},
+  root: {
+   
+    display: "flex",
+    flexDirection: "column",
+    minHeight: "100vh",
+
+  },
   contentWrapper: {
-    marginTop: 100,
+    flex: "1 0 auto",
+
+    marginTop: 120,
     [theme.breakpoints.down("sm")]: {
       marginTop: 55,
       paddingLeft: 0,
@@ -88,54 +96,71 @@ const FunnyBunny = props => {
       <CssBaseline />
       <Header />
       <Container maxWidth="md" className={classes.contentWrapper} id="wrapper">
-        <Hidden smDown id="big">
-          <Grid container spacing={0}>
-            <Grid item md={6}>
-              <SRLWrapper
-                options={lightboxOptions}
-                // callbacks={lightboxCallbacks}
-              >
-                <MainSwiper
-                  thumbsSwiper={thumbsSwiper}
-                  setThumbsSwiper={setThumbsSwiper}
-                  data={props.data}
-                />
-              </SRLWrapper>
-              <br />
-              <ThumbsSwiper
+      <Hidden smDown id="big">
+        <Grid container spacing={0}>
+          <Grid item md={6}>
+           <Grid container direction="column" spacing={2}>
+            <Grid item >
+            <SRLWrapper
+              options={lightboxOptions}
+              // callbacks={lightboxCallbacks}
+            >
+              <MainSwiper
                 thumbsSwiper={thumbsSwiper}
                 setThumbsSwiper={setThumbsSwiper}
                 data={props.data}
               />
-            </Grid>
-            <Grid item md={6}>
-              <Title1 lineContent="Funny Bunny" />
-              <Button
-                size="small"
-                color="primary"
-                onClick={() => {
-                  addItem(ItemInfo)
-                  handleCartDrawerOpen()
-                }}
-              >
-                ADD TO CART
-              </Button>
-              {/* <Counter
-              incrementItem={props.incrementItem}
-              decrementItem={props.decrementItem}
-              removeItem={props.removeItem}
-              quantity={props.item.quantity}
-              sku={props.item.sku}
-            /> */}
+            </SRLWrapper>
+             </Grid>
+           <Grid item >
+            <ThumbsSwiper
+              thumbsSwiper={thumbsSwiper}
+              setThumbsSwiper={setThumbsSwiper}
+              data={props.data}
+            />
+              </Grid>
+                </Grid>
+          </Grid>
+          <Grid item md={6}>
+            <Title1 lineContent="Funny Bunny" />
+            <Button
+              size="small"
+              color="primary"
+              onClick={() => {
+                addItem(ItemInfo)
+                handleCartDrawerOpen()
+              }}
+            >
+              ADD TO CART
+            </Button>
+            <p>
               Lorem ipsum dolor sit, amet consectetur adipisicing elit.
               Doloribus non optio unde quisquam aspernatur praesentium dolorum
               magni! Repellendus esse quis aliquid! Nemo cum aliquam suscipit
               dolorum temporibus numquam quasi consequatur quia sequi earum nisi
               optio adipisci, ut, at quibusdam ex sapiente facilis mollitia
               incidunt dolor. Dolorum reprehenderit ex libero earum!
-            </Grid>
+              Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+              Doloribus non optio unde quisquam aspernatur praesentium dolorum
+              magni! Repellendus esse quis aliquid! Nemo cum aliquam suscipit
+              dolorum temporibus numquam quasi consequatur quia sequi earum nisi
+              optio adipisci, ut, at quibusdam ex sapiente facilis mollitia
+              incidunt dolor. Dolorum reprehenderit ex libero earum!
+                Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+              Doloribus non optio unde quisquam aspernatur praesentium dolorum
+              magni! Repellendus esse quis aliquid! Nemo cum aliquam suscipit
+              dolorum temporibus numquam quasi consequatur quia sequi earum nisi
+              optio adipisci, ut, at quibusdam ex sapiente facilis mollitia
+              incidunt dolor. Dolorum reprehenderit ex libero earum!
+              Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+              Doloribus non optio unde quisquam aspernatur praesentium dolorum
+            
+              optio adipisci, ut, at quibusdam ex sapiente facilis mollitia
+              incidunt dolor. Dolorum reprehenderit ex libero earum!
+            </p>
           </Grid>
-        </Hidden>
+        </Grid>
+       </Hidden >
         <Hidden mdUp id="little">
           <MainSwiper
             thumbsSwiper={thumbsSwiper}
@@ -155,17 +180,33 @@ const FunnyBunny = props => {
             >
               ADD TO CART
             </Button>
-            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Doloribus
-            non optio unde quisquam aspernatur praesentium dolorum magni!
-            Repellendus esse quis aliquid! Nemo cum aliquam suscipit dolorum
-            temporibus numquam quasi consequatur quia sequi earum nisi optio
-            adipisci, ut, at quibusdam ex sapiente facilis mollitia incidunt
-            dolor. Dolorum reprehenderit ex libero earum!
+            Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+              Doloribus non optio unde quisquam aspernatur praesentium dolorum
+              magni! Repellendus esse quis aliquid! Nemo cum aliquam suscipit
+              dolorum temporibus numquam quasi consequatur quia sequi earum nisi
+              optio adipisci, ut, at quibusdam ex sapiente facilis mollitia
+              incidunt dolor. Dolorum reprehenderit ex libero earum!
+              Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+              Doloribus non optio unde quisquam aspernatur praesentium dolorum
+              magni! Repellendus esse quis aliquid! Nemo cum aliquam suscipit
+              dolorum temporibus numquam quasi consequatur quia sequi earum nisi
+              optio adipisci, ut, at quibusdam ex sapiente facilis mollitia
+              incidunt dolor. Dolorum reprehenderit ex libero earum!
+                Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+              Doloribus non optio unde quisquam aspernatur praesentium dolorum
+              magni! Repellendus esse quis aliquid! Nemo cum aliquam suscipit
+              dolorum temporibus numquam quasi consequatur quia sequi earum nisi
+              optio adipisci, ut, at quibusdam ex sapiente facilis mollitia
+              incidunt dolor. Dolorum reprehenderit ex libero earum!
+              Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+              Doloribus non optio unde quisquam aspernatur praesentium dolorum
+            
+              optio adipisci, ut, at quibusdam ex sapiente facilis mollitia
+              incidunt dolor. Dolorum reprehenderit ex libero earum!
           </Container>
         </Hidden>
-
-        <Footer />
       </Container>
+      <Footer />
     </div>
   )
 }
