@@ -83,7 +83,7 @@ export default function Header(props) {
             </IconButton>
 
             <Typography variant="h6" className={classes.title}>
-              <Link to="/p2"> Logo </Link>
+              <Link to="/"> Logo </Link>
             </Typography>
 
             <IconButton

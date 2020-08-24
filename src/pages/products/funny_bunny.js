@@ -98,7 +98,7 @@ const FunnyBunny = props => {
       <Container maxWidth="md" className={classes.contentWrapper} id="wrapper">
       <Hidden smDown id="big">
         <Grid container spacing={0}>
-          <Grid item md={6}>
+          <Grid item md={6} >
            <Grid container direction="column" spacing={2}>
             <Grid item >
             <SRLWrapper

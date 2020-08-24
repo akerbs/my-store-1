@@ -5,7 +5,7 @@ const Footer = () => {
   return (
     <div
       style={{
-        backgroundColor: "tomato",
+       textAlign: "center",
         minHeight: "50px",
 
       }}
