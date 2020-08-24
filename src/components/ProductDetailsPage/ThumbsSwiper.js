@@ -20,7 +20,7 @@ export default function ThumbsSwiper(props) {
   return (
     <Swiper
       spaceBetween={25}
-      slidesPerView={4}
+      slidesPerView={3}
       onSwiper={props.setThumbsSwiper}
       className={classes.thumbsSlider}
       // direction="vertical"
