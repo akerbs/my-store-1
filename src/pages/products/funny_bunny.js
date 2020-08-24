@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useState, useContext } from "react"
 import { graphql } from "gatsby"
 import CssBaseline from "@material-ui/core/CssBaseline"
 import { makeStyles } from "@material-ui/core/styles"
@@ -26,10 +26,17 @@ import { useShoppingCart } from "use-shopping-cart"
 import ThumbsSwiper from "../../components/ProductDetailsPage/ThumbsSwiper"
 import MainSwiper from "../../components/ProductDetailsPage/MainSwiper"
 import Button from "@material-ui/core/Button"
+import { DrawerCartContext } from "../../context/DrawerCartContext"
 
 const useStyles = makeStyles(theme => ({
+  root: {},
   contentWrapper: {
-    marginTop: 70,
+    marginTop: 100,
+    [theme.breakpoints.down("sm")]: {
+      marginTop: 55,
+      paddingLeft: 0,
+      paddingRight: 0,
+    },
   },
 }))
 
@@ -60,6 +67,8 @@ const lightboxOptions = {
 const FunnyBunny = props => {
   const classes = useStyles()
 
+  const { handleCartDrawerOpen } = useContext(DrawerCartContext)
+
   const [thumbsSwiper, setThumbsSwiper] = useState(null)
 
   const { addItem } = useShoppingCart()
@@ -74,60 +83,87 @@ const FunnyBunny = props => {
   }
 
   return (
-    <div className={classes.root}>
+    <div className={classes.root} id="root">
       <SEO title="Funny bunny" keywords={[`gatsby`, `application`, `react`]} />
       <CssBaseline />
       <Header />
-      <Container maxWidth="md" className={classes.contentWrapper}>
-        <Title1 lineContent="Funny Bunny" />
-        <Grid container spacing={0}>
-          <Hidden smDown>
-            <Grid item md={1}>
+      <Container maxWidth="md" className={classes.contentWrapper} id="wrapper">
+        <Hidden smDown id="big">
+          <Grid container spacing={0}>
+            <Grid item md={6}>
+              <SRLWrapper
+                options={lightboxOptions}
+                // callbacks={lightboxCallbacks}
+              >
+                <MainSwiper
+                  thumbsSwiper={thumbsSwiper}
+                  setThumbsSwiper={setThumbsSwiper}
+                  data={props.data}
+                />
+              </SRLWrapper>
+              <br />
               <ThumbsSwiper
                 thumbsSwiper={thumbsSwiper}
                 setThumbsSwiper={setThumbsSwiper}
                 data={props.data}
               />
             </Grid>
-          </Hidden>
-          <Grid item md={5} sm={12}>
-            <SRLWrapper
-              options={lightboxOptions}
-              // callbacks={lightboxCallbacks}
-            >
-              <MainSwiper
-                thumbsSwiper={thumbsSwiper}
-                setThumbsSwiper={setThumbsSwiper}
-                data={props.data}
-              />
-            </SRLWrapper>
-          </Grid>
-          <Grid item md={6} sm={12}>
-            <Button
-              size="small"
-              color="primary"
-              onClick={() => {
-                addItem(ItemInfo)
-                // handleClick()
-              }}
-            >
-              ADD TO CART
-            </Button>
-            {/* <Counter
+            <Grid item md={6}>
+              <Title1 lineContent="Funny Bunny" />
+              <Button
+                size="small"
+                color="primary"
+                onClick={() => {
+                  addItem(ItemInfo)
+                  handleCartDrawerOpen()
+                }}
+              >
+                ADD TO CART
+              </Button>
+              {/* <Counter
               incrementItem={props.incrementItem}
               decrementItem={props.decrementItem}
               removeItem={props.removeItem}
               quantity={props.item.quantity}
               sku={props.item.sku}
             /> */}
+              Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+              Doloribus non optio unde quisquam aspernatur praesentium dolorum
+              magni! Repellendus esse quis aliquid! Nemo cum aliquam suscipit
+              dolorum temporibus numquam quasi consequatur quia sequi earum nisi
+              optio adipisci, ut, at quibusdam ex sapiente facilis mollitia
+              incidunt dolor. Dolorum reprehenderit ex libero earum!
+            </Grid>
+          </Grid>
+        </Hidden>
+        <Hidden mdUp id="little">
+          <MainSwiper
+            thumbsSwiper={thumbsSwiper}
+            setThumbsSwiper={setThumbsSwiper}
+            data={props.data}
+          />
+          <br /> <br />
+          <Container>
+            <Title1 lineContent="Funny Bunny" />
+            <Button
+              size="small"
+              color="primary"
+              onClick={() => {
+                addItem(ItemInfo)
+                handleCartDrawerOpen()
+              }}
+            >
+              ADD TO CART
+            </Button>
             Lorem ipsum dolor sit, amet consectetur adipisicing elit. Doloribus
             non optio unde quisquam aspernatur praesentium dolorum magni!
             Repellendus esse quis aliquid! Nemo cum aliquam suscipit dolorum
             temporibus numquam quasi consequatur quia sequi earum nisi optio
             adipisci, ut, at quibusdam ex sapiente facilis mollitia incidunt
             dolor. Dolorum reprehenderit ex libero earum!
-          </Grid>
-        </Grid>
+          </Container>
+        </Hidden>
+
         <Footer />
       </Container>
     </div>

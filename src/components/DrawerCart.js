@@ -51,7 +51,7 @@ export default function DrawerCart(props) {
     >
       <div className={classes.drawerHeader}>
         <Typography variant="body1" className={classes.cartTitle}>
-          Cart
+          Your cart
         </Typography>
         <IconButton onClick={props.onClose}>
           {theme.direction === "rtl" ? (

@@ -5,7 +5,7 @@ import { Swiper, SwiperSlide } from "swiper/react"
 
 const useStyles = makeStyles(theme => ({
   thumbsSlider: {
-    width: "95px",
+    width: "400px",
     height: "100%",
     [theme.breakpoints.down("sm")]: {
       width: "52px",
@@ -18,11 +18,11 @@ export default function ThumbsSwiper(props) {
 
   return (
     <Swiper
-      spaceBetween={1}
-      slidesPerView={3}
+      spaceBetween={25}
+      slidesPerView={4}
       onSwiper={props.setThumbsSwiper}
       className={classes.thumbsSlider}
-      direction="vertical"
+      // direction="vertical"
     >
       <SwiperSlide>
         <Img

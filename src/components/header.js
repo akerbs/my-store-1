@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useContext } from "react"
 import clsx from "clsx"
 import { makeStyles, useTheme } from "@material-ui/core/styles"
 import CssBaseline from "@material-ui/core/CssBaseline"
@@ -15,6 +15,7 @@ import DrawerMenu from "./DrawerMenu"
 import DrawerCart from "./DrawerCart"
 import { useShoppingCart } from "use-shopping-cart"
 import Link from "gatsby-plugin-transition-link"
+import { DrawerCartContext } from "../context/DrawerCartContext"
 
 function HideOnScroll(props) {
   const { children } = props
@@ -48,8 +49,12 @@ export default function Header(props) {
   const classes = useStyles()
   const theme = useTheme()
   const [open, setOpen] = React.useState(false)
-  const [openCart, setOpenCart] = React.useState(false)
+
   const { cartCount } = useShoppingCart()
+
+  const { openCart, handleCartDrawerOpen, handleCartDrawerClose } = useContext(
+    DrawerCartContext
+  )
 
   const handleDrawerOpen = () => {
     setOpen(true)
@@ -57,16 +62,6 @@ export default function Header(props) {
   }
   const handleDrawerClose = () => {
     setOpen(false)
-    const scrollY = document.body.style.top
-    document.body.style.position = ""
-  }
-
-  const handleCartDrawerOpen = () => {
-    setOpenCart(true)
-    document.body.style.position = "fixed"
-  }
-  const handleCartDrawerClose = () => {
-    setOpenCart(false)
     const scrollY = document.body.style.top
     document.body.style.position = ""
   }

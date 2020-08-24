@@ -32,20 +32,20 @@ export default function SnakeBar(props) {
 
 // for parent component:
 
-// const [openSnackbar, setOpenSnackbar] = React.useState(false)
+// const [openSnackbar, setOpenSnackbar] = useState(false)
 
-// const handleClick = () => {
+// const handleSnakebarShow = () => {
 //   setOpenSnackbar(true)
 // }
-// const handleClose = (event, reason) => {
+// const handleSnakebarClose = (event, reason) => {
 //   if (reason === "clickaway") {
 //     return
 //   }
 //   setOpenSnackbar(false)
 // }
 
-//  <SnakeBar
+// <SnakeBar
 // open={openSnackbar}
-// onClose={handleClose}
+// onClose={handleSnakebarClose}
 // message="Item added into cart"
 // />

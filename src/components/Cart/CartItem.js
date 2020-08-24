@@ -23,14 +23,14 @@ const useStyles = makeStyles(theme => ({
     maxWidth: "auto",
   },
   imgBtn: {
-    width: "100px",
-    height: "120px",
+    width: "90px",
+    height: "100px",
   },
   img: {
     margin: "auto",
     display: "block",
-    width: "100px",
-    height: "120px",
+    width: "90px",
+    height: "100px",
   },
 }))
 

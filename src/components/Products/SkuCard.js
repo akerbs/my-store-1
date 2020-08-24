@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useContext, useState } from "react"
 import Button from "@material-ui/core/Button"
 import Card from "@material-ui/core/Card"
 import CardActionArea from "@material-ui/core/CardActionArea"
@@ -9,8 +9,9 @@ import Typography from "@material-ui/core/Typography"
 import { useShoppingCart, formatCurrencyString } from "use-shopping-cart"
 import { makeStyles } from "@material-ui/core/styles"
 import Link from "gatsby-plugin-transition-link"
-import SnakeBar from "../SnakeBar"
+// import SnakeBar from "../SnakeBar"
 import OldPrice from "./OldPrice"
+import { DrawerCartContext } from "../../context/DrawerCartContext"
 import funnyBunny from "../../images/products/funny_bunny/funny_bunny_2.jpg"
 import catClock from "../../images/products/cat_clock/cat_clock_1.jpg"
 import magicHat from "../../images/products/magic_hat/magic_hat_1.jpg"
@@ -37,17 +38,19 @@ const useStyles = makeStyles({
 const SkuCard = ({ sku }, props) => {
   const classes = useStyles()
   const { addItem } = useShoppingCart()
-  const [openSnackbar, setOpenSnackbar] = React.useState(false)
+  const { handleCartDrawerOpen } = useContext(DrawerCartContext)
 
-  const handleClick = () => {
-    setOpenSnackbar(true)
-  }
-  const handleClose = (event, reason) => {
-    if (reason === "clickaway") {
-      return
-    }
-    setOpenSnackbar(false)
-  }
+  // const [openSnackbar, setOpenSnackbar] = useState(false)
+
+  // const handleSnakebarShow = () => {
+  //   setOpenSnackbar(true)
+  // }
+  // const handleSnakebarClose = (event, reason) => {
+  //   if (reason === "clickaway") {
+  //     return
+  //   }
+  //   setOpenSnackbar(false)
+  // }
 
   const productPage =
     sku.sku === "price_1HGjcwHwITO0GSJrJEhUG0Aq"
@@ -105,19 +108,20 @@ const SkuCard = ({ sku }, props) => {
             color="primary"
             onClick={() => {
               addItem(sku)
-              handleClick()
+              // handleSnakebarShow()
+              handleCartDrawerOpen()
             }}
           >
             ADD TO CART
           </Button>
         </CardActions>
       </Card>
-
+      {/* 
       <SnakeBar
         open={openSnackbar}
-        onClose={handleClose}
+        onClose={handleSnakebarClose}
         message="Item added into cart"
-      />
+      /> */}
     </>
   )
 }

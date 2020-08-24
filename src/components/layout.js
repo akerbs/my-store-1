@@ -7,6 +7,7 @@ import "@stripe/stripe-js" // https://github.com/stripe/stripe-js#import-as-a-si
 import { CartProvider } from "use-shopping-cart"
 import { loadStripe } from "@stripe/stripe-js"
 import SimpleReactLightbox from "simple-react-lightbox"
+import { DrawerCartContextProvider } from "../context/DrawerCartContext"
 
 // const stripePromise = loadStripe(process.env.GATSBY_STRIPE_PUBLISHABLE_KEY)
 const stripePromise = loadStripe(
@@ -40,7 +41,9 @@ const Layout = ({ children }) => {
         billingAddressCollection={true}
       >
         <CssBaseline />
-        <SimpleReactLightbox>{children}</SimpleReactLightbox>
+        <SimpleReactLightbox>
+          <DrawerCartContextProvider>{children}</DrawerCartContextProvider>
+        </SimpleReactLightbox>
       </CartProvider>
     </>
   )
