@@ -70,6 +70,13 @@ const SkuCard = ({ sku }, props) => {
       ? magicHat
       : sku.image
 
+  // console.log(
+  //   formatCurrencyString({
+  //     value: parseInt(sku.price),
+  //     currency: sku.currency,
+  //   })
+  // )
+
   return (
     <>
       <Card className={classes.root}>
