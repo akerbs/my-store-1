@@ -37,7 +37,7 @@ const Layout = ({ children }) => {
         cancelUrl="http://localhost:8000/"
         // successUrl={`${window.location.origin}/success/`}
         // cancelUrl={`${window.location.origin}/`}
-        allowedCountries={["US", "GB", "CA", "DE"]}
+        //  allowedCountries={["US", "GB", "CA", "DE"]}
         billingAddressCollection={true}
       >
         <CssBaseline />

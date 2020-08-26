@@ -4,6 +4,7 @@ import CartItem from "./CartItem"
 import { makeStyles } from "@material-ui/core/styles"
 import Button from "@material-ui/core/Button"
 import Typography from "@material-ui/core/Typography"
+// import Coupon from "./Coupon"
 
 const useStyles = makeStyles(theme => ({
   btnWrapper: {
@@ -22,11 +23,17 @@ const Cart = props => {
     removeItem,
     cartCount,
     cartDetails,
+    // totalPrice,
     formattedTotalPrice,
     redirectToCheckout,
   } = useShoppingCart()
 
   console.log(cartDetails)
+
+  // const [discount, setDiscount] = useState(0.5)
+
+  // const ttlPriceWithDiscount =
+  //   ((totalPrice * discount) / 100).toFixed(2) + " " + "€"
 
   // const ttlPriceWithoutDollarSign = formattedTotalPrice.toString().slice(0, -1)
   // const ttlPriceWithEuroSign = `€ ${ttlPriceWithoutDollarSign}`
@@ -58,6 +65,7 @@ const Cart = props => {
         </Typography>
       ) : (
         <>
+          {/* <Coupon /> */}
           <Typography
             variant="body2"
             align="right"
