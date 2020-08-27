@@ -33,10 +33,10 @@ const Layout = ({ children }) => {
         currency="EUR"
         // successUrl="https://kerbs-store-1.vercel.app/success/"
         // cancelUrl="https://kerbs-store-1.vercel.app/"
-        successUrl="http://localhost:8000/success/"
-        cancelUrl="http://localhost:8000/"
-        // successUrl={`${window.location.origin}/success/`}
-        // cancelUrl={`${window.location.origin}/`}
+        // successUrl="http://localhost:8000/success/"
+        // cancelUrl="http://localhost:8000/"
+        successUrl={`${window.location.origin}/success/`}
+        cancelUrl={`${window.location.origin}/`}
         //  allowedCountries={["US", "GB", "CA", "DE"]}
         billingAddressCollection={true}
       >
