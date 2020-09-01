@@ -40,6 +40,14 @@ const useStyles = makeStyles(theme => ({
     }),
     marginLeft: 0,
   },
+  drawerHeaderToRight: {
+    display: "flex",
+    alignItems: "center",
+    padding: theme.spacing(0, 1),
+    // necessary for content to be below app bar
+    ...theme.mixins.toolbar,
+    justifyContent: "flex-end",
+  },
 
   contentToLeft: {
     flexGrow: 1,
@@ -56,6 +64,14 @@ const useStyles = makeStyles(theme => ({
       duration: theme.transitions.duration.enteringScreen,
     }),
     marginRight: 0,
+  },
+  drawerHeaderToLeft: {
+    display: "flex",
+    alignItems: "center",
+    padding: theme.spacing(0, 1),
+    // necessary for content to be below app bar
+    ...theme.mixins.toolbar,
+    justifyContent: "flex-start",
   },
 }))
 
@@ -79,6 +95,12 @@ const IndexPage = () => {
       <SEO title="Home" keywords={[`gatsby`, `application`, `react`]} />
       <CssBaseline />
       <Header />
+      <div
+        className={clsx(
+          openDrawerCart && classes.drawerHeaderToLeft,
+          openDrawerMenu && classes.drawerHeaderToRight
+        )}
+      />
       <div
         className={clsx(
           openDrawerCart && classes.contentToLeft,
