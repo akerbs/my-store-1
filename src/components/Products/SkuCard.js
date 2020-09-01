@@ -21,18 +21,18 @@ const useStyles = makeStyles({
     maxWidth: 300,
     marginBottom: "1rem",
     // padding: "1rem",
-    // transition: "0.3s linear",
-    // "&:hover": {
-    //   boxShadow: "0 0 10px rgba(0, 0, 0, 0.5)",
-    // },
+    transition: "0.3s linear",
+    "&:hover": {
+      boxShadow: "0 0 10px rgba(0, 0, 0, 0.5)",
+    },
   },
-  // cardMedia: {
-  //   transition: "1s",
+  cardMedia: {
+    transition: "1s",
 
-  //   "&:hover": {
-  //     transform: "scale(1.2)",
-  //   },
-  // },
+    "&:hover": {
+      transform: "scale(1.2)",
+    },
+  },
 })
 
 const SkuCard = ({ sku }, props) => {
