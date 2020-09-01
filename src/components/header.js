@@ -49,14 +49,13 @@ export default function Header(props) {
   const classes = useStyles()
   const theme = useTheme()
   const [openDrawerMenu, setOpenDrawerMenu] = React.useState(false)
-  // const [openDrawerCart, setOpenDrawerCart] = React.useState(false)
-  // const [openDrawerMenu, setOpenDrawerMenu] = React.useState(false)
+  const [openDrawerCart, setOpenDrawerCart] = React.useState(false)
 
   const { cartCount } = useShoppingCart()
 
-  const { openCart, handleCartDrawerOpen, handleCartDrawerClose } = useContext(
-    DrawerCartContext
-  )
+  // const { openCart, handleCartDrawerOpen, handleCartDrawerClose } = useContext(
+  //   DrawerCartContext
+  // )
 
   const handleDrawerMenuOpen = () => {
     setOpenDrawerMenu(true)
@@ -64,6 +63,16 @@ export default function Header(props) {
   }
   const handleDrawerMenuClose = () => {
     setOpenDrawerMenu(false)
+    const scrollY = document.body.style.top
+    document.body.style.position = ""
+  }
+
+  const handleDrawerCartOpen = () => {
+    setOpenDrawerCart(true)
+    document.body.style.position = "fixed"
+  }
+  const handleDrawerCartClose = () => {
+    setOpenDrawerCart(false)
     const scrollY = document.body.style.top
     document.body.style.position = ""
   }
@@ -94,11 +103,11 @@ export default function Header(props) {
             <IconButton
               color="inherit"
               aria-label="open drawer"
-              onClick={handleCartDrawerOpen}
+              onClick={handleDrawerCartOpen}
               edge="end"
               className={clsx(
                 classes.shoppingCartButton,
-                openCart && classes.hide
+                openDrawerCart && classes.hide
               )}
             >
               <Badge badgeContent={cartCount} color="secondary" variant="dot">
@@ -109,7 +118,7 @@ export default function Header(props) {
         </AppBar>
       </HideOnScroll>
       <DrawerMenu onClose={handleDrawerMenuClose} open={openDrawerMenu} />
-      <DrawerCart onClose={handleCartDrawerClose} open={openCart} />
+      <DrawerCart onClose={handleDrawerCartClose} open={openDrawerCart} />
     </div>
   )
 }
