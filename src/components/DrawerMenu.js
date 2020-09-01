@@ -17,6 +17,9 @@ const window = require("global/window")
 const drawerWidth = window.innerWidth <= 599 ? "100vw" : 450
 
 const useStyles = makeStyles(theme => ({
+  root: {
+    display: "flex",
+  },
   drawer: {
     width: drawerWidth,
     flexShrink: 0,
@@ -42,7 +45,7 @@ export default function DrawerMenu(props) {
   const theme = useTheme()
 
   return (
-    <>
+    <div className={classes.root}>
       <CssBaseline />
 
       <Drawer
@@ -170,6 +173,6 @@ export default function DrawerMenu(props) {
           </div>
         </Slide>
       </Drawer>
-    </>
+    </div>
   )
 }
