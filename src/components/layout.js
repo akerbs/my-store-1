@@ -8,6 +8,7 @@ import { CartProvider } from "use-shopping-cart"
 import { loadStripe } from "@stripe/stripe-js"
 import SimpleReactLightbox from "simple-react-lightbox"
 import { DrawerCartContextProvider } from "../context/DrawerCartContext"
+import { DrawerMenuContextProvider } from "../context/DrawerMenuContext"
 
 // const stripePromise = loadStripe(process.env.GATSBY_STRIPE_PUBLISHABLE_KEY)
 const stripePromise = loadStripe(
@@ -42,7 +43,10 @@ const Layout = ({ children }) => {
       >
         <CssBaseline />
         <SimpleReactLightbox>
-          <DrawerCartContextProvider>{children}</DrawerCartContextProvider>
+          {" "}
+          <DrawerMenuContextProvider>
+            <DrawerCartContextProvider>{children}</DrawerCartContextProvider>
+          </DrawerMenuContextProvider>
         </SimpleReactLightbox>
       </CartProvider>
     </>

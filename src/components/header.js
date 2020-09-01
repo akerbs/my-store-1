@@ -16,6 +16,7 @@ import DrawerCart from "./DrawerCart"
 import { useShoppingCart } from "use-shopping-cart"
 import Link from "gatsby-plugin-transition-link"
 import { DrawerCartContext } from "../context/DrawerCartContext"
+import { DrawerMenuContext } from "../context/DrawerMenuContext"
 const window = require("global/window")
 
 const drawerWidth = window.innerWidth <= 599 ? "100vw" : 450
@@ -74,22 +75,18 @@ export default function Header(props) {
   const classes = useStyles()
   const theme = useTheme()
   const { cartCount } = useShoppingCart()
-  const [openDrawerMenu, setOpenDrawerMenu] = React.useState(false)
+
   const {
     openDrawerCart,
     handleDrawerCartOpen,
     handleDrawerCartClose,
   } = useContext(DrawerCartContext)
 
-  const handleDrawerMenuOpen = () => {
-    setOpenDrawerMenu(true)
-    document.body.style.position = "fixed"
-  }
-  const handleDrawerMenuClose = () => {
-    setOpenDrawerMenu(false)
-    const scrollY = document.body.style.top
-    document.body.style.position = ""
-  }
+  const {
+    openDrawerMenu,
+    handleDrawerMenuOpen,
+    handleDrawerMenuClose,
+  } = useContext(DrawerMenuContext)
 
   return (
     <div className={classes.root}>
