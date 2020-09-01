@@ -48,7 +48,9 @@ const useStyles = makeStyles(theme => ({
 export default function Header(props) {
   const classes = useStyles()
   const theme = useTheme()
-  const [open, setOpen] = React.useState(false)
+  const [openDrawerMenu, setOpenDrawerMenu] = React.useState(false)
+  // const [openDrawerCart, setOpenDrawerCart] = React.useState(false)
+  // const [openDrawerMenu, setOpenDrawerMenu] = React.useState(false)
 
   const { cartCount } = useShoppingCart()
 
@@ -56,12 +58,12 @@ export default function Header(props) {
     DrawerCartContext
   )
 
-  const handleDrawerOpen = () => {
-    setOpen(true)
+  const handleDrawerMenuOpen = () => {
+    setOpenDrawerMenu(true)
     document.body.style.position = "fixed"
   }
-  const handleDrawerClose = () => {
-    setOpen(false)
+  const handleDrawerMenuClose = () => {
+    setOpenDrawerMenu(false)
     const scrollY = document.body.style.top
     document.body.style.position = ""
   }
@@ -75,9 +77,12 @@ export default function Header(props) {
             <IconButton
               color="inherit"
               aria-label="open drawer"
-              onClick={handleDrawerOpen}
+              onClick={handleDrawerMenuOpen}
               edge="start"
-              className={clsx(classes.menuButton, open && classes.hide)}
+              className={clsx(
+                classes.menuButton,
+                openDrawerMenu && classes.hide
+              )}
             >
               <MenuIcon />
             </IconButton>
@@ -103,7 +108,7 @@ export default function Header(props) {
           </Toolbar>
         </AppBar>
       </HideOnScroll>
-      <DrawerMenu onClose={handleDrawerClose} open={open} />
+      <DrawerMenu onClose={handleDrawerMenuClose} open={openDrawerMenu} />
       <DrawerCart onClose={handleCartDrawerClose} open={openCart} />
     </div>
   )
