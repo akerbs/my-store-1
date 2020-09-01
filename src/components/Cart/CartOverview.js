@@ -1,4 +1,5 @@
 import React, { useState } from "react"
+import CssBaseline from "@material-ui/core/CssBaseline"
 import { useShoppingCart } from "use-shopping-cart"
 import CartItem from "./CartItem"
 import { makeStyles } from "@material-ui/core/styles"
@@ -34,6 +35,8 @@ const Cart = props => {
 
   return (
     <div>
+      <CssBaseline />
+
       <div>
         {Object.keys(cartDetails).map((item, idx) => {
           const cartItem = cartDetails[item]
@@ -76,7 +79,7 @@ const Cart = props => {
       ) : (
         <>
           {/* <Coupon /> */}
-          <Slide in={props.open} timeout={900} direction="up">
+          <Slide in={props.open} timeout={1000} direction="up">
             <div>
               <Fade in={props.open} timeout={2000}>
                 <Typography
@@ -92,7 +95,7 @@ const Cart = props => {
           </Slide>
 
           <div className={classes.btnWrapper}>
-            <Slide in={props.open} timeout={900} direction="up">
+            <Slide in={props.open} timeout={1000} direction="up">
               <div>
                 <Fade in={props.open} timeout={2000}>
                   <Button

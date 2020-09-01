@@ -1,4 +1,5 @@
 import React, { useState } from "react"
+import CssBaseline from "@material-ui/core/CssBaseline"
 import { makeStyles, useTheme } from "@material-ui/core/styles"
 import Drawer from "@material-ui/core/Drawer"
 import Typography from "@material-ui/core/Typography"
@@ -27,7 +28,7 @@ const useStyles = makeStyles(theme => ({
     padding: theme.spacing(0, 1),
     // necessary for content to be below app bar
     ...theme.mixins.toolbar,
-    justifyContent: "flex-end",
+    justifyContent: "space-between",
   },
   cartTitle: {
     flexGrow: 1,
@@ -39,45 +40,48 @@ export default function DrawerCart(props) {
   const theme = useTheme()
 
   return (
-    <Drawer
-      transitionDuration={{ enter: 400, exit: 300 }}
-      className={classes.drawer}
-      onEscapeKeyDown={props.onClose}
-      onBackdropClick={props.onClose}
-      variant="temporary"
-      anchor="right"
-      open={props.open}
-      onClose={props.onClose}
-      classes={{
-        paper: classes.drawerPaper,
-      }}
-    >
-      <div className={classes.drawerHeader}>
-        <Slide in={props.open} timeout={1000} direction="up">
-          <div>
-            <Fade in={props.open} timeout={2000}>
-              <Typography variant="body1" className={classes.cartTitle}>
-                Your cart
-              </Typography>
-            </Fade>
-          </div>
-        </Slide>
-        <Slide in={props.open} timeout={800} direction="up">
-          <div>
-            <Fade in={props.open} timeout={2000}>
-              <IconButton onClick={props.onClose}>
-                {theme.direction === "rtl" ? (
-                  <ChevronLeftIcon />
-                ) : (
-                  <ChevronRightIcon />
-                )}
-              </IconButton>
-            </Fade>
-          </div>
-        </Slide>
-      </div>
+    <>
+      <CssBaseline />
+      <Drawer
+        transitionDuration={{ enter: 400, exit: 300 }}
+        className={classes.drawer}
+        onEscapeKeyDown={props.onClose}
+        onBackdropClick={props.onClose}
+        variant="temporary"
+        anchor="right"
+        open={props.open}
+        onClose={props.onClose}
+        classes={{
+          paper: classes.drawerPaper,
+        }}
+      >
+        <div className={classes.drawerHeader}>
+          <Slide in={props.open} timeout={900} direction="up">
+            <div>
+              <Fade in={props.open} timeout={2000}>
+                <Typography variant="body1" className={classes.cartTitle}>
+                  Your cart
+                </Typography>
+              </Fade>
+            </div>
+          </Slide>
+          <Slide in={props.open} timeout={800} direction="up">
+            <div>
+              <Fade in={props.open} timeout={2000}>
+                <IconButton onClick={props.onClose}>
+                  {theme.direction === "rtl" ? (
+                    <ChevronLeftIcon />
+                  ) : (
+                    <ChevronRightIcon />
+                  )}
+                </IconButton>
+              </Fade>
+            </div>
+          </Slide>
+        </div>
 
-      <CartOverview onClose={props.onClose} open={props.open} />
-    </Drawer>
+        <CartOverview onClose={props.onClose} open={props.open} />
+      </Drawer>
+    </>
   )
 }

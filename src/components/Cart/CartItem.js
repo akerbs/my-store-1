@@ -1,4 +1,5 @@
 import React, { useState } from "react"
+import CssBaseline from "@material-ui/core/CssBaseline"
 import IconButton from "@material-ui/core/IconButton"
 import CloseIcon from "@material-ui/icons/Close"
 import Counter from "./Counter"
@@ -58,79 +59,82 @@ const CartItem = props => {
       : props.item.image
 
   return (
-    <Slide in={props.open} timeout={1000} direction="up">
-      <div>
-        <Fade in={props.open} timeout={2000}>
-          <div className={classes.root}>
-            <Paper className={classes.paper} elevation="0">
-              <Grid container spacing={2}>
-                <Grid item xs={4}>
-                  <ButtonBase
-                    onClick={() => {
-                      props.onClose()
-                    }}
-                    className={classes.imgBtn}
-                  >
-                    <Link
-                      to={`/products/${productPage}`}
-                      style={{ textDecoration: "none" }}
+    <>
+      <CssBaseline />
+      <Slide in={props.open} timeout={900} direction="up">
+        <div>
+          <Fade in={props.open} timeout={2000}>
+            <div className={classes.root}>
+              <Paper className={classes.paper} elevation="0">
+                <Grid container spacing={2}>
+                  <Grid item xs={4}>
+                    <ButtonBase
+                      onClick={() => {
+                        props.onClose()
+                      }}
+                      className={classes.imgBtn}
                     >
-                      <img
-                        src={imgLocal}
-                        title={props.item.name}
-                        className={classes.img}
-                      />
-                    </Link>
-                  </ButtonBase>
-                </Grid>
-                <Grid
-                  item
-                  xs={8}
-                  sm
-                  container
-                  style={{ paddingLeft: "15px", paddingRight: 0 }}
-                >
-                  <Grid item xs container direction="column" spacing={2}>
-                    <Grid item xs>
-                      <Typography gutterBottom variant="subtitle1">
-                        {props.item.name}
-                      </Typography>
-                      <Typography variant="body2" gutterBottom>
-                        {props.item.description}
-                      </Typography>
-                      <Typography variant="body2" color="textPrimary">
-                        <Counter
-                          incrementItem={props.incrementItem}
-                          decrementItem={props.decrementItem}
-                          removeItem={props.removeItem}
-                          quantity={props.item.quantity}
-                          sku={props.item.sku}
-                        />{" "}
-                        {/* {(props.item.currency = "eur" ? "€" : props.item.currency)}{" "} */}
-                        {/* {corrPrice} */} {props.item.formattedValue}
+                      <Link
+                        to={`/products/${productPage}`}
+                        style={{ textDecoration: "none" }}
+                      >
+                        <img
+                          src={imgLocal}
+                          title={props.item.name}
+                          className={classes.img}
+                        />
+                      </Link>
+                    </ButtonBase>
+                  </Grid>
+                  <Grid
+                    item
+                    xs={8}
+                    sm
+                    container
+                    style={{ paddingLeft: "15px", paddingRight: 0 }}
+                  >
+                    <Grid item xs container direction="column" spacing={2}>
+                      <Grid item xs>
+                        <Typography gutterBottom variant="subtitle1">
+                          {props.item.name}
+                        </Typography>
+                        <Typography variant="body2" gutterBottom>
+                          {props.item.description}
+                        </Typography>
+                        <Typography variant="body2" color="textPrimary">
+                          <Counter
+                            incrementItem={props.incrementItem}
+                            decrementItem={props.decrementItem}
+                            removeItem={props.removeItem}
+                            quantity={props.item.quantity}
+                            sku={props.item.sku}
+                          />{" "}
+                          {/* {(props.item.currency = "eur" ? "€" : props.item.currency)}{" "} */}
+                          {/* {corrPrice} */} {props.item.formattedValue}
+                        </Typography>
+                      </Grid>
+                    </Grid>
+                    <Grid item>
+                      <Typography variant="subtitle1">
+                        {" "}
+                        <IconButton
+                          size="small"
+                          onClick={() => props.removeItem(props.item.sku)}
+                          style={{ padding: 0 }}
+                        >
+                          <CloseIcon fontSize="small" />
+                        </IconButton>
                       </Typography>
                     </Grid>
                   </Grid>
-                  <Grid item>
-                    <Typography variant="subtitle1">
-                      {" "}
-                      <IconButton
-                        size="small"
-                        onClick={() => props.removeItem(props.item.sku)}
-                        style={{ padding: 0 }}
-                      >
-                        <CloseIcon fontSize="small" />
-                      </IconButton>
-                    </Typography>
-                  </Grid>
                 </Grid>
-              </Grid>
-            </Paper>
-            <Divider variant="middle" light={true} />
-          </div>
-        </Fade>
-      </div>
-    </Slide>
+              </Paper>
+              <Divider variant="middle" light={true} />
+            </div>
+          </Fade>
+        </div>
+      </Slide>
+    </>
   )
 }
 

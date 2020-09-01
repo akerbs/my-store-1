@@ -1,19 +1,17 @@
 import React from "react"
+import CssBaseline from "@material-ui/core/CssBaseline"
 import { makeStyles, useTheme } from "@material-ui/core/styles"
 import Drawer from "@material-ui/core/Drawer"
-import CssBaseline from "@material-ui/core/CssBaseline"
 import List from "@material-ui/core/List"
 import Typography from "@material-ui/core/Typography"
-import Divider from "@material-ui/core/Divider"
 import IconButton from "@material-ui/core/IconButton"
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft"
 import ChevronRightIcon from "@material-ui/icons/ChevronRight"
 import ListItem from "@material-ui/core/ListItem"
-import ListItemIcon from "@material-ui/core/ListItemIcon"
 import ListItemText from "@material-ui/core/ListItemText"
-import InboxIcon from "@material-ui/icons/MoveToInbox"
-import MailIcon from "@material-ui/icons/Mail"
 import Link from "gatsby-plugin-transition-link"
+import Slide from "@material-ui/core/Slide"
+import Fade from "@material-ui/core/Fade"
 const window = require("global/window")
 
 const drawerWidth = window.innerWidth <= 599 ? "100vw" : 450
@@ -34,6 +32,9 @@ const useStyles = makeStyles(theme => ({
     ...theme.mixins.toolbar,
     justifyContent: "flex-end",
   },
+  drawerLink: {
+    textDecoration: "none",
+  },
 }))
 
 export default function DrawerMenu(props) {
@@ -41,95 +42,134 @@ export default function DrawerMenu(props) {
   const theme = useTheme()
 
   return (
-    <Drawer
-      className={classes.drawer}
-      onEscapeKeyDown={props.onClose}
-      onBackdropClick={props.onClose}
-      variant="temporary"
-      anchor="left"
-      open={props.open}
-      onClose={props.onClose}
-      classes={{
-        paper: classes.drawerPaper,
-      }}
-    >
-      <div className={classes.drawerHeader}>
-        <IconButton onClick={props.onClose}>
-          {theme.direction === "ltr" ? (
-            <ChevronLeftIcon />
-          ) : (
-            <ChevronRightIcon />
-          )}
-        </IconButton>
-      </div>
+    <>
+      <CssBaseline />
 
-      <List>
-        <Link
-          to="#"
-          // className={classes.drawerItem}
-          // activeClassName={classes.active}
-          // onClick={handleDrawerClose}
-        >
-          <ListItem button key={"HOME"}>
-            <ListItemText
-              primary={
-                <Typography align="center" variant="h6">
-                  HOME
-                </Typography>
-              }
-            />
-          </ListItem>
-        </Link>
-        <Link
-          to="#"
-          // className={classes.drawerItem}
-          // activeClassName={classes.active}
-          // onClick={handleDrawerClose}
-        >
-          <ListItem button key={"ABOUT US"}>
-            <ListItemText
-              primary={
-                <Typography align="center" variant="h6">
-                  ABOUT US
-                </Typography>
-              }
-            />
-          </ListItem>
-        </Link>
-        <Link
-          to="#"
-          // className={classes.drawerItem}
-          // activeClassName={classes.active}
-          // onClick={handleDrawerClose}
-        >
-          <ListItem button key={"TRENDS"}>
-            <ListItemText
-              primary={
-                <Typography align="center" variant="h6">
-                  TRENDS
-                </Typography>
-              }
-            />
-          </ListItem>
-        </Link>
+      <Drawer
+        className={classes.drawer}
+        onEscapeKeyDown={props.onClose}
+        onBackdropClick={props.onClose}
+        variant="temporary"
+        anchor="left"
+        open={props.open}
+        onClose={props.onClose}
+        classes={{
+          paper: classes.drawerPaper,
+        }}
+      >
+        <div className={classes.drawerHeader}>
+          {/* <Slide in={props.open} timeout={1000} direction="up">
+            <div>
+              <Fade in={props.open} timeout={2000}> */}
+          <IconButton onClick={props.onClose}>
+            {theme.direction === "ltr" ? (
+              <ChevronLeftIcon />
+            ) : (
+              <ChevronRightIcon />
+            )}
+          </IconButton>
+          {/* </Fade>
+            </div>
+          </Slide> */}
+        </div>
+        {/* <Slide in={props.open} timeout={1000} direction="up">
+          <div>
+            <Fade in={props.open} timeout={2000}> */}
+        <List>
+          <Link
+            to="#"
+            className={classes.drawerLink}
+            // activeClassName={classes.active}
+            // onClick={handleDrawerClose}
+          >
+            <Slide in={props.open} timeout={1000} direction="up">
+              <div>
+                <Fade in={props.open} timeout={2000}>
+                  <ListItem button key={"HOME"}>
+                    <ListItemText
+                      primary={
+                        <Typography align="center" variant="h6">
+                          HOME
+                        </Typography>
+                      }
+                    />
+                  </ListItem>
+                </Fade>
+              </div>
+            </Slide>
+          </Link>
+          <Link
+            to="#"
+            className={classes.drawerLink}
+            // activeClassName={classes.active}
+            // onClick={handleDrawerClose}
+          >
+            <Slide in={props.open} timeout={1020} direction="up">
+              <div>
+                <Fade in={props.open} timeout={2020}>
+                  <ListItem button key={"ABOUT US"}>
+                    <ListItemText
+                      primary={
+                        <Typography align="center" variant="h6">
+                          ABOUT US
+                        </Typography>
+                      }
+                    />
+                  </ListItem>
+                </Fade>
+              </div>
+            </Slide>
+          </Link>
+          <Link
+            to="#"
+            className={classes.drawerLink}
+            // activeClassName={classes.active}
+            // onClick={handleDrawerClose}
+          >
+            <Slide in={props.open} timeout={1040} direction="up">
+              <div>
+                <Fade in={props.open} timeout={2040}>
+                  <ListItem button key={"TRENDS"}>
+                    <ListItemText
+                      primary={
+                        <Typography align="center" variant="h6">
+                          TRENDS
+                        </Typography>
+                      }
+                    />
+                  </ListItem>
+                </Fade>
+              </div>
+            </Slide>
+          </Link>
 
-        <Link
-          to="#"
-          // className={classes.drawerItem}
-          // activeClassName={classes.active}
-          // onClick={handleDrawerClose}
-        >
-          <ListItem button key={"CONTACT US"}>
-            <ListItemText
-              primary={
-                <Typography align="center" variant="h6">
-                  CONTACT US
-                </Typography>
-              }
-            />
-          </ListItem>
-        </Link>
-      </List>
-    </Drawer>
+          <Link
+            to="#"
+            className={classes.drawerLink}
+            // activeClassName={classes.active}
+            // onClick={handleDrawerClose}
+          >
+            <Slide in={props.open} timeout={1060} direction="up">
+              <div>
+                <Fade in={props.open} timeout={2060}>
+                  <ListItem button key={"CONTACT US"}>
+                    <ListItemText
+                      primary={
+                        <Typography align="center" variant="h6">
+                          CONTACT US
+                        </Typography>
+                      }
+                    />
+                  </ListItem>
+                </Fade>
+              </div>
+            </Slide>
+          </Link>
+        </List>
+        {/* </Fade>
+          </div>
+        </Slide> */}
+      </Drawer>
+    </>
   )
 }
