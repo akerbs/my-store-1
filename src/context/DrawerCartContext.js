@@ -3,14 +3,14 @@ import React, { useState, createContext } from "react"
 const DrawerCartContext = createContext()
 
 const DrawerCartContextProvider = props => {
-  const [openCart, setOpenCart] = useState(false)
+  const [openDrawerCart, setOpenDrawerCart] = React.useState(false)
 
-  const handleCartDrawerOpen = () => {
-    setOpenCart(true)
+  const handleDrawerCartOpen = () => {
+    setOpenDrawerCart(true)
     document.body.style.position = "fixed"
   }
-  const handleCartDrawerClose = () => {
-    setOpenCart(false)
+  const handleDrawerCartClose = () => {
+    setOpenDrawerCart(false)
     const scrollY = document.body.style.top
     document.body.style.position = ""
   }
@@ -18,9 +18,9 @@ const DrawerCartContextProvider = props => {
   return (
     <DrawerCartContext.Provider
       value={{
-        openCart,
-        handleCartDrawerOpen,
-        handleCartDrawerClose,
+        openDrawerCart,
+        handleDrawerCartOpen,
+        handleDrawerCartClose,
       }}
     >
       {props.children}

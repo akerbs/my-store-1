@@ -38,7 +38,11 @@ const useStyles = makeStyles({
 const SkuCard = ({ sku }, props) => {
   const classes = useStyles()
   const { addItem } = useShoppingCart()
-  const { handleCartDrawerOpen } = useContext(DrawerCartContext)
+  const {
+    handleDrawerCartClose,
+    openDrawerCart,
+    handleDrawerCartOpen,
+  } = useContext(DrawerCartContext)
 
   // const [openSnackbar, setOpenSnackbar] = useState(false)
 
@@ -116,7 +120,7 @@ const SkuCard = ({ sku }, props) => {
             onClick={() => {
               addItem(sku)
               // handleSnakebarShow()
-              handleCartDrawerOpen()
+              handleDrawerCartOpen()
             }}
           >
             ADD TO CART
