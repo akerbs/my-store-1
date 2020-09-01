@@ -16,6 +16,9 @@ import DrawerCart from "./DrawerCart"
 import { useShoppingCart } from "use-shopping-cart"
 import Link from "gatsby-plugin-transition-link"
 import { DrawerCartContext } from "../context/DrawerCartContext"
+const window = require("global/window")
+
+const drawerWidth = window.innerWidth <= 599 ? "100vw" : 450
 
 function HideOnScroll(props) {
   const { children } = props
@@ -32,6 +35,20 @@ const useStyles = makeStyles(theme => ({
   root: {
     display: "flex",
     flexGrow: 1,
+  },
+  appBar: {
+    transition: theme.transitions.create(["margin", "width"], {
+      easing: theme.transitions.easing.sharp,
+      duration: theme.transitions.duration.leavingScreen,
+    }),
+  },
+  appBarShift: {
+    width: `calc(100% - ${drawerWidth}px)`,
+    marginLeft: 100,
+    transition: theme.transitions.create(["margin", "width"], {
+      easing: theme.transitions.easing.easeOut,
+      duration: theme.transitions.duration.enteringScreen,
+    }),
   },
   menuButton: {
     marginRight: theme.spacing(2),
@@ -70,7 +87,13 @@ export default function Header(props) {
     <div className={classes.root}>
       <CssBaseline />
       <HideOnScroll {...props}>
-        <AppBar>
+        <AppBar
+          position="fixed"
+          className={clsx(classes.appBar, {
+            [classes.appBarShift]: openDrawerCart,
+            [classes.appBarShift]: openDrawerMenu,
+          })}
+        >
           <Toolbar>
             <IconButton
               color="inherit"
