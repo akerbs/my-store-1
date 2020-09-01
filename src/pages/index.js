@@ -10,6 +10,7 @@ import Container from "@material-ui/core/Container"
 import { makeStyles } from "@material-ui/core/styles"
 import { DrawerCartContext } from "../context/DrawerCartContext"
 import { DrawerMenuContext } from "../context/DrawerMenuContext"
+const window = require("global/window")
 
 const drawerWidth = window.innerWidth <= 599 ? "100vw" : 450
 
