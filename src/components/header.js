@@ -42,9 +42,17 @@ const useStyles = makeStyles(theme => ({
       duration: theme.transitions.duration.leavingScreen,
     }),
   },
-  appBarShift: {
+  appBarShiftToRight: {
     width: `calc(100% - ${drawerWidth}px)`,
     marginLeft: 100,
+    transition: theme.transitions.create(["margin", "width"], {
+      easing: theme.transitions.easing.easeOut,
+      duration: theme.transitions.duration.enteringScreen,
+    }),
+  },
+  appBarShiftToLeft: {
+    width: `calc(100% - ${drawerWidth}px)`,
+    marginRight: drawerWidth,
     transition: theme.transitions.create(["margin", "width"], {
       easing: theme.transitions.easing.easeOut,
       duration: theme.transitions.duration.enteringScreen,
@@ -90,8 +98,8 @@ export default function Header(props) {
         <AppBar
           position="fixed"
           className={clsx(classes.appBar, {
-            [classes.appBarShift]: openDrawerCart,
-            [classes.appBarShift]: openDrawerMenu,
+            [classes.appBarShiftToLeft]: openDrawerCart,
+            [classes.appBarShiftToRight]: openDrawerMenu,
           })}
         >
           <Toolbar>
