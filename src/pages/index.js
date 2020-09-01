@@ -1,5 +1,6 @@
-import React from "react"
+import React, { useContext } from "react"
 import CssBaseline from "@material-ui/core/CssBaseline"
+import clsx from "clsx"
 import Link from "gatsby-plugin-transition-link"
 import Header from "../components/header"
 import Footer from "../components/footer"
@@ -7,6 +8,10 @@ import SEO from "../components/seo"
 import Skus from "../components/Products/Skus"
 import Container from "@material-ui/core/Container"
 import { makeStyles } from "@material-ui/core/styles"
+import { DrawerCartContext } from "../context/DrawerCartContext"
+import { DrawerMenuContext } from "../context/DrawerMenuContext"
+
+const drawerWidth = window.innerWidth <= 599 ? "100vw" : 450
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -14,20 +19,77 @@ const useStyles = makeStyles(theme => ({
     flexDirection: "column",
     minHeight: "100vh",
   },
-  contentWrapper: {
-    flex: "1 0 auto",
+  // contentWrapper: {
+  //   flex: "1 0 auto",
+  // },
+
+  contentToRight: {
+    flexGrow: 1,
+    padding: theme.spacing(3),
+    transition: theme.transitions.create("margin", {
+      easing: theme.transitions.easing.sharp,
+      duration: theme.transitions.duration.leavingScreen,
+    }),
+    marginLeft: -drawerWidth,
+  },
+  contentShiftToRight: {
+    transition: theme.transitions.create("margin", {
+      easing: theme.transitions.easing.easeOut,
+      duration: theme.transitions.duration.enteringScreen,
+    }),
+    marginLeft: 0,
+  },
+
+  contentToLeft: {
+    flexGrow: 1,
+    padding: theme.spacing(3),
+    transition: theme.transitions.create("margin", {
+      easing: theme.transitions.easing.sharp,
+      duration: theme.transitions.duration.leavingScreen,
+    }),
+    marginRight: -drawerWidth,
+  },
+  contentShiftToLeft: {
+    transition: theme.transitions.create("margin", {
+      easing: theme.transitions.easing.easeOut,
+      duration: theme.transitions.duration.enteringScreen,
+    }),
+    marginRight: 0,
   },
 }))
 
 const IndexPage = () => {
   const classes = useStyles()
 
+  const {
+    openDrawerCart,
+    handleDrawerCartOpen,
+    handleDrawerCartClose,
+  } = useContext(DrawerCartContext)
+
+  const {
+    openDrawerMenu,
+    handleDrawerMenuOpen,
+    handleDrawerMenuClose,
+  } = useContext(DrawerMenuContext)
+
   return (
     <div className={classes.root} id="root">
       <SEO title="Home" keywords={[`gatsby`, `application`, `react`]} />
       <CssBaseline />
       <Header />
-      <Container maxWidth="md" className={classes.contentWrapper}>
+      <Container
+        maxWidth="md"
+        // className={classes.contentWrapper}
+        className={clsx(
+          openDrawerCart && classes.contentToLeft,
+          openDrawerMenu && classes.contentToRight,
+          {
+            [classes.contentShiftToLeft]: openDrawerCart,
+            [classes.contentShiftToRight]: openDrawerMenu,
+          }
+        )}
+      >
         <h1>Hi people</h1>
         <p>
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum modi
