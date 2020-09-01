@@ -72,19 +72,19 @@ export default function DrawerMenu(props) {
             </div>
           </Slide>
         </div>
-        {/* <Slide in={props.open} timeout={1000} direction="up">
+        <Slide in={props.open} timeout={1000} direction="up">
           <div>
-            <Fade in={props.open} timeout={2000}> */}
-        <List>
-          <Link
-            to="#"
-            className={classes.drawerLink}
-            // activeClassName={classes.active}
-            // onClick={handleDrawerClose}
-          >
-            <Slide in={props.open} timeout={1020} direction="up">
+            <Fade in={props.open} timeout={2000}>
+              <List>
+                <Link
+                  to="#"
+                  className={classes.drawerLink}
+                  // activeClassName={classes.active}
+                  // onClick={handleDrawerClose}
+                >
+                  {/* <Slide in={props.open} timeout={1020} direction="up">
               <div>
-                <Fade in={props.open} timeout={2020}>
+                <Fade in={props.open} timeout={2020}> */}
                   <ListItem button key={"HOME"}>
                     <ListItemText
                       primary={
@@ -94,19 +94,19 @@ export default function DrawerMenu(props) {
                       }
                     />
                   </ListItem>
-                </Fade>
+                  {/* </Fade>
               </div>
-            </Slide>
-          </Link>
-          <Link
-            to="#"
-            className={classes.drawerLink}
-            // activeClassName={classes.active}
-            // onClick={handleDrawerClose}
-          >
-            <Slide in={props.open} timeout={1040} direction="up">
+            </Slide> */}
+                </Link>
+                <Link
+                  to="#"
+                  className={classes.drawerLink}
+                  // activeClassName={classes.active}
+                  // onClick={handleDrawerClose}
+                >
+                  {/* <Slide in={props.open} timeout={1040} direction="up">
               <div>
-                <Fade in={props.open} timeout={2040}>
+                <Fade in={props.open} timeout={2040}> */}
                   <ListItem button key={"ABOUT US"}>
                     <ListItemText
                       primary={
@@ -116,19 +116,19 @@ export default function DrawerMenu(props) {
                       }
                     />
                   </ListItem>
-                </Fade>
+                  {/* </Fade>
               </div>
-            </Slide>
-          </Link>
-          <Link
-            to="#"
-            className={classes.drawerLink}
-            // activeClassName={classes.active}
-            // onClick={handleDrawerClose}
-          >
-            <Slide in={props.open} timeout={1060} direction="up">
+            </Slide> */}
+                </Link>
+                <Link
+                  to="#"
+                  className={classes.drawerLink}
+                  // activeClassName={classes.active}
+                  // onClick={handleDrawerClose}
+                >
+                  {/* <Slide in={props.open} timeout={1060} direction="up">
               <div>
-                <Fade in={props.open} timeout={2060}>
+                <Fade in={props.open} timeout={2060}> */}
                   <ListItem button key={"TRENDS"}>
                     <ListItemText
                       primary={
@@ -138,20 +138,20 @@ export default function DrawerMenu(props) {
                       }
                     />
                   </ListItem>
-                </Fade>
+                  {/* </Fade>
               </div>
-            </Slide>
-          </Link>
+            </Slide> */}
+                </Link>
 
-          <Link
-            to="#"
-            className={classes.drawerLink}
-            // activeClassName={classes.active}
-            // onClick={handleDrawerClose}
-          >
-            <Slide in={props.open} timeout={1080} direction="up">
+                <Link
+                  to="#"
+                  className={classes.drawerLink}
+                  // activeClassName={classes.active}
+                  // onClick={handleDrawerClose}
+                >
+                  {/* <Slide in={props.open} timeout={1080} direction="up">
               <div>
-                <Fade in={props.open} timeout={2080}>
+                <Fade in={props.open} timeout={2080}> */}
                   <ListItem button key={"CONTACT US"}>
                     <ListItemText
                       primary={
@@ -161,14 +161,14 @@ export default function DrawerMenu(props) {
                       }
                     />
                   </ListItem>
-                </Fade>
+                  {/* </Fade>
               </div>
-            </Slide>
-          </Link>
-        </List>
-        {/* </Fade>
+            </Slide> */}
+                </Link>
+              </List>
+            </Fade>
           </div>
-        </Slide> */}
+        </Slide>
       </Drawer>
     </>
   )
