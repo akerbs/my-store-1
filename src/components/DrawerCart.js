@@ -56,9 +56,9 @@ export default function DrawerCart(props) {
         }}
       >
         <div className={classes.drawerHeader}>
-          <Slide in={props.open} timeout={900} direction="up">
+          <Slide in={props.open} timeout={800} direction="up">
             <div>
-              <Fade in={props.open} timeout={2000}>
+              <Fade in={props.open} timeout={1600}>
                 <Typography variant="body1" className={classes.cartTitle}>
                   Your cart
                 </Typography>
@@ -67,7 +67,7 @@ export default function DrawerCart(props) {
           </Slide>
           <Slide in={props.open} timeout={800} direction="up">
             <div>
-              <Fade in={props.open} timeout={2000}>
+              <Fade in={props.open} timeout={1600}>
                 <IconButton onClick={props.onClose}>
                   {theme.direction === "rtl" ? (
                     <ChevronLeftIcon />
