@@ -68,6 +68,11 @@ const useStyles = makeStyles(theme => ({
   },
   title: {
     flexGrow: 1,
+    display: "inline",
+  },
+  toolbar: {
+    display: "flex",
+    justifyContent: "space-between",
   },
 }))
 
@@ -99,38 +104,41 @@ export default function Header(props) {
             [classes.appBarShiftToRight]: openDrawerMenu,
           })}
         >
-          <Toolbar>
-            <IconButton
-              color="inherit"
-              aria-label="open drawer"
-              onClick={handleDrawerMenuOpen}
-              edge="start"
-              className={clsx(
-                classes.menuButton,
-                openDrawerMenu && classes.hide
-              )}
-            >
-              <MenuIcon />
-            </IconButton>
+          <Toolbar className={classes.toolbar}>
+            <div>
+              <IconButton
+                color="inherit"
+                aria-label="open drawer"
+                onClick={handleDrawerMenuOpen}
+                edge="start"
+                className={clsx(
+                  classes.menuButton,
+                  openDrawerMenu && classes.hide
+                )}
+              >
+                <MenuIcon />
+              </IconButton>
 
-            <Typography variant="h6" className={classes.title}>
-              <Link to="/"> Logo </Link>
-            </Typography>
-
-            <IconButton
-              color="inherit"
-              aria-label="open drawer"
-              onClick={handleDrawerCartOpen}
-              edge="end"
-              className={clsx(
-                classes.menuButton,
-                openDrawerCart && classes.hide
-              )}
-            >
-              <Badge badgeContent={cartCount} color="secondary" variant="dot">
-                <ShoppingCartIcon />
-              </Badge>
-            </IconButton>
+              <Typography variant="h6" className={classes.title}>
+                <Link to="/"> Logo </Link>
+              </Typography>
+            </div>
+            <div>
+              <IconButton
+                color="inherit"
+                aria-label="open drawer"
+                onClick={handleDrawerCartOpen}
+                edge="end"
+                className={clsx(
+                  classes.menuButton,
+                  openDrawerCart && classes.hide
+                )}
+              >
+                <Badge badgeContent={cartCount} color="secondary" variant="dot">
+                  <ShoppingCartIcon />
+                </Badge>
+              </IconButton>
+            </div>
           </Toolbar>
         </AppBar>
       </HideOnScroll>
