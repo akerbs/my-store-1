@@ -105,40 +105,37 @@ export default function Header(props) {
           })}
         >
           <Toolbar className={classes.toolbar}>
-            <div>
-              <IconButton
-                color="inherit"
-                aria-label="open drawer"
-                onClick={handleDrawerMenuOpen}
-                edge="start"
-                className={clsx(
-                  classes.menuButton,
-                  openDrawerMenu && classes.hide
-                )}
-              >
-                <MenuIcon />
-              </IconButton>
+            <IconButton
+              color="inherit"
+              aria-label="open drawer"
+              onClick={handleDrawerMenuOpen}
+              edge="start"
+              className={clsx(
+                classes.menuButton,
+                openDrawerMenu && classes.hide
+              )}
+            >
+              <MenuIcon />
+            </IconButton>
 
-              <Typography variant="h6" className={classes.title}>
-                <Link to="/"> Logo </Link>
-              </Typography>
-            </div>
-            <div>
-              <IconButton
-                color="inherit"
-                aria-label="open drawer"
-                onClick={handleDrawerCartOpen}
-                edge="end"
-                className={clsx(
-                  classes.menuButton,
-                  openDrawerCart && classes.hide
-                )}
-              >
-                <Badge badgeContent={cartCount} color="secondary" variant="dot">
-                  <ShoppingCartIcon />
-                </Badge>
-              </IconButton>
-            </div>
+            <Typography variant="h6" className={classes.title}>
+              <Link to="/"> Logo </Link>
+            </Typography>
+
+            <IconButton
+              color="inherit"
+              aria-label="open drawer"
+              onClick={handleDrawerCartOpen}
+              edge="end"
+              className={clsx(
+                classes.menuButton,
+                openDrawerCart && classes.hide
+              )}
+            >
+              <Badge badgeContent={cartCount} color="secondary" variant="dot">
+                <ShoppingCartIcon />
+              </Badge>
+            </IconButton>
           </Toolbar>
         </AppBar>
       </HideOnScroll>
