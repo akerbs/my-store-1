@@ -118,7 +118,7 @@ export default function Header(props) {
               onClick={handleDrawerCartOpen}
               edge="end"
               className={clsx(
-                classes.shoppingCartButton,
+                classes.menuButton,
                 openDrawerCart && classes.hide
               )}
             >
