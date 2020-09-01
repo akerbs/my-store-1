@@ -5,6 +5,8 @@ import { makeStyles } from "@material-ui/core/styles"
 import Button from "@material-ui/core/Button"
 import Typography from "@material-ui/core/Typography"
 // import Coupon from "./Coupon"
+import Slide from "@material-ui/core/Slide"
+import Fade from "@material-ui/core/Fade"
 
 const useStyles = makeStyles(theme => ({
   btnWrapper: {
@@ -30,16 +32,6 @@ const Cart = props => {
 
   console.log(cartDetails)
 
-  // const [discount, setDiscount] = useState(0.5)
-
-  // const ttlPriceWithDiscount =
-  //   ((totalPrice * discount) / 100).toFixed(2) + " " + "€"
-
-  // const ttlPriceWithoutDollarSign = formattedTotalPrice.toString().slice(0, -1)
-  // const ttlPriceWithEuroSign = `€ ${ttlPriceWithoutDollarSign}`
-
-  // console.log(ttlPriceWithEuroSign)
-
   return (
     <div>
       <div>
@@ -60,34 +52,64 @@ const Cart = props => {
       </div>
 
       {!cartCount ? (
-        <Typography variant="body2" align="center" color="textSecondary">
-          Cart is empty...
-        </Typography>
+        <Slide in={props.open} timeout={1000} direction="up">
+          <div>
+            <Fade in={props.open} timeout={2000}>
+              <Typography
+                variant="body2"
+                align="center"
+                color="textSecondary"
+                // className={(clsx(open && classes.hide), classes.closeDrawerBtn)}
+                // className={clsx(
+                //   classes.byCloseDrawer,
+                //   props.open && classes.byOpenDrawer
+                // )}
+                // className={clsx(classes.byCloseDrawer, {
+                //   [classes.byOpenDrawer]: props.open,
+                // })}
+              >
+                Cart is empty...
+              </Typography>
+            </Fade>
+          </div>
+        </Slide>
       ) : (
         <>
           {/* <Coupon /> */}
-          <Typography
-            variant="body2"
-            align="right"
-            color="textPrimary"
-            style={{ marginRight: 10 }}
-          >
-            Subtotal: {formattedTotalPrice}
-          </Typography>
+          <Slide in={props.open} timeout={900} direction="up">
+            <div>
+              <Fade in={props.open} timeout={2000}>
+                <Typography
+                  variant="body2"
+                  align="right"
+                  color="textPrimary"
+                  style={{ marginRight: 10 }}
+                >
+                  Subtotal: {formattedTotalPrice}
+                </Typography>
+              </Fade>
+            </div>
+          </Slide>
 
           <div className={classes.btnWrapper}>
-            <Button
-              fullWidth
-              variant="contained"
-              color="primary"
-              disabled={loading}
-              onClick={() => {
-                setLoading(true)
-                redirectToCheckout()
-              }}
-            >
-              {loading ? "Loading..." : "Checkout"}
-            </Button>
+            <Slide in={props.open} timeout={900} direction="up">
+              <div>
+                <Fade in={props.open} timeout={2000}>
+                  <Button
+                    fullWidth
+                    variant="contained"
+                    color="primary"
+                    disabled={loading}
+                    onClick={() => {
+                      setLoading(true)
+                      redirectToCheckout()
+                    }}
+                  >
+                    {loading ? "Loading..." : "Checkout"}
+                  </Button>
+                </Fade>
+              </div>
+            </Slide>
           </div>
         </>
       )}

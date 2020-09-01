@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useState } from "react"
 import { makeStyles, useTheme } from "@material-ui/core/styles"
 import Drawer from "@material-ui/core/Drawer"
 import Typography from "@material-ui/core/Typography"
@@ -6,6 +6,9 @@ import IconButton from "@material-ui/core/IconButton"
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft"
 import ChevronRightIcon from "@material-ui/icons/ChevronRight"
 import CartOverview from "./Cart/CartOverview"
+import Slide from "@material-ui/core/Slide"
+import Fade from "@material-ui/core/Fade"
+
 const window = require("global/window")
 
 const drawerWidth = window.innerWidth <= 599 ? "100vw" : 450
@@ -50,16 +53,28 @@ export default function DrawerCart(props) {
       }}
     >
       <div className={classes.drawerHeader}>
-        <Typography variant="body1" className={classes.cartTitle}>
-          Your cart
-        </Typography>
-        <IconButton onClick={props.onClose}>
-          {theme.direction === "rtl" ? (
-            <ChevronLeftIcon />
-          ) : (
-            <ChevronRightIcon />
-          )}
-        </IconButton>
+        <Slide in={props.open} timeout={1000} direction="up">
+          <div>
+            <Fade in={props.open} timeout={2000}>
+              <Typography variant="body1" className={classes.cartTitle}>
+                Your cart
+              </Typography>
+            </Fade>
+          </div>
+        </Slide>
+        <Slide in={props.open} timeout={800} direction="up">
+          <div>
+            <Fade in={props.open} timeout={2000}>
+              <IconButton onClick={props.onClose}>
+                {theme.direction === "rtl" ? (
+                  <ChevronLeftIcon />
+                ) : (
+                  <ChevronRightIcon />
+                )}
+              </IconButton>
+            </Fade>
+          </div>
+        </Slide>
       </div>
 
       <CartOverview onClose={props.onClose} open={props.open} />
