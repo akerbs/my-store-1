@@ -11,75 +11,77 @@ import { DrawerCartContextProvider } from "../context/DrawerCartContext"
 import { DrawerMenuContextProvider } from "../context/DrawerMenuContext"
 import { CurrencyContextProvider } from "../context/CurrencyContext"
 // import { CurrencyContext } from "../context/CurrencyContext"
+// import { useShoppingCart } from "use-shopping-cart"
 
 // const stripePromise = loadStripe(process.env.GATSBY_STRIPE_PUBLISHABLE_KEY)
 const stripePromise = loadStripe(
   "pk_test_51HGUuRHwITO0GSJr0YK6FwbE17LUTst9UCvm2uH0RdjBtAnQJqgPmDn0BSunRc8FIEXRW3HatsFd1uDHkfaGJtUm00IA2780Iw"
 )
 export const CurrencyContext = createContext()
-const Layout = ({ children }) =>
+
+function Layout({ children }) {
   // { actCurrency, handleCurrencyChange } = useContext(CurrencyContext)
 
-  {
-    const data = useStaticQuery(graphql`
-      query SiteTitleQuery {
-        site {
-          siteMetadata {
-            title
-          }
+  const data = useStaticQuery(graphql`
+    query SiteTitleQuery {
+      site {
+        siteMetadata {
+          title
         }
       }
-    `)
-
-    const [actCurrency, setActCurrency] = useState("USD")
-
-    const handleCurrencyChange = event => {
-      setActCurrency(event.target.value)
-      // forceUpdate()
     }
+  `)
+  // const { clearCart } = useShoppingCart()
+  const [actCurrency, setActCurrency] = useState("USD")
 
-    return (
-      <>
-        <CurrencyContext.Provider
-          value={{
-            actCurrency,
-            handleCurrencyChange,
-          }}
-        >
-          <CartProvider
-            mode="client-only"
-            stripe={stripePromise}
-            currency={actCurrency}
-            // currency={
-            //   actCurrency === "EUR"
-            //     ? "EUR"
-            //     : actCurrency === "USD"
-            //     ? "USD"
-            //     : "USD"
-            // }
-            // currency="EUR"
-            // successUrl="https://kerbs-store-1.vercel.app/success/"
-            // cancelUrl="https://kerbs-store-1.vercel.app/"
-            successUrl="http://localhost:8000/success/"
-            cancelUrl="http://localhost:8000/"
-            // successUrl={`${window.location.origin}/success/`}
-            // cancelUrl={`${window.location.origin}/`}
-            //  allowedCountries={["US", "GB", "CA", "DE"]}
-            billingAddressCollection={true}
-          >
-            <CssBaseline />
-            <SimpleReactLightbox>
-              <DrawerMenuContextProvider>
-                <DrawerCartContextProvider>
-                  {children}
-                </DrawerCartContextProvider>
-              </DrawerMenuContextProvider>
-            </SimpleReactLightbox>
-          </CartProvider>
-        </CurrencyContext.Provider>
-      </>
-    )
+  function handleCurrencyChange(event) {
+    setActCurrency(event.target.value)
+    //  forceUpdate()
+    // clearCart()
   }
+
+  return (
+    <>
+      <CurrencyContext.Provider
+        value={{
+          actCurrency,
+          handleCurrencyChange,
+        }}
+      >
+        <CartProvider
+          mode="client-only"
+          stripe={stripePromise}
+          currency={actCurrency}
+          // currency={
+          //   actCurrency === "EUR"
+          //     ? "EUR"
+          //     : actCurrency === "USD"
+          //     ? "USD"
+          //     : "USD"
+          // }
+          // currency="EUR"
+          // successUrl="https://kerbs-store-1.vercel.app/success/"
+          // cancelUrl="https://kerbs-store-1.vercel.app/"
+          successUrl="http://localhost:8000/success/"
+          cancelUrl="http://localhost:8000/"
+          // successUrl={`${window.location.origin}/success/`}
+          // cancelUrl={`${window.location.origin}/`}
+          //  allowedCountries={["US", "GB", "CA", "DE"]}
+          billingAddressCollection={true}
+        >
+          <CssBaseline />
+          <SimpleReactLightbox>
+            <DrawerMenuContextProvider>
+              <DrawerCartContextProvider>
+                <CurrencyContextProvider>{children}</CurrencyContextProvider>
+              </DrawerCartContextProvider>
+            </DrawerMenuContextProvider>
+          </SimpleReactLightbox>
+        </CartProvider>
+      </CurrencyContext.Provider>
+    </>
+  )
+}
 
 Layout.propTypes = {
   children: PropTypes.node.isRequired,

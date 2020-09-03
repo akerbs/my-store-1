@@ -22,9 +22,8 @@ export default function SelectCurrency() {
   //   setCurrency(event.target.value)
   // }
 
-  const { clearCart } = useShoppingCart()
   const { actCurrency, handleCurrencyChange } = useContext(CurrencyContext)
-
+  const { clearCart } = useShoppingCart()
   return (
     <>
       <FormControl variant="outlined" className={classes.formControl}>
@@ -32,7 +31,11 @@ export default function SelectCurrency() {
           labelId="demo-simple-select-outlined-label"
           id="demo-simple-select-outlined"
           value={actCurrency}
-          onChange={(() => handleCurrencyChange, () => clearCart())}
+          onChange={e => {
+            handleCurrencyChange(e)
+            clearCart()
+          }}
+          // onChange={handleCurrencyChange}
           style={{ color: "white" }}
         >
           <MenuItem value={"USD"}>USD</MenuItem>
