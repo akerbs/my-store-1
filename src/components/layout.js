@@ -9,7 +9,7 @@ import { loadStripe } from "@stripe/stripe-js"
 import SimpleReactLightbox from "simple-react-lightbox"
 import { DrawerCartContextProvider } from "../context/DrawerCartContext"
 import { DrawerMenuContextProvider } from "../context/DrawerMenuContext"
-import { CurrencyContextProvider } from "../context/CurrencyContext"
+// import { CurrencyContextProvider } from "../context/CurrencyContext"
 // import { CurrencyContext } from "../context/CurrencyContext"
 // import { useShoppingCart } from "use-shopping-cart"
 
@@ -73,7 +73,9 @@ function Layout({ children }) {
           <SimpleReactLightbox>
             <DrawerMenuContextProvider>
               <DrawerCartContextProvider>
-                <CurrencyContextProvider>{children}</CurrencyContextProvider>
+                {/* <CurrencyContextProvider> */}
+                {children}
+                {/* </CurrencyContextProvider> */}
               </DrawerCartContextProvider>
             </DrawerMenuContextProvider>
           </SimpleReactLightbox>

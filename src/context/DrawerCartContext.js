@@ -5,11 +5,11 @@ const DrawerCartContext = createContext()
 const DrawerCartContextProvider = props => {
   const [openDrawerCart, setOpenDrawerCart] = useState(false)
 
-  const handleDrawerCartOpen = () => {
+  function handleDrawerCartOpen() {
     setOpenDrawerCart(true)
     document.body.style.position = "fixed"
   }
-  const handleDrawerCartClose = () => {
+  function handleDrawerCartClose() {
     setOpenDrawerCart(false)
     const scrollY = document.body.style.top
     document.body.style.position = ""
