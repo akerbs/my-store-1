@@ -41,20 +41,32 @@ const CartItem = props => {
   const classes = useStyles()
 
   const productPage =
-    props.item.sku === "price_1HGjcwHwITO0GSJrJEhUG0Aq"
+    props.item.sku === "price_1HGjcwHwITO0GSJrJEhUG0Aq" ||
+    props.item.sku === "price_1HNFcEHwITO0GSJr0BcSMXko" ||
+    props.item.sku === "price_1HNFbdHwITO0GSJr0cQgGhYQ"
       ? "funny_bunny"
-      : props.item.sku === "price_1HH7DcHwITO0GSJrZz3vg6d9"
+      : props.item.sku === "price_1HH7DcHwITO0GSJrZz3vg6d9" ||
+        props.item.sku === "price_1HNFdPHwITO0GSJrVsLO5IdU" ||
+        props.item.sku === "price_1HNFdwHwITO0GSJrpygU4AcI"
       ? "cat_clock"
-      : props.item.sku === "price_1HHUu9HwITO0GSJrsoWoL51O"
+      : props.item.sku === "price_1HHUu9HwITO0GSJrsoWoL51O" ||
+        props.item.sku === "price_1HMt2gHwITO0GSJrR1YuszFV" ||
+        props.item.sku === "price_1HNFZ7HwITO0GSJrieVKbbte"
       ? "magic_hat"
       : ""
 
   const imgLocal =
-    props.item.sku === "price_1HGjcwHwITO0GSJrJEhUG0Aq"
+    props.item.sku === "price_1HGjcwHwITO0GSJrJEhUG0Aq" ||
+    props.item.sku === "price_1HNFcEHwITO0GSJr0BcSMXko" ||
+    props.item.sku === "price_1HNFbdHwITO0GSJr0cQgGhYQ"
       ? funnyBunny
-      : props.item.sku === "price_1HH7DcHwITO0GSJrZz3vg6d9"
+      : props.item.sku === "price_1HH7DcHwITO0GSJrZz3vg6d9" ||
+        props.item.sku === "price_1HNFdPHwITO0GSJrVsLO5IdU" ||
+        props.item.sku === "price_1HNFdwHwITO0GSJrpygU4AcI"
       ? catClock
-      : props.item.sku === "price_1HHUu9HwITO0GSJrsoWoL51O"
+      : props.item.sku === "price_1HHUu9HwITO0GSJrsoWoL51O" ||
+        props.item.sku === "price_1HMt2gHwITO0GSJrR1YuszFV" ||
+        props.item.sku === "price_1HNFZ7HwITO0GSJrieVKbbte"
       ? magicHat
       : props.item.image
 

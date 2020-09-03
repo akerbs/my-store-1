@@ -3,7 +3,7 @@ import React, { useState, createContext } from "react"
 const DrawerCartContext = createContext()
 
 const DrawerCartContextProvider = props => {
-  const [openDrawerCart, setOpenDrawerCart] = React.useState(false)
+  const [openDrawerCart, setOpenDrawerCart] = useState(false)
 
   const handleDrawerCartOpen = () => {
     setOpenDrawerCart(true)

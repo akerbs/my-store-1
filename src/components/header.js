@@ -17,6 +17,8 @@ import { useShoppingCart } from "use-shopping-cart"
 import Link from "gatsby-plugin-transition-link"
 import { DrawerCartContext } from "../context/DrawerCartContext"
 import { DrawerMenuContext } from "../context/DrawerMenuContext"
+import SelectCurrency from "./SelectCurrency"
+
 const window = require("global/window")
 
 const drawerWidth = window.innerWidth <= 599 ? "100vw" : 450
@@ -122,6 +124,7 @@ export default function Header(props) {
               <Link to="/main"> Logo </Link>
             </Typography>
 
+            <SelectCurrency />
             <IconButton
               color="inherit"
               aria-label="open drawer"

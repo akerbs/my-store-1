@@ -3,7 +3,7 @@ import React, { useState, createContext } from "react"
 const DrawerMenuContext = createContext()
 
 const DrawerMenuContextProvider = props => {
-  const [openDrawerMenu, setOpenDrawerMenu] = React.useState(false)
+  const [openDrawerMenu, setOpenDrawerMenu] = useState(false)
 
   const handleDrawerMenuOpen = () => {
     setOpenDrawerMenu(true)

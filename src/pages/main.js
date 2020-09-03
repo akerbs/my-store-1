@@ -1,12 +1,16 @@
-import React from "react"
+import React, { useContext } from "react"
 import CssBaseline from "@material-ui/core/CssBaseline"
 import Link from "gatsby-plugin-transition-link"
 import Header from "../components/header"
 import Footer from "../components/footer"
 import SEO from "../components/seo"
-import Skus from "../components/Products/Skus"
+// import Skus from "../components/Products/Skus"
+import SkusEur from "../components/Products/SkusEur"
+import SkusUsd from "../components/Products/SkusUsd"
+import SkusRub from "../components/Products/SkusRub"
 import Container from "@material-ui/core/Container"
 import { makeStyles } from "@material-ui/core/styles"
+import { CurrencyContext } from "../components/layout"
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -19,8 +23,10 @@ const useStyles = makeStyles(theme => ({
   },
 }))
 
-const IndexPage = () => {
+const MainPage = () => {
   const classes = useStyles()
+
+  const { actCurrency, handleCurrencyChange } = useContext(CurrencyContext)
 
   return (
     <div className={classes.root} id="root">
@@ -42,7 +48,16 @@ const IndexPage = () => {
           maxime aut itaque molestias amet, et sit commodi nisi! Iusto ratione
           distinctio et aperiam quaerat nisi aut odit optio impedit.
         </p>
-        <Skus />
+        {actCurrency === "EUR" ? (
+          <SkusEur />
+        ) : actCurrency === "USD" ? (
+          <SkusUsd />
+        ) : actCurrency === "RUB" ? (
+          <SkusRub />
+        ) : (
+          <SkusUsd />
+        )}
+        {/* <Skus /> */}
         <p>
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum modi
           itaque ratione. Omnis, dolores voluptas quia recusandae similique
@@ -62,4 +77,4 @@ const IndexPage = () => {
   )
 }
 
-export default IndexPage
+export default MainPage
