@@ -14,7 +14,7 @@ const useStyles = makeStyles(theme => ({
     paddingRight: 5,
   },
   icon: {
-    paddingLeft: 3,
+    paddingLeft: 2,
   },
 }))
 
