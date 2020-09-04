@@ -47,7 +47,7 @@ export default function DrawerMenu(props) {
       <CssBaseline />
 
       <Drawer
-        transitionDuration={{ enter: 400, exit: 300 }}
+        transitionDuration={{ enter: 500, exit: 300 }}
         onEscapeKeyDown={props.onClose}
         onBackdropClick={props.onClose}
         variant="temporary"

@@ -62,8 +62,11 @@ const useStyles = makeStyles(theme => ({
       duration: theme.transitions.duration.enteringScreen,
     }),
   },
-  menuButton: {
+  menuLeftButton: {
     // marginRight: theme.spacing(2),
+  },
+  menuRightButton: {
+    paddingLeft: theme.spacing(0),
   },
 
   hide: {
@@ -114,7 +117,7 @@ export default function Header(props) {
               onClick={handleDrawerMenuOpen}
               edge="start"
               className={clsx(
-                classes.menuButton,
+                classes.menuLeftButton,
                 openDrawerMenu && classes.hide
               )}
             >
@@ -132,7 +135,7 @@ export default function Header(props) {
               onClick={handleDrawerCartOpen}
               edge="end"
               className={clsx(
-                classes.menuButton,
+                classes.menuRightButton,
                 openDrawerCart && classes.hide
               )}
             >

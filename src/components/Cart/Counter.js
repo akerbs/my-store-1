@@ -41,7 +41,7 @@ export default function Counter(props) {
         <Typography
           variant="body2"
           color="textSecondary"
-          style={{ marginBottom: 3 }}
+          style={{ marginBottom: 4 }}
         >
           -
         </Typography>
@@ -57,7 +57,7 @@ export default function Counter(props) {
         <Typography
           variant="body2"
           color="textSecondary"
-          style={{ marginBottom: 3 }}
+          style={{ marginBottom: 4 }}
         >
           +
         </Typography>
