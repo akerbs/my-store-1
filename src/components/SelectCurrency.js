@@ -10,7 +10,9 @@ import { useShoppingCart } from "use-shopping-cart"
 const useStyles = makeStyles(theme => ({
   formControl: {
     margin: theme.spacing(1),
-    minWidth: 80,
+    // minWidth: 80,
+
+    margin: 0,
   },
 }))
 
@@ -26,8 +28,9 @@ export default function SelectCurrency() {
   const { clearCart } = useShoppingCart()
   return (
     <>
-      <FormControl variant="outlined" className={classes.formControl}>
+      <FormControl variant="standard" className={classes.formControl}>
         <Select
+          autoWidth
           labelId="demo-simple-select-outlined-label"
           id="demo-simple-select-outlined"
           value={actCurrency}

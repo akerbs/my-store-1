@@ -47,15 +47,15 @@ export default function DrawerMenu(props) {
       <CssBaseline />
 
       <Drawer
-        className={classes.drawer}
+        transitionDuration={{ enter: 400, exit: 300 }}
         onEscapeKeyDown={props.onClose}
         onBackdropClick={props.onClose}
         variant="temporary"
         anchor="left"
         open={props.open}
-        onClose={props.onClose}
         classes={{
           paper: classes.drawerPaper,
+          drawer: classes.drawer,
         }}
       >
         <div className={classes.drawerHeader}>

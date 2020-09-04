@@ -44,15 +44,14 @@ export default function DrawerCart(props) {
       <CssBaseline />
       <Drawer
         transitionDuration={{ enter: 400, exit: 300 }}
-        className={classes.drawer}
         onEscapeKeyDown={props.onClose}
         onBackdropClick={props.onClose}
         variant="temporary"
         anchor="right"
         open={props.open}
-        onClose={props.onClose}
         classes={{
           paper: classes.drawerPaper,
+          drawer: classes.drawer,
         }}
       >
         <div className={classes.drawerHeader}>
