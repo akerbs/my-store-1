@@ -14,7 +14,7 @@ const useStyles = makeStyles(theme => ({
     paddingRight: 5,
   },
   icon: {
-    paddingLeft: 2,
+    paddingLeft: 1,
   },
 }))
 
@@ -44,9 +44,9 @@ export default function SelectLanguage() {
           // onChange={handleCurrencyChange}
           style={{ color: "white" }}
         >
-          <MenuItem value={"Eng"}>🇬🇧</MenuItem>
-          <MenuItem value={"Deu"}>🇩🇪</MenuItem>
-          <MenuItem value={"Rus"}>🇷🇺</MenuItem>
+          <MenuItem value={"Eng"}>EN</MenuItem>
+          <MenuItem value={"Deu"}>DE</MenuItem>
+          <MenuItem value={"Rus"}>RU</MenuItem>
         </Select>
       </FormControl>
     </>
