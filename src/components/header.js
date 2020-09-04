@@ -122,7 +122,7 @@ export default function Header(props) {
             </IconButton>
 
             <Typography variant="h6" className={classes.title}>
-              <Link to="/main"> Logo </Link>
+              <Link to="/main"> LOGO </Link>
             </Typography>
             <SelectLanguage />
             <SelectCurrency />
