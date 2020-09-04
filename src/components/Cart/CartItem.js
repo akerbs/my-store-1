@@ -24,6 +24,7 @@ const useStyles = makeStyles(theme => ({
     padding: theme.spacing(2),
     margin: "auto",
     maxWidth: "auto",
+    padding: 8,
   },
   imgBtn: {
     width: "100px",
@@ -78,7 +79,7 @@ const CartItem = props => {
           <Fade in={props.open} timeout={2000}>
             <div className={classes.root}>
               <Paper className={classes.paper} elevation="0">
-                <Grid container spacing={2}>
+                <Grid container spacing={1}>
                   <Grid item xs={4}>
                     <ButtonBase
                       onClick={() => {
@@ -103,9 +104,9 @@ const CartItem = props => {
                     xs={8}
                     sm
                     container
-                    style={{ paddingLeft: "15px", paddingRight: 0 }}
+                    style={{ paddingLeft: "8px", paddingRight: 0 }}
                   >
-                    <Grid item xs container direction="column" spacing={2}>
+                    <Grid item xs container direction="column" spacing={1}>
                       <Grid item xs>
                         <Typography gutterBottom variant="subtitle1">
                           {props.item.name}
