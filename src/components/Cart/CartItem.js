@@ -15,6 +15,9 @@ import catClock from "../../images/products/cat_clock/cat_clock_1.jpg"
 import magicHat from "../../images/products/magic_hat/magic_hat_1.jpg"
 import Slide from "@material-ui/core/Slide"
 import Fade from "@material-ui/core/Fade"
+// import DB from "../DB"
+
+// console.log("!!! :", DB[0].name)
 
 const useStyles = makeStyles(theme => ({
   root: {

@@ -5,7 +5,8 @@ const window = require("global/window")
 const useStyles = makeStyles(theme => ({
   root: {
     textDecorationLine: "line-through",
-    textDecorationColor: "red",
+    // textDecorationColor: "red",
+    // color: "gray",
     textDecorationStyle: "solid",
     display: "inline",
   },
