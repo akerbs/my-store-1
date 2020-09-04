@@ -18,6 +18,7 @@ import Link from "gatsby-plugin-transition-link"
 import { DrawerCartContext } from "../context/DrawerCartContext"
 import { DrawerMenuContext } from "../context/DrawerMenuContext"
 import SelectCurrency from "./SelectCurrency"
+import SelectLanguage from "./SelectLanguage"
 
 const window = require("global/window")
 
@@ -123,7 +124,7 @@ export default function Header(props) {
             <Typography variant="h6" className={classes.title}>
               <Link to="/main"> Logo </Link>
             </Typography>
-
+            <SelectLanguage />
             <SelectCurrency />
             <IconButton
               color="inherit"

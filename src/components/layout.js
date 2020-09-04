@@ -32,7 +32,7 @@ function Layout({ children }) {
     }
   `)
   // const { clearCart } = useShoppingCart()
-  const [actCurrency, setActCurrency] = useState("USD")
+  const [actCurrency, setActCurrency] = useState("EUR")
 
   function handleCurrencyChange(event) {
     setActCurrency(event.target.value)

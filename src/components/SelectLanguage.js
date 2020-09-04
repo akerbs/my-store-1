@@ -4,31 +4,27 @@ import InputLabel from "@material-ui/core/InputLabel"
 import MenuItem from "@material-ui/core/MenuItem"
 import FormControl from "@material-ui/core/FormControl"
 import Select from "@material-ui/core/Select"
-import { CurrencyContext } from "../components/layout"
-import { useShoppingCart } from "use-shopping-cart"
+import Link from "gatsby-plugin-transition-link"
 
 const useStyles = makeStyles(theme => ({
   formControl: {
     margin: theme.spacing(1),
     // minWidth: 80,
-
     margin: 0,
   },
   icon: {
-    // paddingLeft: 3,
+    paddingLeft: 3,
   },
 }))
 
-export default function SelectCurrency() {
+export default function SelectLanguage() {
   const classes = useStyles()
-  // const [currency, setCurrency] = React.useState("EUR")
+  const [language, setLanguage] = React.useState("Deu")
 
-  // const handleChange = event => {
-  //   setCurrency(event.target.value)
-  // }
+  const handleChange = event => {
+    setLanguage(event.target.value)
+  }
 
-  const { actCurrency, handleCurrencyChange } = useContext(CurrencyContext)
-  const { clearCart } = useShoppingCart()
   return (
     <>
       <FormControl variant="standard" className={classes.formControl}>
@@ -40,17 +36,16 @@ export default function SelectCurrency() {
           autoWidth
           labelId="demo-simple-select-outlined-label"
           id="demo-simple-select-outlined"
-          value={actCurrency}
+          value={language}
           onChange={e => {
-            handleCurrencyChange(e)
-            clearCart()
+            handleChange(e)
           }}
           // onChange={handleCurrencyChange}
           style={{ color: "white" }}
         >
-          <MenuItem value={"USD"}>USD</MenuItem>
-          <MenuItem value={"EUR"}>EUR</MenuItem>
-          <MenuItem value={"RUB"}>RUB</MenuItem>
+          <MenuItem value={"Eng"}>🇬🇧</MenuItem>
+          <MenuItem value={"Deu"}>🇩🇪</MenuItem>
+          <MenuItem value={"Rus"}>🇷🇺</MenuItem>
         </Select>
       </FormControl>
     </>
