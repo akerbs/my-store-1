@@ -18,6 +18,11 @@ import payCard4 from "../images/payCards/dark/5.png"
 import payCard5 from "../images/payCards/dark/22.png"
 import payCard6 from "../images/payCards/googlePay.svg"
 import payCard7 from "../images/payCards/applePay.svg"
+import { useForm } from "react-hook-form"
+import * as yup from "yup"
+import { yupResolver } from "@hookform/resolvers"
+import FormControl from "@material-ui/core/FormControl"
+import { navigate } from "gatsby"
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -61,8 +66,49 @@ const useStyles = makeStyles(theme => ({
   },
 }))
 
+const schema = yup.object().shape({
+  email: yup
+    .string()
+    .required("Feld ist erforderlich")
+    .matches(
+      /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/,
+      "Please enter a valid email address"
+    ),
+  // .email('Please check your email')
+})
+
 const Footer = () => {
   const classes = useStyles()
+  const { register, handleSubmit, reset, errors } = useForm({
+    resolver: yupResolver(schema),
+  })
+  const errorEmail = errors.hasOwnProperty("email") && errors["email"].message
+
+  async function onSubmit(data) {
+    try {
+      let response = await fetch(
+        "https://my-store-1-mailer.herokuapp.com/subscribe",
+        // "http://localhost:3000/subscribe",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(data),
+        }
+      )
+      if (response.ok) {
+        alert("Thank You!!! You have successfully subscribed :-)")
+        //  await navigate("/")
+        await reset(response)
+
+        let responseJson = await response.json()
+        return responseJson
+      }
+    } catch (error) {
+      console.error(error)
+    }
+  }
 
   return (
     <div className={classes.root}>
@@ -154,21 +200,32 @@ const Footer = () => {
             <Typography variant="body2" className={classes.title2}>
               JOIN OUR NEWSLETTER
             </Typography>
-            <TextField
-              id="outlined-basic"
-              label="Your email address..."
-              variant="outlined"
-              size="small"
-              className={classes.textFieldEmail}
-            />
-            <Button
-              variant="outlined"
-              color="default"
-              className={classes.btnSubscribe}
-              // size="small"
-            >
-              Subscribe
-            </Button>
+            <form onSubmit={handleSubmit(onSubmit)} noValidate>
+              <FormControl className={classes.formControl}>
+                <TextField
+                  type="email"
+                  name="email"
+                  placeholder="Your email address..."
+                  variant="outlined"
+                  size="small"
+                  className={classes.textFieldEmail}
+                  inputRef={register}
+                  error={!!errorEmail}
+                  helperText={errorEmail}
+                />
+              </FormControl>
+              <Button
+                id="submit"
+                name="submit"
+                type="submit"
+                variant="outlined"
+                color="default"
+                className={classes.btnSubscribe}
+                // size="small"
+              >
+                Subscribe
+              </Button>
+            </form>
             <Typography variant="body2" className={classes.title2}>
               FOLLOW US
             </Typography>
