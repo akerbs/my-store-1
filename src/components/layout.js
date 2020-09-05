@@ -3,6 +3,8 @@ import PropTypes from "prop-types"
 import { useStaticQuery, graphql } from "gatsby"
 import CssBaseline from "@material-ui/core/CssBaseline"
 import "./layout.css"
+import { ThemeProvider } from "@material-ui/core/styles"
+import theme from "./theme"
 import "@stripe/stripe-js" // https://github.com/stripe/stripe-js#import-as-a-side-effect
 import { CartProvider } from "use-shopping-cart"
 import { loadStripe } from "@stripe/stripe-js"
@@ -70,15 +72,17 @@ function Layout({ children }) {
           billingAddressCollection={true}
         >
           <CssBaseline />
-          <SimpleReactLightbox>
-            <DrawerMenuContextProvider>
-              <DrawerCartContextProvider>
-                {/* <CurrencyContextProvider> */}
-                {children}
-                {/* </CurrencyContextProvider> */}
-              </DrawerCartContextProvider>
-            </DrawerMenuContextProvider>
-          </SimpleReactLightbox>
+          <ThemeProvider theme={theme}>
+            <SimpleReactLightbox>
+              <DrawerMenuContextProvider>
+                <DrawerCartContextProvider>
+                  {/* <CurrencyContextProvider> */}
+                  {children}
+                  {/* </CurrencyContextProvider> */}
+                </DrawerCartContextProvider>
+              </DrawerMenuContextProvider>
+            </SimpleReactLightbox>
+          </ThemeProvider>
         </CartProvider>
       </CurrencyContext.Provider>
     </>

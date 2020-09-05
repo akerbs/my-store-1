@@ -42,6 +42,7 @@ const useStyles = makeStyles(theme => ({
     flexGrow: 1,
   },
   appBar: {
+    backgroundColor: theme.palette.primary.main,
     transition: theme.transitions.create(["margin", "width"], {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen,
@@ -126,7 +127,7 @@ export default function Header(props) {
             </IconButton>
 
             <Typography variant="h6" className={classes.title}>
-              <Link to="/main"> LOGO </Link>
+              <Link to="/"> LOGO </Link>
             </Typography>
             <SelectLanguage />
             <SelectCurrency />

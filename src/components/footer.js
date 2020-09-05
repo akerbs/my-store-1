@@ -21,8 +21,14 @@ import payCard7 from "../images/payCards/applePay.svg"
 
 const useStyles = makeStyles(theme => ({
   root: {
-    marginTop: 100,
+    backgroundColor: theme.palette.primary.main,
+    maxWidth: "100%",
   },
+  content: {
+    marginTop: 100,
+    color: "black",
+  },
+
   title: {
     marginBottom: 20,
   },
@@ -45,113 +51,139 @@ const useStyles = makeStyles(theme => ({
     width: 35,
     marginRight: 5,
   },
+  link: {
+    textDecoration: "none",
+    color: "black",
+    "&:hover": {
+      color: "white",
+    },
+  },
 }))
 
 const Footer = () => {
   const classes = useStyles()
 
   return (
-    <Container maxWidth="md" className={classes.root}>
+    <div className={classes.root}>
       <CssBaseline />
-      <Grid container className={classes.root} spacing={3}>
-        <Grid item md={4}>
-          <Typography variant="body2" className={classes.title}>
-            CONTACTS
-          </Typography>
-          <Typography variant="caption">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque
-            incidunt dolorem aut explicabo aliquid. Quae officiis voluptate nemo
-            dolore cum animi inventore possimus, beatae incidunt praesentium.
-          </Typography>
+      <Container maxWidth="md" className={classes.content}>
+        <Grid container className={classes.root} spacing={3}>
+          <Grid item md={4}>
+            <Typography variant="body2" className={classes.title}>
+              CONTACTS
+            </Typography>
+            <Typography variant="caption">
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque
+              incidunt dolorem aut explicabo aliquid. Quae officiis voluptate
+              nemo dolore cum animi inventore possimus, beatae incidunt
+              praesentium.
+            </Typography>
 
-          <div className={classes.payCards}>
-            <img src={payCard1} title="visa" className={classes.payCardItem} />
-            <img
-              src={payCard2}
-              title="master card"
-              className={classes.payCardItem}
-            />
-            <img
-              src={payCard3}
-              title="maestro"
-              className={classes.payCardItem}
-            />
-            <img
-              src={payCard4}
-              title="pay pal"
-              className={classes.payCardItem}
-            />
-            <img
-              src={payCard5}
-              title="american express"
-              className={classes.payCardItem}
-            />
+            <div className={classes.payCards}>
+              <img
+                src={payCard1}
+                title="visa"
+                className={classes.payCardItem}
+              />
+              <img
+                src={payCard2}
+                title="master card"
+                className={classes.payCardItem}
+              />
+              <img
+                src={payCard3}
+                title="maestro"
+                className={classes.payCardItem}
+              />
+              <img
+                src={payCard4}
+                title="pay pal"
+                className={classes.payCardItem}
+              />
+              <img
+                src={payCard5}
+                title="american express"
+                className={classes.payCardItem}
+              />
 
-            <img
-              src={payCard6}
-              title="google pay"
-              className={classes.payCardItem}
-            />
+              <img
+                src={payCard6}
+                title="google pay"
+                className={classes.payCardItem}
+              />
 
-            <img
-              src={payCard7}
-              title="apple pay"
-              className={classes.payCardItem}
+              <img
+                src={payCard7}
+                title="apple pay"
+                className={classes.payCardItem}
+              />
+            </div>
+          </Grid>
+          <Grid item md={4}>
+            <Typography variant="body2" className={classes.title}>
+              SERVICES
+            </Typography>
+            <Typography variant="caption">
+              <Link to="/services/terms" className={classes.link}>
+                Terms of Service
+              </Link>
+              <br />
+              <Link to="/services/returns" className={classes.link}>
+                Returns & Refund
+              </Link>
+              <br />
+              <Link to="/services/privacy-policy" className={classes.link}>
+                Privacy Policy
+              </Link>
+              <br />
+              <Link to="/services/shipping-policy" className={classes.link}>
+                Shipping Policy
+              </Link>
+              <br />
+              <Link to="/services/about-us" className={classes.link}>
+                About us
+              </Link>
+              <br />
+              <Link to="/services/contact-us" className={classes.link}>
+                Contact us
+              </Link>
+            </Typography>
+          </Grid>
+          <Grid item md={4}>
+            <Typography variant="body2" className={classes.title2}>
+              JOIN OUR NEWSLETTER
+            </Typography>
+            <TextField
+              id="outlined-basic"
+              label="Your email address..."
+              variant="outlined"
+              size="small"
+              className={classes.textFieldEmail}
             />
-          </div>
+            <Button
+              variant="outlined"
+              color="default"
+              className={classes.btnSubscribe}
+              // size="small"
+            >
+              Subscribe
+            </Button>
+            <Typography variant="body2" className={classes.title2}>
+              FOLLOW US
+            </Typography>
+            <FacebookIcon /> <InstagramIcon />
+          </Grid>
         </Grid>
-        <Grid item md={4}>
-          <Typography variant="body2" className={classes.title}>
-            SERVICES
-          </Typography>
-          <Typography variant="caption">
-            <Link to="/services/terms">Terms of Service</Link>
-            <br />
-            <Link to="/services/returns">Returns & Refund</Link>
-            <br />
-            <Link to="/services/privacy-policy">Privacy Policy</Link>
-            <br />
-            <Link to="/services/shipping-policy">Shipping Policy</Link>
-            <br />
-            <Link to="/services/about-us">About us</Link>
-            <br />
-            <Link to="/services/contact-us">Contact us</Link>
-          </Typography>
-        </Grid>
-        <Grid item md={4}>
-          <Typography variant="body2" className={classes.title2}>
-            JOIN OUR NEWSLETTER
-          </Typography>
-          <TextField
-            id="outlined-basic"
-            label="Your email address..."
-            variant="outlined"
-            size="small"
-            className={classes.textFieldEmail}
-          />
-          <Button
-            variant="outlined"
-            color="default"
-            className={classes.btnSubscribe}
-            // size="small"
-          >
-            Subscribe
-          </Button>
-          <Typography variant="body2" className={classes.title2}>
-            FOLLOW US
-          </Typography>
-          <FacebookIcon /> <InstagramIcon />
-        </Grid>
-      </Grid>
-      <div
-        style={{
-          textAlign: "center",
-          minHeight: "50px",
-        }}
-      >
-        © {new Date().getFullYear()}, Gatsby
-      </div>
-    </Container>
+        <div
+          style={{
+            textAlign: "center",
+            minHeight: "50px",
+          }}
+        >
+          © {new Date().getFullYear()}, Gatsby
+        </div>
+      </Container>
+    </div>
   )
 }
 
