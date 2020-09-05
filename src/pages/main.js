@@ -1,6 +1,7 @@
 import React, { useContext } from "react"
 import CssBaseline from "@material-ui/core/CssBaseline"
-import Link from "gatsby-plugin-transition-link"
+// import Link from "gatsby-plugin-transition-link"
+import { Link } from "gatsby"
 import Header from "../components/header"
 import Footer from "../components/footer"
 import SEO from "../components/seo"
@@ -20,6 +21,7 @@ const useStyles = makeStyles(theme => ({
   },
   contentWrapper: {
     flex: "1 0 auto",
+    marginTop: "10vh",
   },
 }))
 

@@ -9,10 +9,15 @@ import TextField from "@material-ui/core/TextField"
 import Button from "@material-ui/core/Button"
 import FacebookIcon from "@material-ui/icons/Facebook"
 import InstagramIcon from "@material-ui/icons/Instagram"
-import List from "@material-ui/core/List"
-import ListItem from "@material-ui/core/ListItem"
-import ListItemText from "@material-ui/core/ListItemText"
-import Link from "gatsby-plugin-transition-link"
+// import Link from "gatsby-plugin-transition-link"
+import { Link } from "gatsby"
+import payCard1 from "../images/payCards/dark/1.png"
+import payCard2 from "../images/payCards/dark/2.png"
+import payCard3 from "../images/payCards/dark/3.png"
+import payCard4 from "../images/payCards/dark/5.png"
+import payCard5 from "../images/payCards/dark/22.png"
+import payCard6 from "../images/payCards/googlePay.svg"
+import payCard7 from "../images/payCards/applePay.svg"
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -21,9 +26,24 @@ const useStyles = makeStyles(theme => ({
   title: {
     marginBottom: 20,
   },
+  title2: {
+    marginBottom: 10,
+  },
+  textFieldEmail: {
+    marginRight: 5,
+    marginBottom: 3,
+  },
   btnSubscribe: {
-    marginTop: 5,
-    marginBottom: 20,
+    marginBottom: 30,
+    marginTop: 1,
+  },
+  payCards: {
+    display: "flex",
+    marginTop: 20,
+  },
+  payCardItem: {
+    width: 35,
+    marginRight: 5,
   },
 }))
 
@@ -43,27 +63,63 @@ const Footer = () => {
             incidunt dolorem aut explicabo aliquid. Quae officiis voluptate nemo
             dolore cum animi inventore possimus, beatae incidunt praesentium.
           </Typography>
+
+          <div className={classes.payCards}>
+            <img src={payCard1} title="visa" className={classes.payCardItem} />
+            <img
+              src={payCard2}
+              title="master card"
+              className={classes.payCardItem}
+            />
+            <img
+              src={payCard3}
+              title="maestro"
+              className={classes.payCardItem}
+            />
+            <img
+              src={payCard4}
+              title="pay pal"
+              className={classes.payCardItem}
+            />
+            <img
+              src={payCard5}
+              title="american express"
+              className={classes.payCardItem}
+            />
+
+            <img
+              src={payCard6}
+              title="google pay"
+              className={classes.payCardItem}
+            />
+
+            <img
+              src={payCard7}
+              title="apple pay"
+              className={classes.payCardItem}
+            />
+          </div>
         </Grid>
         <Grid item md={4}>
           <Typography variant="body2" className={classes.title}>
             SERVICES
           </Typography>
           <Typography variant="caption">
-            <Link to="/main">Terms of Service</Link>
+            <Link to="/services/terms">Terms of Service</Link>
             <br />
-            <Link to="/main">Returns & Refund</Link>
+            <Link to="/services/returns">Returns & Refund</Link>
             <br />
-            <Link to="/main">Privacy Policy</Link>
+            <Link to="/services/privacy-policy">Privacy Policy</Link>
             <br />
-            <Link to="/main">Shipping Policy</Link>
+            <Link to="/services/shipping-policy">Shipping Policy</Link>
             <br />
-            <Link to="/main">About us</Link>
+            <Link to="/services/about-us">About us</Link>
             <br />
-            <Link to="/main">Contact us</Link>
+            <Link to="/services/contact-us">Contact us</Link>
           </Typography>
         </Grid>
         <Grid item md={4}>
-          <Typography variant="body2" className={classes.title}>
+          <Typography variant="body2" className={classes.title2}>
             JOIN OUR NEWSLETTER
           </Typography>
           <TextField
@@ -71,16 +127,17 @@ const Footer = () => {
             label="Your email address..."
             variant="outlined"
             size="small"
+            className={classes.textFieldEmail}
           />
           <Button
             variant="outlined"
             color="default"
             className={classes.btnSubscribe}
-            size="small"
+            // size="small"
           >
             Subscribe
           </Button>
-          <Typography variant="body2" className={classes.title}>
+          <Typography variant="body2" className={classes.title2}>
             FOLLOW US
           </Typography>
           <FacebookIcon /> <InstagramIcon />

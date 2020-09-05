@@ -4,7 +4,8 @@ import InputLabel from "@material-ui/core/InputLabel"
 import MenuItem from "@material-ui/core/MenuItem"
 import FormControl from "@material-ui/core/FormControl"
 import Select from "@material-ui/core/Select"
-import Link from "gatsby-plugin-transition-link"
+// import Link from "gatsby-plugin-transition-link"
+import { Link } from "gatsby"
 
 const useStyles = makeStyles(theme => ({
   formControl: {
