@@ -49,6 +49,7 @@ const useStyles = makeStyles(theme => ({
   },
   payCardItem: {
     width: 35,
+    height: "100%",
     marginRight: 5,
   },
   link: {
