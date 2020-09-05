@@ -82,6 +82,15 @@ const useStyles = makeStyles(theme => ({
     display: "flex",
     justifyContent: "space-between",
   },
+  link: {
+    textDecoration: "none",
+    "&:visited": {
+      color: "white",
+    },
+    "&:active": {
+      color: theme.palette.primary.light,
+    },
+  },
 }))
 
 export default function Header(props) {
@@ -127,7 +136,9 @@ export default function Header(props) {
             </IconButton>
 
             <Typography variant="h6" className={classes.title}>
-              <Link to="/"> LOGO </Link>
+              <Link to="/" className={classes.link}>
+                LOGO
+              </Link>
             </Typography>
             <SelectLanguage />
             <SelectCurrency />

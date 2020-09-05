@@ -16,6 +16,7 @@ import { DrawerCartContext } from "../../context/DrawerCartContext"
 import funnyBunny from "../../images/products/funny_bunny/funny_bunny_2.jpg"
 import catClock from "../../images/products/cat_clock/cat_clock_1.jpg"
 import magicHat from "../../images/products/magic_hat/magic_hat_1.jpg"
+import theme from "../theme"
 
 const useStyles = makeStyles({
   root: {
@@ -34,16 +35,20 @@ const useStyles = makeStyles({
       transform: "scale(1.2)",
     },
   },
+  link: {
+    textDecoration: "none",
+    color: theme.palette.primary.main,
+
+    "&:active": {
+      color: theme.palette.primary.dark,
+    },
+  },
 })
 
 const SkuCard = ({ sku }, props) => {
   const classes = useStyles()
   const { addItem } = useShoppingCart()
-  const {
-    handleDrawerCartClose,
-    openDrawerCart,
-    handleDrawerCartOpen,
-  } = useContext(DrawerCartContext)
+  const { handleDrawerCartOpen } = useContext(DrawerCartContext)
 
   // const [openSnackbar, setOpenSnackbar] = useState(false)
 
@@ -100,7 +105,8 @@ const SkuCard = ({ sku }, props) => {
         <CardActionArea>
           <Link
             to={`/products/${productPage}`}
-            style={{ textDecoration: "none" }}
+            className={classes.link}
+            // style={{ textDecoration: "none", color: "tomato" }}
           >
             <CardMedia
               className={classes.cardMedia}
@@ -128,6 +134,7 @@ const SkuCard = ({ sku }, props) => {
         </CardActionArea>
         <CardActions>
           <Button
+            variant="outlined"
             size="small"
             color="primary"
             onClick={() => {

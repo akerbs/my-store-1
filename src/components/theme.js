@@ -28,3 +28,12 @@ const theme = createMuiTheme({
 })
 
 export default theme
+
+// fairyGatesTheme.overrideThemeStyles = () => ({
+//   a: {
+//     color: #YourColorHere,
+//     textDecoration: "none",
+//     backgroundImage: "none",
+//     textShadow: "none",
+//   },
+// })
