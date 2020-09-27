@@ -18,6 +18,7 @@ import { useShoppingCart } from "use-shopping-cart"
 import { Link } from "gatsby"
 import { DrawerCartContext } from "../context/DrawerCartContext"
 import { DrawerMenuContext } from "../context/DrawerMenuContext"
+
 import SelectCurrency from "./SelectCurrency"
 import SelectLanguage from "./SelectLanguage"
 

@@ -1,11 +1,9 @@
-import React, { useContext } from "react"
+import React, { useContext, useEffect } from "react"
 import { makeStyles } from "@material-ui/core/styles"
-import InputLabel from "@material-ui/core/InputLabel"
 import MenuItem from "@material-ui/core/MenuItem"
 import FormControl from "@material-ui/core/FormControl"
 import Select from "@material-ui/core/Select"
-// import Link from "gatsby-plugin-transition-link"
-import { Link } from "gatsby"
+import { LanguageContext } from "../components/layout"
 
 const useStyles = makeStyles(theme => ({
   formControl: {
@@ -21,11 +19,8 @@ const useStyles = makeStyles(theme => ({
 
 export default function SelectLanguage() {
   const classes = useStyles()
-  const [language, setLanguage] = React.useState("Deu")
 
-  const handleChange = event => {
-    setLanguage(event.target.value)
-  }
+  const { actLanguage, handleLanguageChange } = useContext(LanguageContext)
 
   return (
     <>
@@ -38,16 +33,16 @@ export default function SelectLanguage() {
           autoWidth
           labelId="demo-simple-select-outlined-label"
           id="demo-simple-select-outlined"
-          value={language}
+          value={actLanguage}
           onChange={e => {
-            handleChange(e)
+            handleLanguageChange(e)
           }}
           // onChange={handleCurrencyChange}
           style={{ color: "white" }}
         >
-          <MenuItem value={"Eng"}>EN</MenuItem>
-          <MenuItem value={"Deu"}>DE</MenuItem>
-          <MenuItem value={"Rus"}>RU</MenuItem>
+          <MenuItem value={"ENG"}>EN</MenuItem>
+          <MenuItem value={"DEU"}>DE</MenuItem>
+          <MenuItem value={"RUS"}>RU</MenuItem>
         </Select>
       </FormControl>
     </>

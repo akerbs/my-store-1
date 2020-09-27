@@ -1,24 +1,17 @@
-import React, { useState } from "react"
+import React from "react"
 import CssBaseline from "@material-ui/core/CssBaseline"
 import IconButton from "@material-ui/core/IconButton"
 import CloseIcon from "@material-ui/icons/Close"
-import Counter from "./Counter"
+import Counter from "../CounterLittle"
 import { makeStyles } from "@material-ui/core/styles"
 import Grid from "@material-ui/core/Grid"
 import Paper from "@material-ui/core/Paper"
 import Typography from "@material-ui/core/Typography"
 import ButtonBase from "@material-ui/core/ButtonBase"
 import Divider from "@material-ui/core/Divider"
-// import Link from "gatsby-plugin-transition-link"
-import { Link } from "gatsby"
-import funnyBunny from "../../images/products/funny_bunny/funny_bunny_2.jpg"
-import catClock from "../../images/products/cat_clock/cat_clock_1.jpg"
-import magicHat from "../../images/products/magic_hat/magic_hat_1.jpg"
+import { navigate } from "gatsby"
 import Slide from "@material-ui/core/Slide"
 import Fade from "@material-ui/core/Fade"
-// import DB from "../DB"
-
-// console.log("!!! :", DB[0].name)
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -31,49 +24,34 @@ const useStyles = makeStyles(theme => ({
     padding: 8,
   },
   imgBtn: {
-    width: "100px",
-    height: "100px",
+    width: 100,
+    height: 100,
+    display: " inline-block",
+    overflow: "hidden",
+    transform: "translateZ(0)",
+    borderRadius: "5%",
+    // maskImage: "radial-gradient(white, black)",
+    // borderRadius: "100%",
   },
   img: {
     margin: "auto",
     display: "block",
-    width: "100px",
-    height: "100px",
+    width: 100,
+    height: 100,
   },
 }))
 
-const CartItem = props => {
+export default function CartItem(props) {
   const classes = useStyles()
 
-  const productPage =
-    props.item.sku === "price_1HGjcwHwITO0GSJrJEhUG0Aq" ||
-    props.item.sku === "price_1HNFcEHwITO0GSJr0BcSMXko" ||
-    props.item.sku === "price_1HNFbdHwITO0GSJr0cQgGhYQ"
-      ? "funny_bunny"
-      : props.item.sku === "price_1HH7DcHwITO0GSJrZz3vg6d9" ||
-        props.item.sku === "price_1HNFdPHwITO0GSJrVsLO5IdU" ||
-        props.item.sku === "price_1HNFdwHwITO0GSJrpygU4AcI"
-      ? "cat_clock"
-      : props.item.sku === "price_1HHUu9HwITO0GSJrsoWoL51O" ||
-        props.item.sku === "price_1HMt2gHwITO0GSJrR1YuszFV" ||
-        props.item.sku === "price_1HNFZ7HwITO0GSJrieVKbbte"
-      ? "magic_hat"
-      : ""
-
-  const imgLocal =
-    props.item.sku === "price_1HGjcwHwITO0GSJrJEhUG0Aq" ||
-    props.item.sku === "price_1HNFcEHwITO0GSJr0BcSMXko" ||
-    props.item.sku === "price_1HNFbdHwITO0GSJr0cQgGhYQ"
-      ? funnyBunny
-      : props.item.sku === "price_1HH7DcHwITO0GSJrZz3vg6d9" ||
-        props.item.sku === "price_1HNFdPHwITO0GSJrVsLO5IdU" ||
-        props.item.sku === "price_1HNFdwHwITO0GSJrpygU4AcI"
-      ? catClock
-      : props.item.sku === "price_1HHUu9HwITO0GSJrsoWoL51O" ||
-        props.item.sku === "price_1HMt2gHwITO0GSJrR1YuszFV" ||
-        props.item.sku === "price_1HNFZ7HwITO0GSJrieVKbbte"
-      ? magicHat
-      : props.item.image
+  const LinkToProductPage =
+    props.sku.productId === "prod_HqQT1Nni7ovIFj"
+      ? "funny-bunny"
+      : props.sku.productId === "prod_HqorCSiih5dZWu"
+      ? "cat-clock"
+      : props.sku.productId === "prod_HrDKbPKHBo6qPK"
+      ? "magic-hat"
+      : null
 
   return (
     <>
@@ -87,20 +65,16 @@ const CartItem = props => {
                   <Grid item xs={4}>
                     <ButtonBase
                       onClick={() => {
+                        navigate(`/products/${LinkToProductPage}`)
                         props.onClose()
                       }}
                       className={classes.imgBtn}
                     >
-                      <Link
-                        to={`/products/${productPage}`}
-                        style={{ textDecoration: "none" }}
-                      >
-                        <img
-                          src={imgLocal}
-                          title={props.item.name}
-                          className={classes.img}
-                        />
-                      </Link>
+                      <img
+                        className={classes.img}
+                        src={props.sku.firstImg}
+                        alt={props.sku.name}
+                      />
                     </ButtonBase>
                   </Grid>
                   <Grid
@@ -113,30 +87,29 @@ const CartItem = props => {
                     <Grid item xs container direction="column" spacing={1}>
                       <Grid item xs>
                         <Typography gutterBottom variant="subtitle1">
-                          {props.item.name}
+                          {props.sku.name}
                         </Typography>
                         <Typography variant="body2" gutterBottom>
-                          {props.item.description}
+                          {props.sku.description}
                         </Typography>
                         <Typography variant="body2" color="textPrimary">
                           <Counter
                             incrementItem={props.incrementItem}
                             decrementItem={props.decrementItem}
                             removeItem={props.removeItem}
-                            quantity={props.item.quantity}
-                            sku={props.item.sku}
+                            quantity={props.sku.quantity}
+                            sku={props.sku.sku}
                           />{" "}
                           {/* {(props.item.currency = "eur" ? "€" : props.item.currency)}{" "} */}
-                          {/* {corrPrice} */} {props.item.formattedValue}
+                          {/* {corrPrice} */} {props.sku.formattedValue}
                         </Typography>
                       </Grid>
                     </Grid>
                     <Grid item>
                       <Typography variant="subtitle1">
-                        {" "}
                         <IconButton
                           size="small"
-                          onClick={() => props.removeItem(props.item.sku)}
+                          onClick={() => props.removeItem(props.sku.sku)}
                           style={{ padding: 0 }}
                         >
                           <CloseIcon fontSize="small" />
@@ -154,5 +127,3 @@ const CartItem = props => {
     </>
   )
 }
-
-export default CartItem

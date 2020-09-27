@@ -55,8 +55,8 @@ export default function DrawerMenu(props) {
         anchor="left"
         open={props.open}
         classes={{
-          paper: classes.drawerPaper,
-          drawer: classes.drawer,
+          paperAnchorLeft: classes.drawerPaper,
+          root: classes.drawer,
         }}
       >
         <div className={classes.drawerHeader}>

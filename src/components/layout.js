@@ -3,6 +3,7 @@ import PropTypes from "prop-types"
 import { useStaticQuery, graphql } from "gatsby"
 import CssBaseline from "@material-ui/core/CssBaseline"
 import "./layout.css"
+import { makeStyles } from "@material-ui/core/styles"
 import { ThemeProvider } from "@material-ui/core/styles"
 import theme from "./theme"
 import "@stripe/stripe-js" // https://github.com/stripe/stripe-js#import-as-a-side-effect
@@ -11,18 +12,24 @@ import { loadStripe } from "@stripe/stripe-js"
 import SimpleReactLightbox from "simple-react-lightbox"
 import { DrawerCartContextProvider } from "../context/DrawerCartContext"
 import { DrawerMenuContextProvider } from "../context/DrawerMenuContext"
-// import { CurrencyContextProvider } from "../context/CurrencyContext"
-// import { CurrencyContext } from "../context/CurrencyContext"
-// import { useShoppingCart } from "use-shopping-cart"
+import { ItemsContextProvider } from "../context/ItemsContext"
+
+const window = require("global/window")
+
+const useStyles = makeStyles(theme => ({}))
 
 // const stripePromise = loadStripe(process.env.GATSBY_STRIPE_PUBLISHABLE_KEY)
 const stripePromise = loadStripe(
   "pk_test_51HGUuRHwITO0GSJr0YK6FwbE17LUTst9UCvm2uH0RdjBtAnQJqgPmDn0BSunRc8FIEXRW3HatsFd1uDHkfaGJtUm00IA2780Iw"
 )
 export const CurrencyContext = createContext()
+export const LanguageContext = createContext()
 
 function Layout({ children }) {
-  // { actCurrency, handleCurrencyChange } = useContext(CurrencyContext)
+  const classes = useStyles()
+
+  const [actCurrency, setActCurrency] = useState("EUR")
+  const [actLanguage, setActLanguage] = useState("ENG")
 
   const data = useStaticQuery(graphql`
     query SiteTitleQuery {
@@ -33,13 +40,50 @@ function Layout({ children }) {
       }
     }
   `)
-  // const { clearCart } = useShoppingCart()
-  const [actCurrency, setActCurrency] = useState("EUR")
+
+  useEffect(() => {
+    if (typeof window !== `undefined`) {
+      console.log("LANGUAGE: ", window.navigator.language.slice(0, 2))
+
+      if (window.navigator.language.slice(0, 2) === "ru") {
+        setActLanguage("RUS")
+      } else if (window.navigator.language.slice(0, 2) === "de") {
+        setActLanguage("DEU")
+      } else if (window.navigator.language.slice(0, 2) === "en") {
+        setActLanguage("ENG")
+      } else {
+        setActLanguage("ENG")
+      }
+    }
+  }, [])
+
+  useEffect(() => {
+    async function getLocation() {
+      const response = await fetch("https://ipapi.co/json")
+
+      const info = await response.json()
+      const countryCode = info.country_code
+
+      countryCode == "US"
+        ? setActCurrency("USD")
+        : countryCode == "DE"
+        ? setActCurrency("EUR")
+        : countryCode == "RU"
+        ? setActCurrency("RUB")
+        : setActCurrency("USD")
+
+      return countryCode
+    }
+    getLocation().then(countryCode => console.log("COUNTRY CODE:", countryCode))
+  }, [])
 
   function handleCurrencyChange(event) {
     setActCurrency(event.target.value)
+    // clearCart();
     //  forceUpdate()
-    // clearCart()
+  }
+  function handleLanguageChange(event) {
+    setActLanguage(event.target.value)
   }
 
   return (
@@ -54,14 +98,6 @@ function Layout({ children }) {
           mode="client-only"
           stripe={stripePromise}
           currency={actCurrency}
-          // currency={
-          //   actCurrency === "EUR"
-          //     ? "EUR"
-          //     : actCurrency === "USD"
-          //     ? "USD"
-          //     : "USD"
-          // }
-          // currency="EUR"
           // successUrl="https://kerbs-store-1.vercel.app/success/"
           // cancelUrl="https://kerbs-store-1.vercel.app/"
           successUrl="http://localhost:8000/success/"
@@ -71,18 +107,26 @@ function Layout({ children }) {
           //  allowedCountries={["US", "GB", "CA", "DE"]}
           billingAddressCollection={true}
         >
-          <CssBaseline />
-          <ThemeProvider theme={theme}>
-            <SimpleReactLightbox>
-              <DrawerMenuContextProvider>
-                <DrawerCartContextProvider>
-                  {/* <CurrencyContextProvider> */}
-                  {children}
-                  {/* </CurrencyContextProvider> */}
-                </DrawerCartContextProvider>
-              </DrawerMenuContextProvider>
-            </SimpleReactLightbox>
-          </ThemeProvider>
+          <LanguageContext.Provider
+            value={{
+              actLanguage,
+              setActLanguage,
+              handleLanguageChange,
+            }}
+          >
+            <ItemsContextProvider>
+              <CssBaseline />
+              <ThemeProvider theme={theme}>
+                <SimpleReactLightbox>
+                  <DrawerMenuContextProvider>
+                    <DrawerCartContextProvider>
+                      {children}
+                    </DrawerCartContextProvider>
+                  </DrawerMenuContextProvider>
+                </SimpleReactLightbox>
+              </ThemeProvider>
+            </ItemsContextProvider>
+          </LanguageContext.Provider>
         </CartProvider>
       </CurrencyContext.Provider>
     </>

@@ -1,6 +1,6 @@
-require("dotenv").config({
-  path: `.env.${process.env.NODE_ENV}`,
-})
+if (process.env.NODE_ENV === "development") {
+  require("dotenv").config()
+}
 
 module.exports = {
   siteMetadata: {
@@ -46,6 +46,7 @@ module.exports = {
         component: require.resolve(`./src/components/layout.js`),
       },
     },
+
     // {
     //   resolve: "gatsby-plugin-transition-link",
     //   options: {
