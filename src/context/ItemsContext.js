@@ -9,6 +9,7 @@ const ItemsContext = createContext()
 const ItemsContextProvider = props => {
   const [products, setProducts] = useState([
     {
+      linkId: "funny-bunny",
       productId: "prod_HqQT1Nni7ovIFj",
       nameEng: "Funny bunny",
       nameDeu: "Lustiger Hase",
@@ -34,6 +35,7 @@ const ItemsContextProvider = props => {
       currencySignRub: "₽",
     },
     {
+      linkId: "cat-clock",
       productId: "prod_HqorCSiih5dZWu",
       nameEng: "Cat clock",
       nameDeu: "Katzenuhr",
@@ -59,6 +61,7 @@ const ItemsContextProvider = props => {
       currencySignRub: "₽",
     },
     {
+      linkId: "magic-hat",
       productId: "prod_HrDKbPKHBo6qPK",
       nameEng: "Magic hat",
       nameDeu: "Magischer Hut",

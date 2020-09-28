@@ -34,9 +34,13 @@ import ShareIcon from "@material-ui/icons/Share"
 import Typography from "@material-ui/core/Typography"
 import BreadCrumbs from "../components/BreadCrumbs"
 
-import Link from "gatsby"
+import { Link, navigate } from "gatsby"
 import Counter from "../components/CounterBig"
-import Rating from "../components/Rating"
+
+import RatingEl from "../components/RatingEl"
+import ReviewForm from "../components/ReviewForm"
+import Reviews from "../components/Reviews"
+
 import Accordion from "../components/Accordion"
 import Tabs from "../components/Tabs"
 import inView from "in-view"
@@ -78,6 +82,7 @@ const useStyles = makeStyles(theme => ({
     marginBottom: 0,
     paddingBottom: 0,
     display: "block",
+    cursor: "pointer ",
   },
   // boxRight: {
   //   // b  order: "1px solid rgba(0, 0, 0, 0.05)",
@@ -140,9 +145,9 @@ function ProductPageTemplate(props) {
   const [itemInView, setItemInView] = useState(null)
 
   useEffect(() => {
-    console.log("BROWSING WORKS")
+    // console.log("BROWSING WORKS")
     setItemInView(itemInfo.productId)
-    console.log(itemInfo.productId, "is browsing")
+    console.log("ITEM", itemInfo.productId, "is BROWSING")
   })
 
   function increment() {
@@ -170,6 +175,7 @@ function ProductPageTemplate(props) {
         : null,
     productId: props.item.productId,
     videoId: props.item.videoId,
+    linkId: props.item.linkId,
 
     sku:
       actCurrency === "USD"
@@ -213,7 +219,7 @@ function ProductPageTemplate(props) {
     console.info("You clicked a breadcrumb.")
   }
 
-  console.log("DATA:", itemInfo)
+  console.log("DATA:", `/products/${itemInfo.linkId}#reviews`)
 
   return (
     <div className={classes.root} id="root">
@@ -221,105 +227,122 @@ function ProductPageTemplate(props) {
       <CssBaseline />
       <Header />
       <Container className={classes.contentWrapper} id="wrapper">
-        <Hidden smDown id="big">
-          <div id="content" className="clearfix">
-            <div className={classes.boxLeft}>
+        {/* <Hidden smDown id="big"> */}
+        <div id="content" className="clearfix">
+          <div className={classes.boxLeft}>
+            <SRLWrapper
+              options={lightboxOptions}
+              // callbacks={lightboxCallbacks}
+            >
               <img src={itemInfo.firstImg} className={classes.imgBoxLeft} />
               <img src={itemInfo.scndImg} className={classes.imgBoxLeft} />
               <img src={itemInfo.firstImg} className={classes.imgBoxLeft} />
               <img src={itemInfo.scndImg} className={classes.imgBoxLeft} />
               <img src={itemInfo.firstImg} className={classes.imgBoxLeft} />
               <img src={itemInfo.scndImg} className={classes.imgBoxLeft} />
-            </div>
+            </SRLWrapper>
+          </div>
 
-            <div className="boxRight">
-              <BreadCrumbs data={itemInfo} />
-              <br />
-              <Typography variant="h4">
-                <b>{itemInfo.name}</b>
-              </Typography>
-              <br />
-              <Typography variant="h5">
-                {formatCurrencyString({
-                  currency: itemInfo.currency,
-                  value: parseInt(itemInfo.price),
-                })}
-              </Typography>
-              <br />
-              <Rating />
-              <br /> <br />
-              <Counter
-                incrementItem={increment}
-                decrementItem={decrement}
-                quantity={quantityOfItem}
-                sku={itemInfo}
-              />
-              <br />
-              <div
-                style={{
-                  display: "flex",
-                  justifyContent: "space-between",
-                  borderRadius: "8px",
+          <div className="boxRight">
+            <BreadCrumbs data={itemInfo} />
+            <br />
+            <Typography variant="h4">
+              <b>{itemInfo.name}</b>
+            </Typography>
+            <br />
+            <Typography variant="h5">
+              {formatCurrencyString({
+                currency: itemInfo.currency,
+                value: parseInt(itemInfo.price),
+              })}
+            </Typography>
+            <br />
+            {/* <Link to="#reviews"> */}
+            <Link
+              to={`/products/${itemInfo.linkId}#reviews`}
+              style={{ cursor: "pointer" }}
+            >
+              {/* <Link to="/"> */}
+              {/* <bitton onClick={() => alert("click")}>BTN</bitton> */}
+              <RatingEl />
+            </Link>
+            <br /> <br />
+            <Counter
+              incrementItem={increment}
+              decrementItem={decrement}
+              quantity={quantityOfItem}
+              sku={itemInfo}
+            />
+            <br />
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "space-between",
+                borderRadius: "8px",
+              }}
+            >
+              <Button
+                className={classes.btn}
+                variant="contained"
+                color="secondary"
+                // className={classes.btn1}
+                onClick={() => {
+                  addItem(itemInfo, quantityOfItem)
+                  handleDrawerCartOpen()
                 }}
               >
-                <Button
-                  className={classes.btn}
-                  variant="contained"
-                  color="secondary"
-                  // className={classes.btn1}
-                  onClick={() => {
-                    addItem(itemInfo, quantityOfItem)
-                    handleDrawerCartOpen()
-                  }}
-                >
-                  {actLanguage === "DEU"
-                    ? "in Warenkorb legen"
+                {actLanguage === "DEU"
+                  ? "in Warenkorb legen"
+                  : actLanguage === "RUS"
+                  ? "добавить в корзину"
+                  : actLanguage === "ENG"
+                  ? "add to cart"
+                  : null}
+              </Button>
+              <Button
+                className={classes.btn}
+                variant="contained"
+                color="primary"
+                disabled={loading}
+                onClick={e => {
+                  addItem(itemInfo, quantityOfItem)
+                  setLoading(true)
+                  redirectToCheckout(e)
+                }}
+              >
+                {loading
+                  ? actLanguage === "DEU"
+                    ? "Wird geladen..."
                     : actLanguage === "RUS"
-                    ? "добавить в корзину"
+                    ? "Загрузка ..."
                     : actLanguage === "ENG"
-                    ? "add to cart"
-                    : null}
-                </Button>
-                <Button
-                  className={classes.btn}
-                  variant="contained"
-                  color="primary"
-                  disabled={loading}
-                  onClick={e => {
-                    addItem(itemInfo, quantityOfItem)
-                    setLoading(true)
-                    redirectToCheckout(e)
-                  }}
-                >
-                  {loading
-                    ? actLanguage === "DEU"
-                      ? "Wird geladen..."
-                      : actLanguage === "RUS"
-                      ? "Загрузка ..."
-                      : actLanguage === "ENG"
-                      ? "Loading..."
-                      : null
-                    : actLanguage === "DEU"
-                    ? "Kaufen jetzt"
-                    : actLanguage === "RUS"
-                    ? "Купить сейчас"
-                    : actLanguage === "ENG"
-                    ? "Buy it now"
-                    : null}
-                </Button>
-              </div>
-              <br />
-              <br />
-              <br />
-              {/* <Accordion data={itemInfo} /> */}
-              <Tabs data={itemInfo} />
-              <br />
+                    ? "Loading..."
+                    : null
+                  : actLanguage === "DEU"
+                  ? "Kaufen jetzt"
+                  : actLanguage === "RUS"
+                  ? "Купить сейчас"
+                  : actLanguage === "ENG"
+                  ? "Buy it now"
+                  : null}
+              </Button>
             </div>
+            <br />
+            <br />
+            <br />
+            {/* <Accordion data={itemInfo} /> */}
+            <Tabs data={itemInfo} />
+            <br />
           </div>
-          {/* <br /> */}
-
-          <VideoYT itemInView={itemInView} itemInfo={itemInfo} />
-        </Hidden>
+        </div>
+        <VideoYT itemInView={itemInView} itemInfo={itemInfo} />
+        <br />
+        {/* <hr /> */}
+        <div id="reviews">
+          <Reviews itemInfo={itemInfo} />
+        </div>
+        <br /> <br /> <br />
+        {/* </Hidden> */}
       </Container>
       <Footer />
     </div>

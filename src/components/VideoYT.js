@@ -82,7 +82,7 @@ export default function (props) {
   }
 
   return (
-    <div className={classes.videoWrapper}>
+    <div className={classes.videoWrapper} id="videoWrapper">
       {/* <video
               // onplay="handleFirstPlay()"
               id="myVideo"
