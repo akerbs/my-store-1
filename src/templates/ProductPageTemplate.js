@@ -40,8 +40,7 @@ import Rating from "../components/Rating"
 import Accordion from "../components/Accordion"
 import Tabs from "../components/Tabs"
 import inView from "in-view"
-
-import YouTube from "react-youtube"
+import VideoYT from "../components/VideoYT"
 
 const document = require("global/document")
 const window = require("global/window")
@@ -99,16 +98,8 @@ const useStyles = makeStyles(theme => ({
     fontSize: 15,
     fontWeight: "bold",
   },
-  mediaBlock: {
-    width: "100vw",
-    minWidth: "100vw",
-    maxWidth: "100vw",
-  },
-  videoWrapper: {
-    margin: 0,
-    padding: 0,
-  },
 }))
+
 SwiperCore.use([Thumbs, Zoom, Navigation, EffectFade, Pagination])
 const lightboxOptions = {
   settings: {},
@@ -153,59 +144,6 @@ function ProductPageTemplate(props) {
     setItemInView(itemInfo.productId)
     console.log(itemInfo.productId, "is browsing")
   })
-
-  ///////////////////  ///////////////////  ///////////////////  ///////////////////  ///////////////////  ///////////////////
-
-  useEffect(() => {
-    console.log("IN VIEW WORKS")
-    inView("#videoWrapper")
-      .on("enter", startInViewShowVideo)
-      .on("exit", stopInViewShowVideo)
-    inView.threshold(0.2)
-  }, [itemInView])
-
-  function startInViewShowVideo() {
-    console.log(" videoWrapper in View!")
-    onPlay()
-  }
-
-  function stopInViewShowVideo() {
-    console.log(" videoWrapper OUT of View!")
-    onPause()
-  }
-
-  const opts = {
-    width: "100%",
-    height: "500px",
-    playerVars: {
-      // https://developers.google.com/youtube/player_parameters
-      // autoplay: 1,
-      enablejsapi: 1,
-      rel: 0,
-      showinfo: 0,
-      controls: 0,
-      // loop: 1,
-      // suggestedQuality: "hd1080",
-    },
-  }
-
-  function onReady(event) {
-    window.YTPlayer = event.target
-    window.YTPlayer.mute()
-    window.YTPlayer.setPlaybackQuality("hd1080")
-    console.log(" onReady")
-  }
-
-  function onPlay() {
-    window.YTPlayer.playVideo()
-    console.log(" onPlay")
-  }
-
-  function onPause() {
-    window.YTPlayer.pauseVideo()
-    console.log(" onPause")
-  }
-  ///////////////////  ///////////////////  ///////////////////  ///////////////////  ///////////////////  ///////////////////
 
   function increment() {
     setQuantityOfItem(quantityOfItem + 1)
@@ -379,36 +317,8 @@ function ProductPageTemplate(props) {
             </div>
           </div>
           {/* <br /> */}
-          <div id="videoWrapper">
-            {/* <video
-              // onplay="handleFirstPlay()"
-              id="myVideo"
-              src={itemInfo.video}
-              type="video/mp4"
-              // controls
-              width="100%"
-              autoPlay
-              loop
-              muted
-              playsInline
-            /> */}
-            <YouTube
-              videoId={itemInfo.videoId}
-              opts={opts}
-              onReady={onReady}
-              id="myVideo"
-            />
-            {/* <iframe
-              className="myVideo"
-              id="myVideo"
-              width="100%"
-              height="500px"
-              src="https://www.youtube.com/embed/-i_94tW_iSM?rel=0&controls=0&hd=1&showinfo=0&enablejsapi=1&autoplay=1"
-              frameborder="0"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowfullscreen
-            ></iframe> */}
-          </div>
+
+          <VideoYT itemInView={itemInView} itemInfo={itemInfo} />
         </Hidden>
       </Container>
       <Footer />
