@@ -16,7 +16,6 @@
     "gatsby-plugin-layout": "^1.3.11",
     "gatsby-plugin-manifest": "^2.4.27",
     "gatsby-plugin-offline": "^3.2.26",
-    "gatsby-plugin-preload-fonts": "^1.2.26",
     "gatsby-plugin-react-helmet": "^3.3.10",
     "gatsby-plugin-sharp": "^2.6.31",
     "gatsby-plugin-smoothscroll": "^1.2.0",
@@ -49,7 +48,6 @@
   ],
   "license": "0BSD",
   "scripts": {
-    "preload-fonts": "gatsby-preload-fonts",
     "build": "gatsby build",
     "develop": "gatsby develop",
     "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,md}\"",

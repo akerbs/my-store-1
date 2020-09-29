@@ -345,7 +345,7 @@ function ProductPageTemplate(props) {
             <br />
           </div>
         </div>
-        <VideoYT itemInView={itemInView} itemInfo={itemInfo} />
+        {/* <VideoYT itemInView={itemInView} itemInfo={itemInfo} /> */}
         <br />
         {/* <hr /> */}
         <div id="reviews">
