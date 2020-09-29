@@ -153,8 +153,8 @@ function ProductPageTemplate(props) {
 
   useEffect(() => {
     // console.log("BROWSING WORKS")
-    window.onload = function () {
-      console.log("PAGE IS LOADED")
+    window.onpageshow = function () {
+      console.log("PAGE IS SHOWING")
     }
     setItemInView(itemInfo.productId)
     console.log("ITEM", itemInfo.productId, "is BROWSING")
