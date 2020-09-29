@@ -144,8 +144,18 @@ function ProductPageTemplate(props) {
   const [loading, setLoading] = useState(false)
   const [itemInView, setItemInView] = useState(null)
 
+  // useEffect(() => {
+  //   const timer = setTimeout(() => {
+  //     window.location.reload(false)
+  //   }, 1000)
+  //   return () => clearTimeout(timer)
+  // }, [])
+
   useEffect(() => {
     // console.log("BROWSING WORKS")
+    window.onload = function () {
+      console.log("PAGE IS LOADED")
+    }
     setItemInView(itemInfo.productId)
     console.log("ITEM", itemInfo.productId, "is BROWSING")
   })

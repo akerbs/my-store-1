@@ -5,7 +5,7 @@ import ProductPageTemplate from "../../templates/ProductPageTemplate"
 import { ItemsContext } from "../../context/ItemsContext"
 
 export default function () {
-  const { products, changeHover } = useContext(ItemsContext)
+  const { products } = useContext(ItemsContext)
 
   const Obj = products.filter(x => {
     return x.productId === "prod_HrDKbPKHBo6qPK"
