@@ -146,7 +146,7 @@ function ProductPageTemplate(props) {
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      window.reload()
+      window.location.reload(true)
     }, 900000)
     return () => clearTimeout(timer)
   }, [])
