@@ -5,9 +5,6 @@ import Button from "@material-ui/core/Button"
 import { useForm } from "react-hook-form"
 import * as yup from "yup"
 import { yupResolver } from "@hookform/resolvers"
-import FormControl from "@material-ui/core/FormControl"
-import { navigate } from "gatsby"
-import inView from "in-view"
 import { LanguageContext } from "../components/layout"
 const window = require("global/window")
 

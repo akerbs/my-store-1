@@ -1,5 +1,6 @@
 import React, { useContext } from "react"
 import { withStyles } from "@material-ui/core/styles"
+import Container from "@material-ui/core/Container"
 import Accordion from "@material-ui/core/Accordion"
 import AccordionSummary from "@material-ui/core/AccordionSummary"
 import AccordionDetails from "@material-ui/core/AccordionDetails"
@@ -11,6 +12,7 @@ import StarBorderIcon from "@material-ui/icons/StarBorder"
 import RateReviewIcon from "@material-ui/icons/RateReview"
 import Button from "@material-ui/core/Button"
 import { LanguageContext } from "./layout"
+import ReviewForm from "./ReviewForm"
 
 const useStyles = makeStyles(theme => ({
   RatingFullReadOnly: {
@@ -46,7 +48,7 @@ const useStyles = makeStyles(theme => ({
   },
 }))
 
-export default function CustomizedAccordions(props) {
+export default function (props) {
   const classes = useStyles()
   const { actLanguage } = useContext(LanguageContext)
   const [expanded, setExpanded] = React.useState(false)
@@ -56,7 +58,7 @@ export default function CustomizedAccordions(props) {
   }
 
   return (
-    <>
+    <Container maxWidth="md" className={classes.root}>
       <Accordion
         square
         expanded={expanded}
@@ -71,7 +73,13 @@ export default function CustomizedAccordions(props) {
             content: classes.accSummaryContent,
           }}
         >
-          <div style={{ display: "flex", justifyContent: "space-between" }}>
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "center",
+            }}
+          >
             <Rating
               defaultValue={0}
               readOnly
@@ -99,36 +107,10 @@ export default function CustomizedAccordions(props) {
                 : null}
             </Button>
           </div>
+          <hr />
         </AccordionSummary>
         <AccordionDetails>
-          <Typography>
-            <div id="cont">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-            </div>
-            Suspendisse malesuada lacus ex, sit amet blandit leo lobortis eget.
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
-            malesuada lacus ex, sit amet blandit leo lobortis eget. Lorem ipsum
-            dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada
-            lacus ex, sit amet blandit leo lobortis eget. Lorem ipsum dolor sit
-            amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex,
-            sit amet blandit leo lobortis eget. Lorem ipsum dolor sit amet,
-            consectetur adipiscing elit. Suspendisse malesuada lacus ex, sit
-            amet blandit leo lobortis eget. Lorem ipsum dolor sit amet,
-            consectetur adipiscing elit. Suspendisse malesuada lacus ex, sit
-            amet blandit leo lobortis eget. Lorem ipsum dolor sit amet,
-            consectetur adipiscing elit. Suspendisse malesuada lacus ex, sit
-            amet blandit leo lobortis eget. Lorem ipsum dolor sit amet,
-            consectetur adipiscing elit. Suspendisse malesuada lacus ex, sit
-            amet blandit leo lobortis eget. Lorem ipsum dolor sit amet,
-            consectetur adipiscing elit. Suspendisse malesuada lacus ex, sit
-            amet blandit leo lobortis eget. Lorem ipsum dolor sit amet,
-            consectetur adipiscing elit. Suspendisse malesuada lacus ex, sit
-            amet blandit leo lobortis eget. Lorem ipsum dolor sit amet,
-            consectetur adipiscing elit. Suspendisse malesuada lacus ex, sit
-            amet blandit leo lobortis eget. Lorem ipsum dolor sit amet,
-            consectetur adipiscing elit. Suspendisse malesuada lacus ex, sit
-            amet blandit leo lobortis eget.
-          </Typography>
+          <ReviewForm />
         </AccordionDetails>
       </Accordion>
       <br /> <br />
@@ -168,6 +150,6 @@ export default function CustomizedAccordions(props) {
             : null}
         </Button>
       </div>
-    </>
+    </Container>
   )
 }
