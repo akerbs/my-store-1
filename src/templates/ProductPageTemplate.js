@@ -144,6 +144,15 @@ function ProductPageTemplate(props) {
   const [loading, setLoading] = useState(false)
   const [itemInView, setItemInView] = useState(null)
 
+  const [showYTPlayer, setShowYTPlayer] = useState(false)
+
+  function startShowYTPlayer() {
+    setShowYTPlayer(true)
+  }
+
+  useEffect(() => {
+    inView("#anck").once("enter", startShowYTPlayer)
+  })
   // useEffect(() => {
   //   const timer = setTimeout(() => {
   //     window.location.reload(false)
@@ -246,7 +255,11 @@ function ProductPageTemplate(props) {
             >
               <img src={itemInfo.firstImg} className={classes.imgBoxLeft} />
               <img src={itemInfo.scndImg} className={classes.imgBoxLeft} />
-              <img src={itemInfo.firstImg} className={classes.imgBoxLeft} />
+              <img
+                src={itemInfo.firstImg}
+                className={classes.imgBoxLeft}
+                id="anck"
+              />
               <img src={itemInfo.scndImg} className={classes.imgBoxLeft} />
               <img src={itemInfo.firstImg} className={classes.imgBoxLeft} />
               <img src={itemInfo.scndImg} className={classes.imgBoxLeft} />
@@ -345,7 +358,7 @@ function ProductPageTemplate(props) {
             <br />
           </div>
         </div>
-        {/* <VideoYT itemInView={itemInView} itemInfo={itemInfo} /> */}
+        <VideoYT itemInView={itemInView} itemInfo={itemInfo} />
         <br />
         {/* <hr /> */}
         <div id="reviews">
