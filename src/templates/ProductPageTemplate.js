@@ -144,12 +144,12 @@ function ProductPageTemplate(props) {
   const [loading, setLoading] = useState(false)
   const [itemInView, setItemInView] = useState(null)
 
+  const [pageOk, setPageOk] = useState(false)
+
   useEffect(() => {
-    const timer = setTimeout(() => {
-      window.location.reload(true)
-    }, 900000)
-    return () => clearTimeout(timer)
-  }, [])
+    window.location.reload(false)
+    setPageOk(true)
+  }, [pageOk])
 
   useEffect(() => {
     // console.log("BROWSING WORKS")
