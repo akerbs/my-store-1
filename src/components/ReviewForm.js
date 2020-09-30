@@ -110,13 +110,13 @@ export default function Create() {
           ? "Indicates a required field"
           : null}
       </Typography>
-      <br /> <br /> <br />
+      <br /> <br />
       <form
         className={classes.form}
         noValidate
         onSubmit={handleSubmit(onSubmit)}
       >
-        <Typography variant="caption" style={{ color: "tomato" }}>
+        <Typography variant="caption" style={{ color: "rgb(244,67,54)" }}>
           *{" "}
         </Typography>
         <Typography variant="caption">
@@ -180,43 +180,50 @@ export default function Create() {
           // label="select rating"
         />
         <br /> <br />
+        <Typography variant="caption" style={{ color: "rgb(244,67,54)" }}>
+          *{" "}
+        </Typography>
+        <Typography variant="caption">
+          {actLanguage === "DEU"
+            ? "Titel:"
+            : actLanguage === "RUS"
+            ? "Заголовок:"
+            : actLanguage === "ENG"
+            ? "Title:"
+            : null}
+        </Typography>
+        <br />
         <TextField
           id="title"
           variant="outlined"
           // margin="normal"
           fullWidth
           size="small"
-          label={
-            actLanguage === "DEU"
-              ? "Titel:"
-              : actLanguage === "RUS"
-              ? "Заголовок:"
-              : actLanguage === "ENG"
-              ? "Title:"
-              : null
-          }
           name="title"
           autoFocus
           inputRef={register()}
           error={!!errorTitle}
           helperText={errorTitle}
         />
-        <br /> <br />
+        <br />
+        <Typography variant="caption" style={{ color: "rgb(244,67,54)" }}>
+          *{" "}
+        </Typography>
+        <Typography variant="caption">
+          {actLanguage === "DEU"
+            ? "Bewertung:"
+            : actLanguage === "RUS"
+            ? "Отзыв:"
+            : actLanguage === "ENG"
+            ? "Review:"
+            : null}
+        </Typography>
+        <br />
         <TextField
           id="review"
           variant="outlined"
           // margin="normal"
           fullWidth
-          // size="small"
-          label={
-            actLanguage === "DEU"
-              ? "Bewertung:"
-              : actLanguage === "RUS"
-              ? "Отзыв:"
-              : actLanguage === "ENG"
-              ? "Review:"
-              : null
-          }
           name="review"
           autoFocus
           multiline
@@ -228,52 +235,62 @@ export default function Create() {
         <br /> <br />
         <br />
         <div style={{ display: "flex", justifyContent: "flex-end" }}>
-          <TextField
-            id="name"
-            style={{ marginRight: "1%" }}
-            variant="outlined"
-            margin="normal"
-            // fullWidth
-            size="small"
-            label={
-              actLanguage === "DEU"
+          <div>
+            <Typography variant="caption" style={{ color: "rgb(244,67,54)" }}>
+              *{" "}
+            </Typography>
+            <Typography variant="caption">
+              {actLanguage === "DEU"
                 ? "Ihr Name:"
                 : actLanguage === "RUS"
                 ? "Ваше имя:"
                 : actLanguage === "ENG"
                 ? "Your name:"
-                : null
-            }
-            name="name"
-            autoFocus
-            inputRef={register()}
-            error={!!errorName}
-            helperText={errorName}
-          />
-          <TextField
-            id="email"
-            variant="outlined"
-            margin="normal"
-            // fullWidth
-            size="small"
-            type="email"
-            label={
-              actLanguage === "DEU"
+                : null}
+            </Typography>
+            <br />
+            <TextField
+              id="name"
+              style={{ marginRight: "1%", marginTop: 0 }}
+              variant="outlined"
+              margin="normal"
+              size="small"
+              name="name"
+              autoFocus
+              inputRef={register()}
+              error={!!errorName}
+              helperText={errorName}
+            />
+          </div>
+          <div>
+            <Typography variant="caption" style={{ color: "rgb(244,67,54)" }}>
+              *{" "}
+            </Typography>
+            <Typography variant="caption">
+              {actLanguage === "DEU"
                 ? "Email:"
                 : actLanguage === "RUS"
                 ? "Эл. адрес:"
                 : actLanguage === "ENG"
                 ? "Email:"
-                : null
-            }
-            name="email"
-            autoFocus
-            inputRef={register()}
-            error={!!errorEmail}
-            helperText={errorEmail}
-          />
+                : null}
+            </Typography>
+            <br />
+            <TextField
+              style={{ marginTop: 0 }}
+              id="email"
+              variant="outlined"
+              margin="normal"
+              size="small"
+              type="email"
+              name="email"
+              autoFocus
+              inputRef={register()}
+              error={!!errorEmail}
+              helperText={errorEmail}
+            />
+          </div>
         </div>
-        <br />
         <div
           style={{
             display: "flex",
