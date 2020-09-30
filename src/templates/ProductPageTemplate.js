@@ -37,9 +37,9 @@ import BreadCrumbs from "../components/BreadCrumbs"
 import { Link, navigate } from "gatsby"
 import Counter from "../components/CounterBig"
 
-import RatingEl from "../components/RatingEl"
-import ReviewForm from "../components/ReviewForm"
-import Reviews from "../components/Reviews"
+import RatingEl from "../components/Reviews/RatingEl"
+import ReviewForm from "../components/Reviews/ReviewForm"
+import Reviews from "../components/Reviews/Reviews"
 
 import Accordion from "../components/Accordion"
 import Tabs from "../components/Tabs"
@@ -186,6 +186,7 @@ function ProductPageTemplate(props) {
     productId: props.item.productId,
     videoId: props.item.videoId,
     linkId: props.item.linkId,
+    reviews: props.item.reviews,
 
     sku:
       actCurrency === "USD"

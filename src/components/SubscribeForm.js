@@ -52,11 +52,20 @@ export default function () {
   const errorName = errors.hasOwnProperty("name") && errors["name"].message
   const errorEmail = errors.hasOwnProperty("email") && errors["email"].message
 
+  const alertMessage =
+    actLanguage === "DEU"
+      ? "Vielen Dank!!! Sie haben erfolgreich abonniert  :-)"
+      : actLanguage === "RUS"
+      ? "Спасибо!!! Вы успешно подписались :-)"
+      : actLanguage === "ENG"
+      ? "Thank You!!! You have successfully subscribed :-)"
+      : null
+
   async function onSubmit(data) {
     try {
       let response = await fetch(
-        "https://my-store-1-mailer.herokuapp.com/subscribe",
-        // "http://localhost:3000/subscribe",
+        // "https://my-store-1-mailer.herokuapp.com/subscribe",
+        "http://localhost:3000/subscribe",
         {
           method: "POST",
           headers: {
@@ -66,7 +75,7 @@ export default function () {
         }
       )
       if (response.ok) {
-        alert("Thank You!!! You have successfully subscribed :-)")
+        alert(alertMessage)
         //  await navigate("/")
         await reset(response)
 

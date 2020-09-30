@@ -63,15 +63,6 @@ export default function (props) {
     inView("#selector").once("enter", startInView)
   })
 
-  const LinkToProductPage =
-    props.sku.productId === "prod_HqQT1Nni7ovIFj"
-      ? "funny-bunny"
-      : props.sku.productId === "prod_HqorCSiih5dZWu"
-      ? "cat-clock"
-      : props.sku.productId === "prod_HrDKbPKHBo6qPK"
-      ? "magic-hat"
-      : null
-
   return (
     <>
       <div className={classes.root} id="selector">
@@ -83,10 +74,7 @@ export default function (props) {
             onMouseOver={() => props.onMouseOver(props.id, true)}
             onMouseOut={() => props.onMouseOut(props.id, false)}
           >
-            <Link
-              to={`/products/${LinkToProductPage}`}
-              className={classes.link}
-            >
+            <Link to={`/products/${props.sku.linkId}`} className={classes.link}>
               <img
                 style={{ width: "100%" }}
                 className={classes.img}

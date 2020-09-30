@@ -11,7 +11,7 @@ import { makeStyles } from "@material-ui/core/styles"
 import StarBorderIcon from "@material-ui/icons/StarBorder"
 import RateReviewIcon from "@material-ui/icons/RateReview"
 import Button from "@material-ui/core/Button"
-import { LanguageContext } from "./layout"
+import { LanguageContext } from "../layout"
 import ReviewForm from "./ReviewForm"
 
 const useStyles = makeStyles(theme => ({
@@ -53,8 +53,11 @@ export default function (props) {
   const { actLanguage } = useContext(LanguageContext)
   const [expanded, setExpanded] = React.useState(false)
 
-  const handleExpand = () => {
+  const handleAccOpen = () => {
     setExpanded(true)
+  }
+  const handleAccClose = () => {
+    setExpanded(false)
   }
 
   return (
@@ -62,7 +65,7 @@ export default function (props) {
       <Accordion
         square
         expanded={expanded}
-        onChange={e => handleExpand(e)}
+        onChange={e => handleAccOpen(e)}
         classes={{
           root: classes.accordion,
         }}
@@ -110,46 +113,84 @@ export default function (props) {
           <hr />
         </AccordionSummary>
         <AccordionDetails>
-          <ReviewForm />
+          <ReviewForm
+            itemInfo={props.itemInfo}
+            handleAccClose={handleAccClose}
+          />
         </AccordionDetails>
       </Accordion>
       <br /> <br />
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-        }}
-      >
-        <Rating
-          defaultValue={5}
-          readOnly
-          size="small"
-          classes={{
-            iconFilled: classes.RatingFullReadOnly,
-          }}
-        />
-        <Button
-          variant="contained"
-          color="primary"
-          className={classes.button}
-          size="small"
-          onClick={e => {
-            handleExpand(e)
-            setTimeout(function () {
-              navigate(`/products/${props.itemInfo.linkId}#reviews`)
-            }, 300)
+      {!props.itemInfo.reviews.length ? (
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
           }}
         >
+          <Rating
+            defaultValue={5}
+            readOnly
+            size="small"
+            classes={{
+              iconFilled: classes.RatingFullReadOnly,
+            }}
+          />
+          <Button
+            variant="contained"
+            color="primary"
+            className={classes.button}
+            size="small"
+            onClick={e => {
+              handleAccOpen(e)
+              setTimeout(function () {
+                navigate(`/products/${props.itemInfo.linkId}#reviews`)
+              }, 300)
+            }}
+          >
+            {actLanguage === "DEU"
+              ? "als Erster eine Bewertung schreiben"
+              : actLanguage === "RUS"
+              ? "быть первым, кто напишет отзыв"
+              : actLanguage === "ENG"
+              ? "to be first to write a review"
+              : null}
+          </Button>
+        </div>
+      ) : (
+        <div>
           {actLanguage === "DEU"
-            ? "als Erster eine Bewertung schreiben"
+            ? "Bewertungen"
             : actLanguage === "RUS"
-            ? "быть первым, кто напишет отзыв"
+            ? "Отзывы"
             : actLanguage === "ENG"
-            ? "to be first to write a review"
-            : null}
-        </Button>
-      </div>
+            ? "Reviews"
+            : null}{" "}
+          ({props.itemInfo.reviews.length})
+          <hr />
+          {props.itemInfo.reviews.map((rev, i) => (
+            // <div key={`rev-${i}`}>{rev.review}</div>
+            <ReviewItem {...rev} key={`rev-${i}`} />
+          ))}
+        </div>
+      )}
     </Container>
+  )
+}
+const ReviewItem = props => {
+  // const [price, setPrice] = useState(props.price);
+  return (
+    <div style={{ display: "flex", justifyContent: "space-between" }}>
+      <div style={{ display: "flex", flexDirection: "column" }}>
+        <span>{props.name} Verified Buyer</span>
+        <span>{props.rating}</span>
+        <span>{props.title}</span>
+        <span>{props.review}</span>
+      </div>
+
+      <div style={{ display: "flex", flexDirection: "column" }}>
+        <span>{props.date}</span>
+      </div>
+    </div>
   )
 }

@@ -39,6 +39,7 @@ export default function () {
                 ? item.descriptionRus
                 : null,
             productId: item.productId,
+            linkId: item.linkId,
 
             sku:
               actCurrency === "USD"

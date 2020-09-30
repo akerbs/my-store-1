@@ -13,8 +13,12 @@ module.exports = {
     {
       resolve: `gatsby-source-filesystem`,
       options: {
-        name: `images`,
-        path: `${__dirname}/src/images`,
+        name: `src`,
+        // name: `images`,
+        // name: `posts`,
+        path: `${__dirname}/src/`,
+        // path: `${__dirname}/src/images`,
+        // path: `${__dirname}/src/db/posts`,
       },
     },
     `gatsby-transformer-sharp`,
@@ -35,7 +39,9 @@ module.exports = {
       resolve: `gatsby-source-stripe`,
       options: {
         objects: ["Price", "Product"],
-        secretKey: process.env.STRIPE_SECRET_KEY,
+        // secretKey: process.env.STRIPE_SECRET_KEY,
+        secretKey:
+          " sk_test_51HGUuRHwITO0GSJrtMeWmTR6WduzZYAU2VTPRyBrY0wqKp0iBeeLKNwuIm6UOMT3o2IyodrpNB2gXJV4D4BJInv700HWefHxma",
 
         downloadFiles: false,
       },
@@ -46,7 +52,7 @@ module.exports = {
         component: require.resolve(`./src/components/layout.js`),
       },
     },
-
+    `gatsby-transformer-remark`,
     // {
     //   resolve: "gatsby-plugin-transition-link",
     //   options: {

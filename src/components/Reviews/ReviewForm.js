@@ -10,7 +10,8 @@ import Rating from "@material-ui/lab/Rating"
 import * as yup from "yup"
 import StarBorderIcon from "@material-ui/icons/StarBorder"
 import { yupResolver } from "@hookform/resolvers"
-import { LanguageContext } from "../components/layout"
+import { LanguageContext } from "../layout"
+import { navigate } from "gatsby"
 
 const useStyles = makeStyles(theme => ({
   RatingFullReadOnly: {
@@ -61,13 +62,29 @@ const schema = yup.object().shape({
   // .email('Please check your email')
 })
 
-export default function Create() {
+export default function (props) {
   const { actLanguage } = useContext(LanguageContext)
   const classes = useStyles()
   const [rating, setRating] = useState(" ")
-  const { register, handleSubmit, errors, control } = useForm({
+  const { register, handleSubmit, errors, control, reset } = useForm({
     resolver: yupResolver(schema),
   })
+
+  const linkId = props.itemInfo.linkId
+  ///////////// DATE //////////////
+  let today = new Date()
+  let dd = today.getDate()
+  let mm = today.getMonth() + 1
+  const yyyy = today.getFullYear()
+  if (dd < 10) {
+    dd = `0${dd}`
+  }
+  if (mm < 10) {
+    mm = `0${mm}`
+  }
+  today = `${dd}/${mm}/${yyyy}`
+  // console.log(today);
+  //////////////////////////////////////////
 
   // const errorRating =
   //   errors.hasOwnProperty("rating") && errors["rating"].message
@@ -77,12 +94,70 @@ export default function Create() {
   const errorName = errors.hasOwnProperty("name") && errors["name"].message
   const errorEmail = errors.hasOwnProperty("email") && errors["email"].message
 
-  const onSubmit = data => {
+  ////// :) :) :) :) :) :) :) :) :) ////////////
+  // const id = props.itemInfo.productId
+
+  // const item = products.filter(x => {
+  //   return x.productId ===  id
+  // })
+
+  // const goal = item.reviews
+
+  //   setProducts()
+  // const saveReviewToFile = (filename = FILE_NAME, encoding = "utf8") => {
+  //   const reviewItem = `${data
+  //     .split(
+  //       p =>
+  //         `${p.date},${p.email},${p.name},${p.rating},${p.review},${p.title}\n`
+  //     )
+  //     .join("")}`
+
+  //   fs.writeFileSync(filename, reviewItem, encoding)
+  // }
+
+  //////////////////////////////////////////////
+  const alertMessage =
+    actLanguage === "DEU"
+      ? "Vielen Dank!!! Ihre Bewertung wird überprüft und veröffentlicht :-)"
+      : actLanguage === "RUS"
+      ? "Спасибо!!! Ваш отзыв будет проверен и опубликован :-)"
+      : actLanguage === "ENG"
+      ? "Thank You!!! Your review will be checked and published  :-)"
+      : null
+
+  async function onSubmit(data) {
     if (rating === " ") {
       const ratingErrorFieldEl = document.getElementById("ratingErrorField")
       ratingErrorFieldEl.style.display = "block"
     } else {
-      console.log(data)
+      // console.log(data)
+      try {
+        let response = await fetch(
+          // "https://my-store-1-mailer.herokuapp.com/subscribe",
+          "http://localhost:3000/review",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(data),
+          }
+        )
+        if (response.ok) {
+          console.log(JSON.stringify(data))
+          alert(JSON.stringify(data))
+          // alert(alertMessage)
+
+          await reset(response)
+          await props.handleAccClose()
+          await navigate(`/products/${props.itemInfo.linkId}`)
+
+          let responseJson = await response.json()
+          return responseJson
+        }
+      } catch (error) {
+        console.error(error)
+      }
     }
   }
 
@@ -311,6 +386,22 @@ export default function Create() {
             Submit
           </Button>
         </div>
+        <input
+          name="date"
+          type="string"
+          value={today}
+          ref={register}
+          hidden
+          readOnly
+        />
+        <input
+          name="linkId"
+          type="string"
+          value={linkId}
+          ref={register}
+          hidden
+          readOnly
+        />
       </form>
     </Container>
   )

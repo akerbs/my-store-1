@@ -33,6 +33,17 @@ const ItemsContextProvider = props => {
       priceRub: 7913000,
       currencyRub: "RUB",
       currencySignRub: "₽",
+      reviews: [
+        {
+          rating: "5",
+          title: "Thank you!!!",
+          review: "Super Bunny! I love it!",
+          name: "My Name",
+          email: "draft_@list.ru",
+          date: "30/09/2020",
+          linkId: "funny-bunny",
+        },
+      ],
     },
     {
       linkId: "cat-clock",
@@ -59,6 +70,7 @@ const ItemsContextProvider = props => {
       priceRub: 436500,
       currencyRub: "RUB",
       currencySignRub: "₽",
+      reviews: [],
     },
     {
       linkId: "magic-hat",
@@ -85,6 +97,7 @@ const ItemsContextProvider = props => {
       priceRub: 294000,
       currencyRub: "RUB",
       currencySignRub: "₽",
+      reviews: [],
     },
   ])
 
