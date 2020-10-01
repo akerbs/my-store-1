@@ -13,11 +13,9 @@ import RateReviewIcon from "@material-ui/icons/RateReview"
 import Button from "@material-ui/core/Button"
 import { LanguageContext } from "../layout"
 import ReviewForm from "./ReviewForm"
+import RatingEl from "./RatingEl"
 
 const useStyles = makeStyles(theme => ({
-  RatingFullReadOnly: {
-    color: "rgb(89,157,210)",
-  },
   button: {
     margin: theme.spacing(1),
   },
@@ -83,17 +81,7 @@ export default function (props) {
               alignItems: "center",
             }}
           >
-            <Rating
-              defaultValue={0}
-              readOnly
-              size="small"
-              emptyIcon={
-                <StarBorderIcon
-                  fontSize="inherit"
-                  style={{ color: "rgb(254,198,1)" }}
-                />
-              }
-            />
+            <RatingEl ratingValue={props.averageRatingValue} />
             <Button
               variant="contained"
               color="primary"
@@ -128,14 +116,12 @@ export default function (props) {
             alignItems: "center",
           }}
         >
-          <Rating
-            defaultValue={5}
-            readOnly
-            size="small"
-            classes={{
-              iconFilled: classes.RatingFullReadOnly,
-            }}
+          <RatingEl
+            ratingValue={5}
+            starsSize="small"
+            starsColor="rgb(89,157,210)"
           />
+
           <Button
             variant="contained"
             color="primary"
@@ -180,17 +166,21 @@ export default function (props) {
 const ReviewItem = props => {
   // const [price, setPrice] = useState(props.price);
   return (
-    <div style={{ display: "flex", justifyContent: "space-between" }}>
-      <div style={{ display: "flex", flexDirection: "column" }}>
-        <span>{props.name} Verified Buyer</span>
-        <span>{props.rating}</span>
-        <span>{props.title}</span>
-        <span>{props.review}</span>
-      </div>
+    <>
+      <div style={{ display: "flex", justifyContent: "space-between" }}>
+        <div style={{ display: "flex", flexDirection: "column" }}>
+          <span>{props.name} Verified Buyer</span>
+          <RatingEl ratingValue={props.rating} starsSize="small" />
 
-      <div style={{ display: "flex", flexDirection: "column" }}>
-        <span>{props.date}</span>
+          <span>{props.title}</span>
+          <span>{props.review}</span>
+        </div>
+
+        <div style={{ display: "flex", flexDirection: "column" }}>
+          <span>{props.date}</span>
+        </div>
       </div>
-    </div>
+      <hr />
+    </>
   )
 }

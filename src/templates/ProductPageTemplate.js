@@ -229,6 +229,13 @@ function ProductPageTemplate(props) {
     event.preventDefault()
     console.info("You clicked a breadcrumb.")
   }
+  //////////////////////////////////////////////////////
+  const newArr = itemInfo.reviews.map(el => Number(el.rating))
+  const sum = newArr.reduce((a, b) => a + b, 0)
+  const quantity = newArr.length
+  const averageRatingValue = sum / quantity
+  // console.log("->!!!!->", newArr, sum, quantity, averageRatingValue)
+  //////////////////////////////////////////////////////
 
   console.log("DATA:", `/products/${itemInfo.linkId}#reviews`)
 
@@ -275,7 +282,11 @@ function ProductPageTemplate(props) {
             >
               {/* <Link to="/"> */}
               {/* <bitton onClick={() => alert("click")}>BTN</bitton> */}
-              <RatingEl />
+              <RatingEl
+                ratingValue={averageRatingValue}
+                starsSize="small"
+                starsColor="black"
+              />
             </Link>
             <br /> <br />
             <Counter
@@ -350,7 +361,10 @@ function ProductPageTemplate(props) {
         <br />
         {/* <hr /> */}
         <div id="reviews">
-          <Reviews itemInfo={itemInfo} />
+          <Reviews
+            itemInfo={itemInfo}
+            averageRatingValue={averageRatingValue}
+          />
         </div>
         <br /> <br /> <br />
         {/* </Hidden> */}

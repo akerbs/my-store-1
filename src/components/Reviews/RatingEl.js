@@ -2,6 +2,7 @@ import React from "react"
 import Rating from "@material-ui/lab/Rating"
 import { makeStyles } from "@material-ui/core/styles"
 import StarBorderIcon from "@material-ui/icons/StarBorder"
+import StarIcon from "@material-ui/icons/Star"
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -13,19 +14,27 @@ const useStyles = makeStyles(theme => ({
   },
 }))
 
-export default function RatingEl() {
+export default function RatingEl(props) {
   const classes = useStyles()
 
   return (
     <div className={classes.root}>
       <Rating
+        value={props.ratingValue}
         defaultValue={0}
-        size="small"
+        size={props.starsSize}
+        precision={0.5}
         readOnly
         emptyIcon={
           <StarBorderIcon
             fontSize="inherit"
-            style={{ color: "rgb(254,198,1)", cursor: "pointer" }}
+            style={{ color: props.starsColor, cursor: "pointer" }}
+          />
+        }
+        icon={
+          <StarIcon
+            fontSize="inherit"
+            style={{ color: props.starsColor, cursor: "pointer" }}
           />
         }
       />
