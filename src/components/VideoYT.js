@@ -14,6 +14,11 @@ const useStyles = makeStyles(theme => ({
     width: "100%",
     height: "800px",
     paddingTop: "50%",
+    [theme.breakpoints.down("md")]: {
+      width: "100vw",
+      height: "auto",
+      paddingTop: "70%",
+    },
   },
   video: {
     position: "absolute",
@@ -24,7 +29,11 @@ const useStyles = makeStyles(theme => ({
     // width: '100%',
     // height: '500px',
     border: "0px",
-    marginTop: " -60px",
+    marginTop: " -5%",
+  },
+  [theme.breakpoints.down("md")]: {
+    marginTop: " -10%",
+    marginTop: 0,
   },
 }))
 

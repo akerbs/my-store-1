@@ -51,19 +51,20 @@ const document = require("global/document")
 const window = require("global/window")
 
 const useStyles = makeStyles(theme => ({
-  root: {
-    display: "flex",
-    flexDirection: "column",
-    // minHeight: "100vh",
-  },
+  root: {},
   contentWrapper: {
     maxWidth: "100vw",
     margin: 0,
     padding: 0,
+    display: "flex",
+    flexDirection: "column",
+    // minHeight: "100vh",
     // flex: "0 0 auto",
 
     marginTop: "3%",
-    [theme.breakpoints.down("sm")]: {},
+    [theme.breakpoints.down("md")]: {
+      marginTop: "15%",
+    },
   },
   // clearfix: {
   //   "&::after": {
