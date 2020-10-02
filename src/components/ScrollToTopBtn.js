@@ -8,7 +8,8 @@ const useStyles = makeStyles(theme => ({
   btn: {
     zIndex: 2,
     position: "fixed",
-    bottom: "7vh",
+    bottom: "5%",
+    left: "5%",
 
     backgroundColor: theme.palette.primary.main,
     color: theme.palette.primary.contrastText,

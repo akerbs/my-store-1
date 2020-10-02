@@ -59,25 +59,28 @@ export default function (props) {
       rel: 0,
       showinfo: 0,
       controls: 0,
+      // wmode: "opaque",
+      // origin: "http://localhost:8000",
+      // autohide:1,
       // loop: 1,
       // suggestedQuality: "hd1080",
     },
   }
 
-  function onReady(event) {
+  async function onReady(event) {
     window.YTPlayer = event.target
-    window.YTPlayer.mute()
-    window.YTPlayer.setPlaybackQuality("hd1080")
+    await window.YTPlayer.mute()
+    await window.YTPlayer.setPlaybackQuality("hd1080")
     console.log(" onReady")
   }
 
-  function onPlay() {
-    window.YTPlayer.playVideo()
+  async function onPlay() {
+    await window.YTPlayer.playVideo()
     console.log(" onPlay")
   }
 
-  function onPause() {
-    window.YTPlayer.pauseVideo()
+  async function onPause() {
+    await window.YTPlayer.pauseVideo()
     console.log(" onPause")
   }
 

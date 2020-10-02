@@ -13,6 +13,7 @@ import SimpleReactLightbox from "simple-react-lightbox"
 import { DrawerCartContextProvider } from "../context/DrawerCartContext"
 import { DrawerMenuContextProvider } from "../context/DrawerMenuContext"
 import { ItemsContextProvider } from "../context/ItemsContext"
+import { GoogleReCaptchaProvider } from "react-google-recaptcha-v3"
 
 const window = require("global/window")
 
@@ -88,47 +89,52 @@ function Layout({ children }) {
 
   return (
     <>
-      <CurrencyContext.Provider
-        value={{
-          actCurrency,
-          handleCurrencyChange,
-        }}
+      <GoogleReCaptchaProvider
+        // reCaptchaKey={process.env.RECAPTCHA_KEY}
+        reCaptchaKey="6LebfdIZAAAAAJ_QgpOdjwdM9zUUNAi7aIFCtjp-"
       >
-        <CartProvider
-          mode="client-only"
-          stripe={stripePromise}
-          currency={actCurrency}
-          // successUrl="https://kerbs-store-1.vercel.app/success/"
-          // cancelUrl="https://kerbs-store-1.vercel.app/"
-          successUrl="http://localhost:8000/success/"
-          cancelUrl="http://localhost:8000/"
-          // successUrl={`${window.location.origin}/success/`}
-          // cancelUrl={`${window.location.origin}/`}
-          //  allowedCountries={["US", "GB", "CA", "DE"]}
-          billingAddressCollection={true}
+        <CurrencyContext.Provider
+          value={{
+            actCurrency,
+            handleCurrencyChange,
+          }}
         >
-          <LanguageContext.Provider
-            value={{
-              actLanguage,
-              setActLanguage,
-              handleLanguageChange,
-            }}
+          <CartProvider
+            mode="client-only"
+            stripe={stripePromise}
+            currency={actCurrency}
+            // successUrl="https://kerbs-store-1.vercel.app/success/"
+            // cancelUrl="https://kerbs-store-1.vercel.app/"
+            successUrl="http://localhost:8000/success/"
+            cancelUrl="http://localhost:8000/"
+            // successUrl={`${window.location.origin}/success/`}
+            // cancelUrl={`${window.location.origin}/`}
+            //  allowedCountries={["US", "GB", "CA", "DE"]}
+            billingAddressCollection={true}
           >
-            <ItemsContextProvider>
-              <CssBaseline />
-              <ThemeProvider theme={theme}>
-                <SimpleReactLightbox>
-                  <DrawerMenuContextProvider>
-                    <DrawerCartContextProvider>
-                      {children}
-                    </DrawerCartContextProvider>
-                  </DrawerMenuContextProvider>
-                </SimpleReactLightbox>
-              </ThemeProvider>
-            </ItemsContextProvider>
-          </LanguageContext.Provider>
-        </CartProvider>
-      </CurrencyContext.Provider>
+            <LanguageContext.Provider
+              value={{
+                actLanguage,
+                setActLanguage,
+                handleLanguageChange,
+              }}
+            >
+              <ItemsContextProvider>
+                <CssBaseline />
+                <ThemeProvider theme={theme}>
+                  <SimpleReactLightbox>
+                    <DrawerMenuContextProvider>
+                      <DrawerCartContextProvider>
+                        {children}
+                      </DrawerCartContextProvider>
+                    </DrawerMenuContextProvider>
+                  </SimpleReactLightbox>
+                </ThemeProvider>
+              </ItemsContextProvider>
+            </LanguageContext.Provider>
+          </CartProvider>
+        </CurrencyContext.Provider>
+      </GoogleReCaptchaProvider>
     </>
   )
 }

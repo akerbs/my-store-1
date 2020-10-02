@@ -1,19 +1,27 @@
 import React, { useContext } from "react"
-import { withStyles } from "@material-ui/core/styles"
-import MuiAccordion from "@material-ui/core/Accordion"
-import MuiAccordionSummary from "@material-ui/core/AccordionSummary"
-import MuiAccordionDetails from "@material-ui/core/AccordionDetails"
+import { makeStyles } from "@material-ui/core/styles"
+import Accordion from "@material-ui/core/Accordion"
+import AccordionSummary from "@material-ui/core/AccordionSummary"
+import AccordionDetails from "@material-ui/core/AccordionDetails"
 import Typography from "@material-ui/core/Typography"
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore"
 import { LanguageContext } from "../components/layout"
+import Button from "@material-ui/core/Button"
 
-const Accordion = withStyles({
-  root: {
-    border: "1px solid rgba(0, 0, 0, .125)",
+const useStyles = makeStyles(theme => ({
+  root: {},
+  btn: {
+    fontSize: 15,
+    fontWeight: "bold",
+    width: "100%",
+    minWidth: "100%",
+    maxWidth: "100%",
+    marginBottom: "0%",
+  },
+  accordion: {
+    backgroundColor: "#fafafa",
+    border: "none",
     boxShadow: "none",
-    "&:not(:last-child)": {
-      borderBottom: 0,
-    },
     "&:before": {
       display: "none",
     },
@@ -21,35 +29,29 @@ const Accordion = withStyles({
       margin: "auto",
     },
   },
-  expanded: {},
-})(MuiAccordion)
-
-const AccordionSummary = withStyles({
-  root: {
-    backgroundColor: "rgba(0, 0, 0, .03)",
-    borderBottom: "1px solid rgba(0, 0, 0, .125)",
+  accSummary: {
+    border: "none",
+    padding: 0,
     marginBottom: -1,
     minHeight: 56,
     "&$expanded": {
       minHeight: 56,
     },
   },
-  content: {
+  accSummaryContent: {
+    display: "block",
+
     "&$expanded": {
       margin: "12px 0",
     },
   },
-  expanded: {},
-})(MuiAccordionSummary)
+  accDetails: {},
+}))
 
-const AccordionDetails = withStyles(theme => ({
-  root: {
-    padding: theme.spacing(2),
-  },
-}))(MuiAccordionDetails)
+export default function (props) {
+  const classes = useStyles()
 
-export default function CustomizedAccordions(props) {
-  const [expanded, setExpanded] = React.useState("panel1")
+  const [expanded, setExpanded] = React.useState(" ")
   const { actLanguage } = useContext(LanguageContext)
 
   const handleChange = panel => (event, newExpanded) => {
@@ -57,18 +59,25 @@ export default function CustomizedAccordions(props) {
   }
 
   return (
-    <div>
+    <div className={classes.root}>
       <Accordion
         square
         expanded={expanded === "panel1"}
         onChange={handleChange("panel1")}
+        classes={{
+          root: classes.accordion,
+        }}
       >
         <AccordionSummary
           aria-controls="panel1d-content"
           id="panel1d-header"
-          expandIcon={<ExpandMoreIcon />}
+          // expandIcon={<ExpandMoreIcon />}
+          classes={{
+            root: classes.accSummary,
+            content: classes.accSummaryContent,
+          }}
         >
-          <Typography>
+          <Button className={classes.btn} variant="contained" color="defailt">
             {actLanguage === "DEU"
               ? "Produktbeschreibung"
               : actLanguage === "RUS"
@@ -76,9 +85,9 @@ export default function CustomizedAccordions(props) {
               : actLanguage === "ENG"
               ? "Product description"
               : null}
-          </Typography>
+          </Button>
         </AccordionSummary>
-        <AccordionDetails>
+        <AccordionDetails className={classes.accDetails}>
           <Typography>{props.data.description}</Typography>
         </AccordionDetails>
       </Accordion>
@@ -86,13 +95,20 @@ export default function CustomizedAccordions(props) {
         square
         expanded={expanded === "panel2"}
         onChange={handleChange("panel2")}
+        classes={{
+          root: classes.accordion,
+        }}
       >
         <AccordionSummary
           aria-controls="panel2d-content"
           id="panel2d-header"
-          expandIcon={<ExpandMoreIcon />}
+          // expandIcon={<ExpandMoreIcon />}
+          classes={{
+            root: classes.accSummary,
+            content: classes.accSummaryContent,
+          }}
         >
-          <Typography>
+          <Button className={classes.btn} variant="contained" color="defailt">
             {actLanguage === "DEU"
               ? "Spezifikationen"
               : actLanguage === "RUS"
@@ -100,7 +116,7 @@ export default function CustomizedAccordions(props) {
               : actLanguage === "ENG"
               ? "Specifications"
               : null}
-          </Typography>
+          </Button>
         </AccordionSummary>
         <AccordionDetails>
           <Typography>
@@ -125,13 +141,20 @@ export default function CustomizedAccordions(props) {
         square
         expanded={expanded === "panel3"}
         onChange={handleChange("panel3")}
+        classes={{
+          root: classes.accordion,
+        }}
       >
         <AccordionSummary
           aria-controls="panel3d-content"
           id="panel3d-header"
-          expandIcon={<ExpandMoreIcon />}
+          // expandIcon={<ExpandMoreIcon />}
+          classes={{
+            root: classes.accSummary,
+            content: classes.accSummaryContent,
+          }}
         >
-          <Typography>
+          <Button className={classes.btn} variant="contained" color="defailt">
             {actLanguage === "DEU"
               ? "Versand & Rückgabe"
               : actLanguage === "RUS"
@@ -139,7 +162,7 @@ export default function CustomizedAccordions(props) {
               : actLanguage === "ENG"
               ? " Shipping & Returns"
               : null}
-          </Typography>
+          </Button>
         </AccordionSummary>
         <AccordionDetails>
           <Typography>

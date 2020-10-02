@@ -12,8 +12,10 @@ import StarBorderIcon from "@material-ui/icons/StarBorder"
 import { yupResolver } from "@hookform/resolvers"
 import { LanguageContext } from "../layout"
 import { navigate } from "gatsby"
+import { useGoogleReCaptcha } from "react-google-recaptcha-v3"
 
 const useStyles = makeStyles(theme => ({
+  root: {},
   RatingFullReadOnly: {
     color: "rgb(89,157,210)",
   },
@@ -29,6 +31,26 @@ const useStyles = makeStyles(theme => ({
   },
   submit: {
     margin: theme.spacing(3, 0, 2),
+  },
+  nameEmailBox: {
+    display: "flex",
+    justifyContent: "flex-end",
+    [theme.breakpoints.down("md")]: {
+      flexDirection: "column",
+    },
+  },
+  nameField: {
+    marginRight: "1%",
+    marginTop: 0,
+    [theme.breakpoints.down("md")]: {
+      width: "100%",
+    },
+  },
+  emailField: {
+    marginTop: 0,
+    [theme.breakpoints.down("md")]: {
+      width: "100%",
+    },
   },
 }))
 
@@ -63,9 +85,13 @@ const schema = yup.object().shape({
 })
 
 export default function (props) {
+  const { executeRecaptcha } = useGoogleReCaptcha()
+  const [token, setToken] = useState("")
   const { actLanguage } = useContext(LanguageContext)
   const classes = useStyles()
-  const [rating, setRating] = useState(" ")
+  const [rating, setRating] = useState(0)
+  const [loading, setLoading] = useState(false)
+
   const { register, handleSubmit, errors, control, reset } = useForm({
     resolver: yupResolver(schema),
   })
@@ -126,15 +152,24 @@ export default function (props) {
       : null
 
   async function onSubmit(data) {
-    if (rating === " ") {
+    // e.preventDefault() //--> prevent the page from reloading on form submit
+    //    Check if the captcha was skipped or not
+    if (!executeRecaptcha) {
+      return
+    }
+    if (rating === 0) {
       const ratingErrorFieldEl = document.getElementById("ratingErrorField")
       ratingErrorFieldEl.style.display = "block"
     } else {
       // console.log(data)
       try {
+        //   This is the same as grecaptcha.execute on traditional html script tags
+        const result = executeRecaptcha("shop1")
+        setToken(result) //--> grab the generated token by the reCAPTCHA
+
         let response = await fetch(
-          // "https://my-store-1-mailer.herokuapp.com/subscribe",
-          "http://localhost:3000/review",
+          "https://my-store-1-mailer.herokuapp.com/review",
+          // "http://localhost:3000/review",
           {
             method: "POST",
             headers: {
@@ -236,7 +271,7 @@ export default function (props) {
                 onChange={(_, value) => {
                   setRating(value)
                   // console.log("r a t i n g", value)
-                  if (value !== " ") {
+                  if (value !== 0) {
                     const ratingErrorFieldEl = document.getElementById(
                       "ratingErrorField"
                     )
@@ -309,7 +344,7 @@ export default function (props) {
         />
         <br /> <br />
         <br />
-        <div style={{ display: "flex", justifyContent: "flex-end" }}>
+        <div className={classes.nameEmailBox}>
           <div>
             <Typography variant="caption" style={{ color: "rgb(244,67,54)" }}>
               *{" "}
@@ -326,7 +361,7 @@ export default function (props) {
             <br />
             <TextField
               id="name"
-              style={{ marginRight: "1%", marginTop: 0 }}
+              className={classes.nameField}
               variant="outlined"
               margin="normal"
               size="small"
@@ -352,7 +387,7 @@ export default function (props) {
             </Typography>
             <br />
             <TextField
-              style={{ marginTop: 0 }}
+              className={classes.emailField}
               id="email"
               variant="outlined"
               margin="normal"
@@ -377,13 +412,33 @@ export default function (props) {
               marginTop: 0,
             }}
             type="submit"
+            disabled={loading}
             // fullWidth
             variant="contained"
             color="primary"
             className={classes.submit}
-            onClick={onSubmit}
+            // onClick={onSubmit}
+            onClick={() => {
+              setLoading(true)
+              onSubmit()
+              setLoading(false)
+            }}
           >
-            Submit
+            {loading
+              ? actLanguage === "DEU"
+                ? "Wird geladen..."
+                : actLanguage === "RUS"
+                ? "Загрузка ..."
+                : actLanguage === "ENG"
+                ? "Loading..."
+                : "Loading..."
+              : actLanguage === "DEU"
+              ? "Senden"
+              : actLanguage === "RUS"
+              ? "Добавить"
+              : actLanguage === "ENG"
+              ? "Submit"
+              : null}
           </Button>
         </div>
         <input
@@ -403,6 +458,7 @@ export default function (props) {
           readOnly
         />
       </form>
+      {token && console.log("Token:", token)}
     </Container>
   )
 }

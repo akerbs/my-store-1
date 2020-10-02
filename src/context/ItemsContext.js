@@ -35,19 +35,19 @@ const ItemsContextProvider = props => {
       currencySignRub: "₽",
       reviews: [
         {
-          rating: "5",
+          rating: 5,
           title: "Thank you!!!",
           review: "Super Bunny! I love it!",
-          name: "Jenny",
+          name: "Jenny F.",
           email: "skjdfhsd@sdft.sdf",
           date: "29/09/2020",
           linkId: "funny-bunny",
         },
         {
-          rating: "3",
+          rating: 3,
           title: "Not bad",
           review: "It 's ok",
-          name: "Patric",
+          name: "Patric K.",
           email: "sdfsd@sdf.sd",
           date: "30/09/2020",
           linkId: "funny-bunny",

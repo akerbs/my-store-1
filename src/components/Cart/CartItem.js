@@ -105,7 +105,7 @@ export default function CartItem(props) {
                         </Typography>
                       </Grid>
                     </Grid>
-                    <Grid item>
+                    <Grid item style={{ marginRight: "5%" }}>
                       <Typography variant="subtitle1">
                         <IconButton
                           size="small"

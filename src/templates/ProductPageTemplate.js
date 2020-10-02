@@ -45,6 +45,7 @@ import Accordion from "../components/Accordion"
 import Tabs from "../components/Tabs"
 import inView from "in-view"
 import VideoYT from "../components/VideoYT"
+import Scroll from "../components/ScrollToTopBtn"
 
 const document = require("global/document")
 const window = require("global/window")
@@ -102,6 +103,12 @@ const useStyles = makeStyles(theme => ({
     maxWidth: 225,
     fontSize: 15,
     fontWeight: "bold",
+    [theme.breakpoints.down("md")]: {
+      width: "100%",
+      minWidth: "100%",
+      maxWidth: "100%",
+      marginBottom: "8%",
+    },
   },
 }))
 
@@ -133,10 +140,14 @@ function ProductPageTemplate(props) {
   const { actLanguage } = useContext(LanguageContext)
   const {
     addItem,
-    redirectToCheckout,
     incrementItem,
     decrementItem,
     removeItem,
+    cartCount,
+    cartDetails,
+    // totalPrice,
+    formattedTotalPrice,
+    redirectToCheckout,
   } = useShoppingCart()
   const { handleDrawerCartOpen } = useContext(DrawerCartContext)
   const [thumbsSwiper, setThumbsSwiper] = useState(null)
@@ -151,12 +162,16 @@ function ProductPageTemplate(props) {
   //   setPageOk(true)
   // }, [pageOk])
 
+  function handleSetItemInView() {
+    setItemInView(itemInfo.productId)
+  }
+
   useEffect(() => {
     // console.log("BROWSING WORKS")
     window.onpageshow = function () {
       console.log("PAGE IS LOADED")
     }
-    setItemInView(itemInfo.productId)
+    handleSetItemInView()
     console.log("ITEM", itemInfo.productId, "is BROWSING")
   })
 
@@ -186,7 +201,7 @@ function ProductPageTemplate(props) {
     productId: props.item.productId,
     videoId: props.item.videoId,
     linkId: props.item.linkId,
-    reviews: props.item.reviews,
+    // reviews: props.item.reviews,
 
     sku:
       actCurrency === "USD"
@@ -225,12 +240,11 @@ function ProductPageTemplate(props) {
     scndImg: props.item.scndImg,
     hovered: props.item.hovered,
   }
-  function handleClick(event) {
-    event.preventDefault()
-    console.info("You clicked a breadcrumb.")
-  }
+
+  const reviews = props.item.reviews
+
   //////////////////////////////////////////////////////
-  const newArr = itemInfo.reviews.map(el => Number(el.rating))
+  const newArr = reviews.map(el => Number(el.rating))
   const sum = newArr.reduce((a, b) => a + b, 0)
   const quantity = newArr.length
   const averageRatingValue = sum / quantity
@@ -239,32 +253,221 @@ function ProductPageTemplate(props) {
 
   console.log("DATA:", `/products/${itemInfo.linkId}#reviews`)
 
+  // let sessionId
+  // function getJSessionId() {
+  //   sessionId = document.cookie.match(/JSESSIONID=[^;]+/)
+  //   if (sessionId != null) {
+  //     if (sessionId instanceof Array) sessionId = sessionId[0].substring(11)
+  //     else sessionId = sessionId.substring(11)
+  //   }
+  //   return sessionId
+  // }
+
+  // function handlePayment(e) {
+  //   // setLoading(true)
+  //   addItem(itemInfo, quantityOfItem)
+  //   setTimeout(function () {
+  //     console.log("cartDetails", cartDetails)
+  //   }, 2000)
+
+  //   // await redirectToCheckout(e)
+  // }
+
   return (
     <div className={classes.root} id="root">
       <SEO title="Funny bunny" keywords={[`gatsby`, `application`, `react`]} />
       <CssBaseline />
       <Header />
-      <Container className={classes.contentWrapper} id="wrapper">
-        {/* <Hidden smDown id="big"> */}
-        <div id="content" className="clearfix">
-          <div className={classes.boxLeft}>
-            <SRLWrapper
-              options={lightboxOptions}
-              // callbacks={lightboxCallbacks}
-            >
-              <img src={itemInfo.firstImg} className={classes.imgBoxLeft} />
-              <img src={itemInfo.scndImg} className={classes.imgBoxLeft} />
-              <img src={itemInfo.firstImg} className={classes.imgBoxLeft} />
-              <img src={itemInfo.scndImg} className={classes.imgBoxLeft} />
-              <img src={itemInfo.firstImg} className={classes.imgBoxLeft} />
-              <img src={itemInfo.scndImg} className={classes.imgBoxLeft} />
-            </SRLWrapper>
-          </div>
+      <Scroll showBelow={250} />
 
-          <div className="boxRight">
+      <Container className={classes.contentWrapper} id="wrapper">
+        <Hidden smDown id="big">
+          <div id="content" className="clearfix">
+            <div className={classes.boxLeft}>
+              <SRLWrapper
+                options={lightboxOptions}
+                // callbacks={lightboxCallbacks}
+              >
+                <img src={itemInfo.firstImg} className={classes.imgBoxLeft} />
+                <img src={itemInfo.scndImg} className={classes.imgBoxLeft} />
+                <img src={itemInfo.firstImg} className={classes.imgBoxLeft} />
+                <img src={itemInfo.scndImg} className={classes.imgBoxLeft} />
+                <img src={itemInfo.firstImg} className={classes.imgBoxLeft} />
+                <img src={itemInfo.scndImg} className={classes.imgBoxLeft} />
+              </SRLWrapper>
+            </div>
+
+            <div className="boxRight">
+              <BreadCrumbs data={itemInfo} />
+              <br />
+              <Typography variant="h4">
+                <b>{itemInfo.name}</b>
+              </Typography>
+              <br />
+              <Typography variant="h5">
+                {formatCurrencyString({
+                  currency: itemInfo.currency,
+                  value: parseInt(itemInfo.price),
+                })}
+              </Typography>
+              <br />
+              {/* <Link to="#reviews"> */}
+              <Link
+                to={`/products/${itemInfo.linkId}#reviews`}
+                style={{
+                  cursor: "pointer",
+                  textDecoration: "none",
+                  color: "black",
+                }}
+              >
+                {/* <Link to="/"> */}
+                {/* <bitton onClick={() => alert("click")}>BTN</bitton> */}
+                <div style={{ display: "flex" }}>
+                  <RatingEl
+                    ratingValue={averageRatingValue}
+                    starsSize="small"
+                    starsColor="black"
+                  />
+                  <span>
+                    {reviews.length > 0 ? reviews.length : null}{" "}
+                    {actLanguage === "DEU"
+                      ? reviews.length === 1
+                        ? "Bewertung"
+                        : "Bewertungen"
+                      : actLanguage === "ENG"
+                      ? reviews.length === 1
+                        ? "Review"
+                        : "Reviews"
+                      : actLanguage === "RUS"
+                      ? reviews.length === 1 || reviews.length === 21
+                        ? "Отзыв"
+                        : reviews.length > 1 && reviews.length < 5
+                        ? "Отзывa"
+                        : reviews.length >= 5 && reviews.length <= 20
+                        ? "Отзывов"
+                        : null
+                      : null}
+                  </span>
+                </div>
+              </Link>
+              <br /> <br />
+              <Counter
+                incrementItem={increment}
+                decrementItem={decrement}
+                quantity={quantityOfItem}
+                sku={itemInfo}
+              />
+              <br />
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "space-between",
+                  borderRadius: "8px",
+                }}
+              >
+                <Button
+                  className={classes.btn}
+                  variant="contained"
+                  color="secondary"
+                  // className={classes.btn1}
+                  onClick={() => {
+                    addItem(itemInfo, quantityOfItem)
+                    // console.log("cartDetails", cartDetails)
+                    handleDrawerCartOpen()
+                  }}
+                >
+                  {actLanguage === "DEU"
+                    ? "in Warenkorb legen"
+                    : actLanguage === "RUS"
+                    ? "добавить в корзину"
+                    : actLanguage === "ENG"
+                    ? "add to cart"
+                    : null}
+                </Button>
+                <Button
+                  // data-checkout-mode="payment"
+                  // data-price-id={itemInfo.sku}
+                  className={classes.btn}
+                  variant="contained"
+                  color="primary"
+                  // disabled={loading}
+                  onClick={() => {
+                    // addItem(itemInfo, quantityOfItem)
+                    // console.log("cartDetails", cartDetails)
+                    // handleDrawerCartOpen()
+
+                    // handlePayment()
+                    redirectToCheckout()
+                  }}
+
+                  // onClick={() => {
+                  //   addItem(itemInfo, quantityOfItem)
+                  //   console.log("cartDetails", cartDetails)
+                  //   setLoading(true)
+                  //   redirectToCheckout()
+                  // }}
+                >
+                  {loading
+                    ? actLanguage === "DEU"
+                      ? "Wird geladen..."
+                      : actLanguage === "RUS"
+                      ? "Загрузка ..."
+                      : actLanguage === "ENG"
+                      ? "Loading..."
+                      : null
+                    : actLanguage === "DEU"
+                    ? "Kaufen jetzt"
+                    : actLanguage === "RUS"
+                    ? "Купить сейчас"
+                    : actLanguage === "ENG"
+                    ? "Buy it now"
+                    : null}
+                </Button>
+              </div>
+              <br />
+              <br />
+              <br />
+              {/* <Accordion data={itemInfo} /> */}
+              <Tabs data={itemInfo} />
+              <br />
+            </div>
+          </div>
+          <VideoYT itemInView={itemInView} itemInfo={itemInfo} />
+          <br />
+          {/* <hr /> */}
+          <div id="reviews">
+            <Reviews
+              reviews={reviews}
+              itemInfo={itemInfo}
+              averageRatingValue={averageRatingValue}
+            />
+          </div>
+          <br /> <br /> <br />
+        </Hidden>
+        <Hidden mdUp id="little">
+          {/* <Grid container direction="column" spacing={2}> */}
+          <SRLWrapper
+            options={lightboxOptions}
+            // callbacks={lightboxCallbacks}
+          >
+            <MainSwiper
+              thumbsSwiper={thumbsSwiper}
+              setThumbsSwiper={setThumbsSwiper}
+              data={itemInfo}
+            />
+          </SRLWrapper>
+          <div
+            style={{
+              margin: "0% 5%",
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
             <BreadCrumbs data={itemInfo} />
             <br />
-            <Typography variant="h4">
+            <Typography variant="h4" align="center">
               <b>{itemInfo.name}</b>
             </Typography>
             <br />
@@ -275,18 +478,43 @@ function ProductPageTemplate(props) {
               })}
             </Typography>
             <br />
-            {/* <Link to="#reviews"> */}
             <Link
               to={`/products/${itemInfo.linkId}#reviews`}
-              style={{ cursor: "pointer" }}
+              style={{
+                cursor: "pointer",
+                textDecoration: "none",
+                color: "black",
+              }}
             >
               {/* <Link to="/"> */}
               {/* <bitton onClick={() => alert("click")}>BTN</bitton> */}
-              <RatingEl
-                ratingValue={averageRatingValue}
-                starsSize="small"
-                starsColor="black"
-              />
+              <div style={{ display: "flex" }}>
+                <RatingEl
+                  ratingValue={averageRatingValue}
+                  starsSize="small"
+                  starsColor="black"
+                />
+                <span>
+                  {reviews.length > 0 ? reviews.length : null}{" "}
+                  {actLanguage === "DEU"
+                    ? reviews.length === 1
+                      ? "Bewertung"
+                      : "Bewertungen"
+                    : actLanguage === "ENG"
+                    ? reviews.length === 1
+                      ? "Review"
+                      : "Reviews"
+                    : actLanguage === "RUS"
+                    ? reviews.length === 1 || reviews.length === 21
+                      ? "Отзыв"
+                      : reviews.length > 1 && reviews.length < 5
+                      ? "Отзывa"
+                      : reviews.length >= 5 && reviews.length <= 20
+                      ? "Отзывов"
+                      : null
+                    : null}
+                </span>
+              </div>
             </Link>
             <br /> <br />
             <Counter
@@ -296,78 +524,88 @@ function ProductPageTemplate(props) {
               sku={itemInfo}
             />
             <br />
-            <div
-              style={{
-                display: "flex",
-                justifyContent: "space-between",
-                borderRadius: "8px",
+            <Button
+              className={classes.btn}
+              variant="contained"
+              color="secondary"
+              // className={classes.btn1}
+              onClick={() => {
+                addItem(itemInfo, quantityOfItem)
+                // console.log("cartDetails", cartDetails)
+                handleDrawerCartOpen()
               }}
             >
-              <Button
-                className={classes.btn}
-                variant="contained"
-                color="secondary"
-                // className={classes.btn1}
-                onClick={() => {
-                  addItem(itemInfo, quantityOfItem)
-                  handleDrawerCartOpen()
-                }}
-              >
-                {actLanguage === "DEU"
-                  ? "in Warenkorb legen"
+              {actLanguage === "DEU"
+                ? "in Warenkorb legen"
+                : actLanguage === "RUS"
+                ? "добавить в корзину"
+                : actLanguage === "ENG"
+                ? "add to cart"
+                : null}
+            </Button>
+            <Button
+              // data-checkout-mode="payment"
+              // data-price-id={itemInfo.sku}
+              className={classes.btn}
+              variant="contained"
+              color="primary"
+              // disabled={loading}
+              onClick={() => {
+                // addItem(itemInfo, quantityOfItem)
+                // console.log("cartDetails", cartDetails)
+                // handleDrawerCartOpen()
+
+                // handlePayment()
+                redirectToCheckout()
+              }}
+
+              // onClick={() => {
+              //   addItem(itemInfo, quantityOfItem)
+              //   console.log("cartDetails", cartDetails)
+              //   setLoading(true)
+              //   redirectToCheckout()
+              // }}
+            >
+              {loading
+                ? actLanguage === "DEU"
+                  ? "Wird geladen..."
                   : actLanguage === "RUS"
-                  ? "добавить в корзину"
+                  ? "Загрузка ..."
                   : actLanguage === "ENG"
-                  ? "add to cart"
-                  : null}
-              </Button>
-              <Button
-                className={classes.btn}
-                variant="contained"
-                color="primary"
-                disabled={loading}
-                onClick={e => {
-                  addItem(itemInfo, quantityOfItem)
-                  setLoading(true)
-                  redirectToCheckout(e)
-                }}
-              >
-                {loading
-                  ? actLanguage === "DEU"
-                    ? "Wird geladen..."
-                    : actLanguage === "RUS"
-                    ? "Загрузка ..."
-                    : actLanguage === "ENG"
-                    ? "Loading..."
-                    : null
-                  : actLanguage === "DEU"
-                  ? "Kaufen jetzt"
-                  : actLanguage === "RUS"
-                  ? "Купить сейчас"
-                  : actLanguage === "ENG"
-                  ? "Buy it now"
-                  : null}
-              </Button>
-            </div>
-            <br />
-            <br />
-            <br />
-            {/* <Accordion data={itemInfo} /> */}
-            <Tabs data={itemInfo} />
-            <br />
+                  ? "Loading..."
+                  : null
+                : actLanguage === "DEU"
+                ? "Kaufen jetzt"
+                : actLanguage === "RUS"
+                ? "Купить сейчас"
+                : actLanguage === "ENG"
+                ? "Buy it now"
+                : null}
+            </Button>
+            <br /> <br />
+            <Accordion data={itemInfo} />
           </div>
-        </div>
-        <VideoYT itemInView={itemInView} itemInfo={itemInfo} />
-        <br />
-        {/* <hr /> */}
-        <div id="reviews">
-          <Reviews
-            itemInfo={itemInfo}
-            averageRatingValue={averageRatingValue}
-          />
-        </div>
-        <br /> <br /> <br />
-        {/* </Hidden> */}
+          <br /> <br />
+          <VideoYT itemInView={itemInView} itemInfo={itemInfo} />
+          <div
+            style={{
+              margin: 0,
+              padding: 0,
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
+            <div id="reviews" style={{ width: "100vw" }}>
+              <Reviews
+                reviews={reviews}
+                itemInfo={itemInfo}
+                averageRatingValue={averageRatingValue}
+              />
+            </div>
+          </div>
+        </Hidden>
       </Container>
       <Footer />
     </div>

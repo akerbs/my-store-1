@@ -1,30 +1,12 @@
-import React, { useState, useEffect } from "react"
-import PropTypes from "prop-types"
-import CssBaseline from "@material-ui/core/CssBaseline"
-import Typography from "@material-ui/core/Typography"
-import Container from "@material-ui/core/Container"
-import Grid from "@material-ui/core/Grid"
+import React, { useState, useContext } from "react"
 import { makeStyles } from "@material-ui/core/styles"
 import TextField from "@material-ui/core/TextField"
 import Button from "@material-ui/core/Button"
-import FacebookIcon from "@material-ui/icons/Facebook"
-import InstagramIcon from "@material-ui/icons/Instagram"
-// import Link from "gatsby-plugin-transition-link"
-import { Link } from "gatsby"
-import payCard1 from "../images/payCards/dark/1.png"
-import payCard2 from "../images/payCards/dark/2.png"
-import payCard3 from "../images/payCards/dark/3.png"
-import payCard4 from "../images/payCards/dark/5.png"
-import payCard5 from "../images/payCards/dark/22.png"
-import payCard6 from "../images/payCards/googlePay.svg"
-import payCard7 from "../images/payCards/applePay.svg"
 import { useForm } from "react-hook-form"
 import * as yup from "yup"
 import { yupResolver } from "@hookform/resolvers"
 import FormControl from "@material-ui/core/FormControl"
-import { navigate } from "gatsby"
-import inView from "in-view"
-import Slide from "@material-ui/core/Slide"
+import { LanguageContext } from "../layout"
 
 const useStyles = makeStyles(theme => ({
   textFieldEmail: {
@@ -50,6 +32,8 @@ const schema = yup.object().shape({
 
 export default function () {
   const classes = useStyles()
+  const { actLanguage } = useContext(LanguageContext)
+  const [loading, setLoading] = useState(false)
   const { register, handleSubmit, reset, errors } = useForm({
     resolver: yupResolver(schema),
   })
@@ -104,8 +88,28 @@ export default function () {
         color="default"
         className={classes.btnSubscribe}
         // size="small"
+        disabled={loading}
+        onClick={() => {
+          setLoading(true)
+          handleSubmit(onSubmit)
+          setLoading(false)
+        }}
       >
-        Subscribe
+        {loading
+          ? actLanguage === "DEU"
+            ? "Wird geladen..."
+            : actLanguage === "RUS"
+            ? "Загрузка ..."
+            : actLanguage === "ENG"
+            ? "Loading..."
+            : "Loading..."
+          : actLanguage === "DEU"
+          ? "Anmelden"
+          : actLanguage === "RUS"
+          ? "Подписаться"
+          : actLanguage === "ENG"
+          ? "Sing up"
+          : null}
       </Button>
     </form>
   )

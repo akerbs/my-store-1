@@ -19,7 +19,7 @@ import Slide from "@material-ui/core/Slide"
 import Typography from "@material-ui/core/Typography"
 import Button from "@material-ui/core/Button"
 import inView from "in-view"
-import SubscribeWindow from "../components/SubscribeWindow"
+import SubscribeWindow from "../components/Subscribe/SubscribeWindow"
 
 const document = require("global/document")
 
@@ -104,7 +104,7 @@ export default function IndexPage(props) {
   })
 
   return (
-    <div className={classes.root} id="root">
+    <div className={classes.root}>
       <SEO title="Home" keywords={[`gatsby`, `application`, `react`]} />
       <CssBaseline />
       <Header />

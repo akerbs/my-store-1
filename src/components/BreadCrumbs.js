@@ -7,17 +7,25 @@ import { Link } from "gatsby"
 import { LanguageContext } from "../components/layout"
 
 const useStyles = makeStyles(theme => ({
-  root: { fontSize: "0.875rem" },
+  root: {
+    fontSize: "0.875rem",
+  },
+  ol: {
+    [theme.breakpoints.down("md")]: {
+      justifyContent: "center",
+      // flexWrap: "nowrap",
+    },
+  },
   links: {
     textDecoration: "none",
     color: theme.palette.text.primary,
   },
 }))
 
-function handleClick(event) {
-  event.preventDefault()
-  console.info("You clicked a breadcrumb.")
-}
+// function handleClick(event) {
+//   event.preventDefault()
+//   console.info("You clicked a breadcrumb.")
+// }
 
 export default function (props) {
   const classes = useStyles()
@@ -26,13 +34,17 @@ export default function (props) {
   return (
     <Breadcrumbs
       aria-label="breadcrumb"
-      className={classes.root}
+      // className={classes.root}
+      classes={{
+        root: classes.root,
+        ol: classes.ol,
+      }}
       separator=" > "
     >
       <Link
         color="inherit"
-        href="/"
-        onClick={handleClick}
+        to="/"
+        // onClick={handleClick}
         className={classes.links}
       >
         {actLanguage === "DEU"
@@ -45,8 +57,8 @@ export default function (props) {
       </Link>
       <Link
         color="inherit"
-        href="#"
-        onClick={handleClick}
+        to="#"
+        // onClick={handleClick}
         className={classes.links}
       >
         {actLanguage === "DEU"

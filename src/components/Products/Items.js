@@ -18,9 +18,9 @@ export default function () {
   const { addItem } = useShoppingCart()
 
   return (
-    <>
+    <div>
       <Grid container spacing={0}>
-        {products.map((item, productId) => {
+        {products.map(item => {
           const newSku = {
             name:
               actLanguage === "ENG"
@@ -83,8 +83,8 @@ export default function () {
             <Grid item xs={12} sm={6} md={4}>
               <ItemCard
                 sku={newSku}
-                key={productId}
-                id={productId}
+                key={item.productId}
+                id={item.productId}
                 onMouseOver={changeHover}
                 onMouseOut={changeHover}
               />
@@ -92,6 +92,6 @@ export default function () {
           )
         })}
       </Grid>
-    </>
+    </div>
   )
 }

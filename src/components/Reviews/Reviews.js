@@ -1,5 +1,4 @@
 import React, { useContext } from "react"
-import { withStyles } from "@material-ui/core/styles"
 import Container from "@material-ui/core/Container"
 import Accordion from "@material-ui/core/Accordion"
 import AccordionSummary from "@material-ui/core/AccordionSummary"
@@ -14,8 +13,11 @@ import Button from "@material-ui/core/Button"
 import { LanguageContext } from "../layout"
 import ReviewForm from "./ReviewForm"
 import RatingEl from "./RatingEl"
+import ReviewAvatar from "./ReviewAvatar"
+import theme from "../theme"
 
 const useStyles = makeStyles(theme => ({
+  root: {},
   button: {
     margin: theme.spacing(1),
   },
@@ -32,6 +34,7 @@ const useStyles = makeStyles(theme => ({
   },
   accSummary: {
     border: "none",
+    padding: 0,
     marginBottom: -1,
     minHeight: 56,
     "&$expanded": {
@@ -40,8 +43,30 @@ const useStyles = makeStyles(theme => ({
   },
   accSummaryContent: {
     display: "block",
+
     "&$expanded": {
       margin: "12px 0",
+    },
+  },
+  accHeader: {
+    display: "flex",
+    justifyContent: "space-between",
+    alignItems: "center",
+    [theme.breakpoints.down("md")]: {
+      flexDirection: "column",
+    },
+  },
+  reviewItemWrapper: {
+    display: "flex",
+    justifyContent: "space-between",
+    [theme.breakpoints.down("md")]: {
+      flexDirection: "column",
+    },
+  },
+  reviewItemDate: {
+    fontSize: 14,
+    [theme.breakpoints.down("md")]: {
+      fontSize: 12,
     },
   },
 }))
@@ -74,14 +99,30 @@ export default function (props) {
             content: classes.accSummaryContent,
           }}
         >
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "space-between",
-              alignItems: "center",
-            }}
-          >
-            <RatingEl ratingValue={props.averageRatingValue} />
+          <div className={classes.accHeader}>
+            <div style={{ display: "flex" }}>
+              <RatingEl ratingValue={props.averageRatingValue} />
+              <span style={{ marginTop: "1%" }}>
+                {props.reviews.length > 0 ? props.reviews.length : null}{" "}
+                {actLanguage === "DEU"
+                  ? props.reviews.length === 1
+                    ? "Bewertung"
+                    : "Bewertungen"
+                  : actLanguage === "ENG"
+                  ? props.reviews.length === 1
+                    ? "Review"
+                    : "Reviews"
+                  : actLanguage === "RUS"
+                  ? props.reviews.length === 1 || props.reviews.length === 21
+                    ? "Отзыв"
+                    : props.reviews.length > 1 && props.reviews.length < 5
+                    ? "Отзывa"
+                    : props.reviews.length >= 5 && props.reviews.length <= 20
+                    ? "Отзывов"
+                    : null
+                  : null}
+              </span>
+            </div>
             <Button
               variant="contained"
               color="primary"
@@ -108,7 +149,7 @@ export default function (props) {
         </AccordionDetails>
       </Accordion>
       <br /> <br />
-      {!props.itemInfo.reviews.length ? (
+      {!props.reviews.length ? (
         <div
           style={{
             display: "flex",
@@ -152,9 +193,9 @@ export default function (props) {
             : actLanguage === "ENG"
             ? "Reviews"
             : null}{" "}
-          ({props.itemInfo.reviews.length})
+          ({props.reviews.length})
           <hr />
-          {props.itemInfo.reviews.map((rev, i) => (
+          {props.reviews.map((rev, i) => (
             // <div key={`rev-${i}`}>{rev.review}</div>
             <ReviewItem {...rev} key={`rev-${i}`} />
           ))}
@@ -163,21 +204,43 @@ export default function (props) {
     </Container>
   )
 }
+
 const ReviewItem = props => {
+  const classes = useStyles()
+
   // const [price, setPrice] = useState(props.price);
   return (
     <>
-      <div style={{ display: "flex", justifyContent: "space-between" }}>
-        <div style={{ display: "flex", flexDirection: "column" }}>
-          <span>{props.name} Verified Buyer</span>
-          <RatingEl ratingValue={props.rating} starsSize="small" />
+      <div className={classes.reviewItemWrapper}>
+        <div style={{ display: "flex" }}>
+          <ReviewAvatar name={props.name} />
+          <div style={{ display: "flex", flexDirection: "column" }}>
+            <span
+              style={{ fontSize: 12, whiteSpace: "nowrap", marginBottom: "2%" }}
+            >
+              <span
+                style={{
+                  color: theme.palette.primary.main,
+                  fontWeight: "bold",
+                }}
+              >
+                {props.name}
+              </span>{" "}
+              Verified Buyer
+            </span>
+            <RatingEl ratingValue={props.rating} starsSize="small" />
 
-          <span>{props.title}</span>
-          <span>{props.review}</span>
+            <span style={{ fontSize: 14, fontWeight: "bold", marginTop: "2%" }}>
+              {props.title}
+            </span>
+            <span style={{ fontSize: 14, marginBottom: "1%" }}>
+              {props.review}
+            </span>
+          </div>
         </div>
 
-        <div style={{ display: "flex", flexDirection: "column" }}>
-          <span>{props.date}</span>
+        <div>
+          <span className={classes.reviewItemDate}>{props.date}</span>
         </div>
       </div>
       <hr />

@@ -13,6 +13,9 @@ const useStyles = makeStyles(theme => ({
     display: "flex",
     justifyContent: "space-between",
     borderRadius: "8px",
+    [theme.breakpoints.down("md")]: {
+      width: "100%",
+    },
   },
   btnLeft: {
     // height: "30px",

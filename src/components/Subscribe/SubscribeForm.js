@@ -1,11 +1,11 @@
-import React, { useContext } from "react"
+import React, { useContext, useState } from "react"
 import { makeStyles } from "@material-ui/core/styles"
 import TextField from "@material-ui/core/TextField"
 import Button from "@material-ui/core/Button"
 import { useForm } from "react-hook-form"
 import * as yup from "yup"
 import { yupResolver } from "@hookform/resolvers"
-import { LanguageContext } from "../components/layout"
+import { LanguageContext } from "../layout"
 const window = require("global/window")
 
 const inputPadding = window.innerWidth <= 599 ? "0.05vw" : "0.5vw"
@@ -46,6 +46,7 @@ const schema = yup.object().shape({
 export default function () {
   const { actLanguage } = useContext(LanguageContext)
   const classes = useStyles()
+  const [loading, setLoading] = useState(false)
   const { register, handleSubmit, reset, errors } = useForm({
     resolver: yupResolver(schema),
   })
@@ -64,8 +65,8 @@ export default function () {
   async function onSubmit(data) {
     try {
       let response = await fetch(
-        // "https://my-store-1-mailer.herokuapp.com/subscribe",
-        "http://localhost:3000/subscribe",
+        "https://my-store-1-mailer.herokuapp.com/subscribe",
+        // "http://localhost:3000/subscribe",
         {
           method: "POST",
           headers: {
@@ -154,8 +155,28 @@ export default function () {
         color="primary"
         className={classes.btn}
         size="small"
+        disabled={loading}
+        onClick={() => {
+          setLoading(true)
+          handleSubmit(onSubmit)
+          setLoading(false)
+        }}
       >
-        sing up
+        {loading
+          ? actLanguage === "DEU"
+            ? "Wird geladen..."
+            : actLanguage === "RUS"
+            ? "Загрузка ..."
+            : actLanguage === "ENG"
+            ? "Loading..."
+            : "Loading..."
+          : actLanguage === "DEU"
+          ? "Anmelden"
+          : actLanguage === "RUS"
+          ? "Подписаться"
+          : actLanguage === "ENG"
+          ? "Sing up"
+          : null}
       </Button>
     </form>
   )

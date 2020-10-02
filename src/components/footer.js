@@ -16,13 +16,14 @@ import payCard6 from "../images/payCards/googlePay.svg"
 import payCard7 from "../images/payCards/applePay.svg"
 import inView from "in-view"
 import Slide from "@material-ui/core/Slide"
-import SubscribeFormFooter from "./SubscribeFormFooter"
+import SubscribeFormFooter from "./Subscribe/SubscribeFormFooter"
 const window = require("global/window")
 
 const footerMarginTop = window.innerWidth <= 599 ? "20%" : "5%"
 
 const useStyles = makeStyles(theme => ({
   root: {
+    paddingBottom: "5%",
     backgroundColor: theme.palette.primary.main,
     maxWidth: "100%",
   },
