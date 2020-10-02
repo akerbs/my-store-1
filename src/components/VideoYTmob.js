@@ -13,8 +13,6 @@ const useStyles = makeStyles(theme => ({
     overflow: "hidden",
     width: "100%",
     height: "800px",
-    paddingTop: "50%",
-    [theme.breakpoints.down("md")]: {},
   },
   video: {
     position: "absolute",
@@ -25,35 +23,34 @@ const useStyles = makeStyles(theme => ({
     // width: '100%',
     // height: '500px',
     border: "0px",
-    marginTop: " -5%",
+    marginTop: " -16%",
   },
-  [theme.breakpoints.down("md")]: {},
 }))
 
 export default function (props) {
   const classes = useStyles()
 
-  useEffect(() => {
-    console.log("IN VIEW WORKS")
-    inView("#videoWrapper")
-      .on("enter", startInViewShowVideo)
-      .on("exit", stopInViewShowVideo)
-    inView.threshold(0.2)
-  }, [props.itemInView])
+  // useEffect(() => {
+  //   console.log("IN VIEW WORKS")
+  //   inView("#videoWrapper")
+  //     .on("enter", startInViewShowVideo)
+  //     .on("exit", stopInViewShowVideo)
+  //   inView.threshold(0.2)
+  // }, [props.itemInView])
 
-  function startInViewShowVideo() {
-    console.log(" videoWrapper in View!")
-    onPlay()
-  }
+  // function startInViewShowVideo() {
+  //   console.log(" videoWrapper in View!")
+  //   onPlay()
+  // }
 
-  function stopInViewShowVideo() {
-    console.log(" videoWrapper OUT of View!")
-    onPause()
-  }
+  // function stopInViewShowVideo() {
+  //   console.log(" videoWrapper OUT of View!")
+  //   onPause()
+  // }
 
   const opts = {
     width: "100%",
-    height: "800px",
+    height: "auto",
     playerVars: {
       // https://developers.google.com/youtube/player_parameters
       // autoplay: 1,
@@ -120,7 +117,3 @@ export default function (props) {
     </div>
   )
 }
-
-// <iframe width="560" height="315" src="https://www.youtube.com/embed/-i_94tW_iSM?controls=0" frameborder="0"
-// allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
-// </iframe>

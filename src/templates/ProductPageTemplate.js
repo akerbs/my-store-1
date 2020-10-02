@@ -45,6 +45,8 @@ import Accordion from "../components/Accordion"
 import Tabs from "../components/Tabs"
 import inView from "in-view"
 import VideoYT from "../components/VideoYT"
+import VideoYTmob from "../components/VideoYTmob"
+
 import Scroll from "../components/ScrollToTopBtn"
 
 const document = require("global/document")
@@ -587,7 +589,7 @@ function ProductPageTemplate(props) {
             <Accordion data={itemInfo} />
           </div>
           <br /> <br />
-          <VideoYT itemInView={itemInView} itemInfo={itemInfo} />
+          <VideoYTmob itemInView={itemInView} itemInfo={itemInfo} />
           <div
             style={{
               margin: 0,
@@ -613,11 +615,10 @@ function ProductPageTemplate(props) {
   )
 }
 
-// ProductPageTemplate.propTypes = {
-//   width: PropTypes.oneOf(["lg", "md", "sm", "xl", "xs"]).isRequired,
-// }
-// export default withWidth()(ProductPageTemplate)
-export default ProductPageTemplate
+ProductPageTemplate.propTypes = {
+  width: PropTypes.oneOf(["lg", "md", "sm", "xl", "xs"]).isRequired,
+}
+export default withWidth()(ProductPageTemplate)
 
 // <iframe width="560" height="315" src="https://www.youtube.com/embed/-i_94tW_iSM?controls=0" frameborder="0"
 // allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
