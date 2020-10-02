@@ -68,6 +68,8 @@ export default function (props) {
       rel: 0,
       showinfo: 0,
       controls: 0,
+      fullscreen: 0,
+      allowfullscreen: 0,
       // wmode: "opaque",
       // origin: "http://localhost:8000",
       // autohide:1,
