@@ -19,15 +19,15 @@ const useStyles = makeStyles(theme => ({
   video: {
     position: "absolute",
     // leftMargin: "50%",
-    right: "50%",
+    // right: "50%",
     // top: "-39%",
     // width: "100%",
     height: "100vh",
     minHeight: "100%",
-    left: "0px",
+
     // bottom: "36%",
     bottom: "14%",
-    right: "0px",
+    right: "-160px",
     // width: '100%',
     // height: '500px',
     border: "0px",
