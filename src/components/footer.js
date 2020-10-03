@@ -75,10 +75,10 @@ export default function () {
   return (
     <div className={classes.root}>
       <CssBaseline />
-      <div style={{ overflow: "hidden" }}>
+      <div style={{ overflow: "hidden" }} id="selector">
         <Slide in={show} timeout={1500} direction="up">
           <div>
-            <Container maxWidth="md" className={classes.content} id="selector">
+            <Container maxWidth="md" className={classes.content}>
               <Grid container className={classes.root} spacing={3}>
                 <Grid item md={4}>
                   <Typography variant="body2" className={classes.title}>
