@@ -17,7 +17,9 @@ import ReviewAvatar from "./ReviewAvatar"
 import theme from "../theme"
 
 const useStyles = makeStyles(theme => ({
-  root: {},
+  root: {
+    marginTop: "20%",
+  },
   button: {
     margin: theme.spacing(1),
   },

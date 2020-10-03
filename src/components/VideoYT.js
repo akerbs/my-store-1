@@ -12,9 +12,8 @@ const useStyles = makeStyles(theme => ({
     position: "relative",
     overflow: "hidden",
     width: "100%",
-    height: "800px",
-    paddingTop: "50%",
-    [theme.breakpoints.down("md")]: {},
+    height: "100%",
+    paddingBottom: "56.25%",
   },
   video: {
     position: "absolute",
@@ -25,9 +24,9 @@ const useStyles = makeStyles(theme => ({
     // width: '100%',
     // height: '500px',
     border: "0px",
-    marginTop: " -5%",
+    // marginTop: " -16%",
+    // marginTop: " -97%",
   },
-  [theme.breakpoints.down("md")]: {},
 }))
 
 export default function (props) {
@@ -38,22 +37,26 @@ export default function (props) {
     inView("#videoWrapper")
       .on("enter", startInViewShowVideo)
       .on("exit", stopInViewShowVideo)
-    inView.threshold(0.2)
+    inView.threshold(0.5)
   }, [props.itemInView])
 
   function startInViewShowVideo() {
     console.log(" videoWrapper in View!")
-    onPlay()
+    setTimeout(function () {
+      onPlay()
+    }, 1000)
   }
 
   function stopInViewShowVideo() {
     console.log(" videoWrapper OUT of View!")
-    onPause()
+    setTimeout(function () {
+      onPause()
+    }, 1000)
   }
 
   const opts = {
     width: "100%",
-    height: "800px",
+    height: "100%",
     playerVars: {
       // https://developers.google.com/youtube/player_parameters
       // autoplay: 1,

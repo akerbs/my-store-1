@@ -601,7 +601,7 @@ function ProductPageTemplate(props) {
           <VideoYTmob itemInView={itemInView} itemInfo={itemInfo} />
           {/* )}
           {isBrowser && <VideoYT itemInView={itemInView} itemInfo={itemInfo} />} */}
-          <br /> <br /> <br /> <br />
+          <br />
           <div
             style={{
               margin: 0,
@@ -612,7 +612,14 @@ function ProductPageTemplate(props) {
               alignItems: "center",
             }}
           >
-            <div id="reviews" style={{ width: "100vw", margin: 0, padding: 0 }}>
+            <div
+              id="reviews"
+              style={{
+                width: "100vw",
+                margin: 0,
+                padding: 0,
+              }}
+            >
               <Reviews
                 reviews={reviews}
                 itemInfo={itemInfo}
