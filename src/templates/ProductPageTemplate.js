@@ -48,6 +48,12 @@ import VideoYT from "../components/VideoYT"
 import VideoYTmob from "../components/VideoYTmob"
 
 import Scroll from "../components/ScrollToTopBtn"
+import {
+  BrowserView,
+  MobileView,
+  isBrowser,
+  isMobile,
+} from "react-device-detect"
 
 const document = require("global/document")
 const window = require("global/window")
@@ -591,7 +597,10 @@ function ProductPageTemplate(props) {
           </div>
           <br /> <br />
           <br /> <br /> <br />
+          {/* {isMobile && ( */}
           <VideoYTmob itemInView={itemInView} itemInfo={itemInfo} />
+          {/* )}
+          {isBrowser && <VideoYT itemInView={itemInView} itemInfo={itemInfo} />} */}
           <br /> <br /> <br /> <br />
           <div
             style={{
