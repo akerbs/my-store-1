@@ -12,7 +12,8 @@ const useStyles = makeStyles(theme => ({
     position: "relative",
     overflow: "hidden",
     width: "100%",
-    height: "800px",
+    height: "100%",
+    paddingBottom: "56.25%",
   },
   video: {
     position: "absolute",
@@ -23,7 +24,8 @@ const useStyles = makeStyles(theme => ({
     // width: '100%',
     // height: '500px',
     border: "0px",
-    marginTop: " -16%",
+    // marginTop: " -16%",
+    // marginTop: " -97%",
   },
 }))
 
@@ -50,7 +52,7 @@ export default function (props) {
 
   const opts = {
     width: "100%",
-    height: "auto",
+    height: "100%",
     playerVars: {
       // https://developers.google.com/youtube/player_parameters
       // autoplay: 1,
