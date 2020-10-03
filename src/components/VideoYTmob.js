@@ -12,20 +12,20 @@ const useStyles = makeStyles(theme => ({
     position: "relative",
     overflow: "hidden",
     width: "100%",
-    height: "100%",
-    paddingBottom: "56.25%",
+    height: "800px",
   },
   video: {
     position: "absolute",
-    top: "0px",
+    top: "-39%",
     left: "0px",
-    bottom: "0px",
+    bottom: "-39%",
     right: "0px",
     // width: '100%',
     // height: '500px',
     border: "0px",
     // marginTop: " -16%",
     // marginTop: " -97%",
+    // marginBottom: " -97%",
   },
 }))
 
@@ -86,8 +86,9 @@ export default function (props) {
   }
 
   return (
-    <div className={classes.videoWrapper} id="videoWrapper">
-      {/* <video
+    <>
+      <div className={classes.videoWrapper} id="videoWrapper">
+        {/* <video
               // onplay="handleFirstPlay()"
               id="myVideo"
               src={itemInfo.video}
@@ -99,14 +100,15 @@ export default function (props) {
               muted
               playsInline
             /> */}
-      <YouTube
-        className={classes.video}
-        videoId={props.itemInfo.videoId}
-        opts={opts}
-        onReady={onReady}
-        id="myVideo"
-      />
-      {/* <iframe
+        <YouTube
+          className={classes.video}
+          videoId={props.itemInfo.videoId}
+          opts={opts}
+          onReady={onReady}
+          id="myVideo"
+        />
+
+        {/* <iframe
               className="myVideo"
               id="myVideo"
               width="100%"
@@ -116,6 +118,28 @@ export default function (props) {
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
               allowfullscreen
             ></iframe> */}
-    </div>
+        <div
+          style={{
+            backgroundColor: "#fafafa",
+            width: "100%",
+            height: "40%",
+            // zIndex: "0",
+            position: "absolute",
+            bottom: "38%",
+          }}
+        ></div>
+      </div>
+      {/* <div
+        style={{
+          backgroundColor: "tomato",
+          width: "100%",
+          height: "300px",
+          zIndex: "999",
+          marginBottom: "150%",
+        }}
+      >
+        test
+      </div> */}
+    </>
   )
 }
