@@ -589,8 +589,8 @@ function ProductPageTemplate(props) {
             <Accordion data={itemInfo} />
           </div>
           <br /> <br />
+          <br /> <br /> <br />
           <VideoYTmob itemInView={itemInView} itemInfo={itemInfo} />
-          <br /> <br />
           <div
             style={{
               margin: 0,
@@ -601,7 +601,7 @@ function ProductPageTemplate(props) {
               alignItems: "center",
             }}
           >
-            <div id="reviews" style={{ width: "100vw" }}>
+            <div id="reviews" style={{ width: "100vw", margin: 0, padding: 0 }}>
               <Reviews
                 reviews={reviews}
                 itemInfo={itemInfo}

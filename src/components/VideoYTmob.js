@@ -9,16 +9,24 @@ const useStyles = makeStyles(theme => ({
   videoWrapper: {
     // margin: 0,
     // padding: 0,
+
     position: "relative",
     overflow: "hidden",
     width: "100%",
-    height: "800px",
+    height: "100vh",
+    minHeight: "100%",
   },
   video: {
     position: "absolute",
-    top: "-39%",
+    // leftMargin: "50%",
+    right: "50%",
+    // top: "-39%",
+    // width: "100%",
+    height: "100vh",
+    minHeight: "100%",
     left: "0px",
-    bottom: "-39%",
+    // bottom: "36%",
+    bottom: "14%",
     right: "0px",
     // width: '100%',
     // height: '500px',
@@ -32,27 +40,25 @@ const useStyles = makeStyles(theme => ({
 export default function (props) {
   const classes = useStyles()
 
-  // useEffect(() => {
-  //   console.log("IN VIEW WORKS")
-  //   inView("#videoWrapper")
-  //     .on("enter", startInViewShowVideo)
-  //     .on("exit", stopInViewShowVideo)
-  //   inView.threshold(0.2)
-  // }, [props.itemInView])
+  useEffect(() => {
+    console.log("IN VIEW WORKS")
+    inView("#videoWrapper")
+      .on("enter", startInViewShowVideo)
+      .on("exit", stopInViewShowVideo)
+    inView.threshold(0.2)
+  }, [props.itemInView])
 
-  // function startInViewShowVideo() {
-  //   console.log(" videoWrapper in View!")
-  //   onPlay()
-  // }
+  function startInViewShowVideo() {
+    console.log(" videoWrapper in View!")
+    onPlay()
+  }
 
-  // function stopInViewShowVideo() {
-  //   console.log(" videoWrapper OUT of View!")
-  //   onPause()
-  // }
+  function stopInViewShowVideo() {
+    console.log(" videoWrapper OUT of View!")
+    onPause()
+  }
 
   const opts = {
-    width: "100%",
-    height: "100%",
     playerVars: {
       // https://developers.google.com/youtube/player_parameters
       // autoplay: 1,
@@ -60,6 +66,7 @@ export default function (props) {
       rel: 0,
       showinfo: 0,
       controls: 0,
+      fs: 0,
       // wmode: "opaque",
       // origin: "http://localhost:8000",
       // autohide:1,
@@ -86,9 +93,8 @@ export default function (props) {
   }
 
   return (
-    <>
-      <div className={classes.videoWrapper} id="videoWrapper">
-        {/* <video
+    <div className={classes.videoWrapper} id="videoWrapper">
+      {/* <video
               // onplay="handleFirstPlay()"
               id="myVideo"
               src={itemInfo.video}
@@ -100,15 +106,15 @@ export default function (props) {
               muted
               playsInline
             /> */}
-        <YouTube
-          className={classes.video}
-          videoId={props.itemInfo.videoId}
-          opts={opts}
-          onReady={onReady}
-          id="myVideo"
-        />
+      <YouTube
+        className={classes.video}
+        videoId={props.itemInfo.videoId}
+        opts={opts}
+        onReady={onReady}
+        id="myVideo"
+      />
 
-        {/* <iframe
+      {/* <iframe
               className="myVideo"
               id="myVideo"
               width="100%"
@@ -118,28 +124,17 @@ export default function (props) {
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
               allowfullscreen
             ></iframe> */}
-        <div
-          style={{
-            backgroundColor: "#fafafa",
-            width: "100%",
-            height: "40%",
-            // zIndex: "0",
-            position: "absolute",
-            bottom: "38%",
-          }}
-        ></div>
-      </div>
-      {/* <div
+      <div
         style={{
-          backgroundColor: "tomato",
+          // left: "100%",
+          backgroundColor: "#fafafa",
           width: "100%",
-          height: "300px",
-          zIndex: "999",
-          marginBottom: "150%",
+          height: "19%",
+          // zIndex: "0",
+          position: "absolute",
+          bottom: "18%",
         }}
-      >
-        test
-      </div> */}
-    </>
+      ></div>
+    </div>
   )
 }
