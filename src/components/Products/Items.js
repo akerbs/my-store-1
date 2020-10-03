@@ -80,7 +80,7 @@ export default function () {
           }
 
           return (
-            <Grid item xs={12} sm={6} md={4}>
+            <Grid item xs={12} sm={6} md={4} key={item.productId}>
               <ItemCard
                 sku={newSku}
                 key={item.productId}
