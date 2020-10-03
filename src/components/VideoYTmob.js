@@ -27,7 +27,7 @@ const useStyles = makeStyles(theme => ({
 
     // bottom: "36%",
     bottom: "14%",
-    right: "-160px",
+    right: "-50%",
     // width: '100%',
     // height: '500px',
     border: "0px",
