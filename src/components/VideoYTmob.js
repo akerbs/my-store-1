@@ -42,9 +42,9 @@ export default function (props) {
 
   useEffect(() => {
     console.log("IN VIEW WORKS")
-    inView("#videoWrapper")
-      .on("enter", startInViewShowVideo)
-      .on("exit", stopInViewShowVideo)
+    inView("#videoWrapper").on("enter", startInViewShowVideo)
+    // .on("enter", startInViewShowVideo)
+    // .on("exit", stopInViewShowVideo)
     inView.threshold(0.2)
   }, [props.itemInView])
 
