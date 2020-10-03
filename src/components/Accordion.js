@@ -154,7 +154,7 @@ export default function (props) {
             content: classes.accSummaryContent,
           }}
         >
-          <Button className={classes.btn} variant="contained" color="defailt">
+          <Button className={classes.btn} variant="contained" color="default">
             {actLanguage === "DEU"
               ? "Versand & Rückgabe"
               : actLanguage === "RUS"

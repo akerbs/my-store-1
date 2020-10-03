@@ -40,23 +40,23 @@ const useStyles = makeStyles(theme => ({
 export default function (props) {
   const classes = useStyles()
 
-  useEffect(() => {
-    console.log("IN VIEW WORKS")
-    inView("#videoWrapper").on("enter", startInViewShowVideo)
-    // .on("enter", startInViewShowVideo)
-    // .on("exit", stopInViewShowVideo)
-    inView.threshold(0.2)
-  }, [props.itemInView])
+  // useEffect(() => {
+  //   console.log("IN VIEW WORKS")
+  //   inView("#videoWrapper").on("enter", startInViewShowVideo)
+  //   // .on("enter", startInViewShowVideo)
+  //   // .on("exit", stopInViewShowVideo)
+  //   inView.threshold(0.2)
+  // }, [props.itemInView])
 
-  function startInViewShowVideo() {
-    console.log(" videoWrapper in View!")
-    onPlay()
-  }
+  // function startInViewShowVideo() {
+  //   console.log(" videoWrapper in View!")
+  //   onPlay()
+  // }
 
-  function stopInViewShowVideo() {
-    console.log(" videoWrapper OUT of View!")
-    onPause()
-  }
+  // function stopInViewShowVideo() {
+  //   console.log(" videoWrapper OUT of View!")
+  //   onPause()
+  // }
 
   const opts = {
     playerVars: {
@@ -67,6 +67,7 @@ export default function (props) {
       showinfo: 0,
       controls: 0,
       fs: 0,
+      playsinline: 1,
       // wmode: "opaque",
       // origin: "http://localhost:8000",
       // autohide:1,

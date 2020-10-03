@@ -284,7 +284,7 @@ function ProductPageTemplate(props) {
       <Scroll showBelow={250} />
 
       <Container className={classes.contentWrapper} id="wrapper">
-        <Hidden smDown id="big">
+        <Hidden smDown>
           <div id="content" className="clearfix">
             <div className={classes.boxLeft}>
               <SRLWrapper
@@ -447,7 +447,8 @@ function ProductPageTemplate(props) {
           </div>
           <br /> <br /> <br />
         </Hidden>
-        <Hidden mdUp id="little">
+        {/* Middle up hide - but show for little viewport */}
+        <Hidden mdUp>
           {/* <Grid container direction="column" spacing={2}> */}
           <SRLWrapper
             options={lightboxOptions}
