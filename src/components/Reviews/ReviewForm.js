@@ -164,7 +164,7 @@ export default function (props) {
       // console.log(data)
       try {
         //   This is the same as grecaptcha.execute on traditional html script tags
-        const result = executeRecaptcha("shop1")
+        const result = executeRecaptcha("review_form")
         setToken(result) //--> grab the generated token by the reCAPTCHA
 
         let response = await fetch(

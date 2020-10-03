@@ -6,6 +6,8 @@ import { useForm } from "react-hook-form"
 import * as yup from "yup"
 import { yupResolver } from "@hookform/resolvers"
 import { LanguageContext } from "../layout"
+import { useGoogleReCaptcha } from "react-google-recaptcha-v3"
+
 const window = require("global/window")
 
 const inputPadding = window.innerWidth <= 599 ? "0.05vw" : "0.5vw"
@@ -44,6 +46,8 @@ const schema = yup.object().shape({
 })
 
 export default function () {
+  const { executeRecaptcha } = useGoogleReCaptcha()
+  const [token, setToken] = useState("")
   const { actLanguage } = useContext(LanguageContext)
   const classes = useStyles()
   const [loading, setLoading] = useState(false)
@@ -63,7 +67,14 @@ export default function () {
       : null
 
   async function onSubmit(data) {
+    if (!executeRecaptcha) {
+      return
+    }
     try {
+      //   This is the same as grecaptcha.execute on traditional html script tags
+      const result = executeRecaptcha("subscribe_form")
+      setToken(result) //--> grab the generated token by the reCAPTCHA
+
       let response = await fetch(
         "https://my-store-1-mailer.herokuapp.com/subscribe",
         // "http://localhost:3000/subscribe",

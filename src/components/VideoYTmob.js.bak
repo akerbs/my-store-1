@@ -5,27 +5,42 @@ import SEO from "../components/seo"
 import YouTube from "react-youtube"
 import inView from "in-view"
 
+// const patchHeight
+// const patchBottom
+// const iframeBottom
+// const iframeRight
+
 const useStyles = makeStyles(theme => ({
   videoWrapper: {
     // margin: 0,
     // padding: 0,
+
     position: "relative",
     overflow: "hidden",
     width: "100%",
-    height: "100%",
-    paddingBottom: "56.25%",
+    height: "100vh",
+    minHeight: "100%",
   },
   video: {
     position: "absolute",
-    top: "0px",
-    left: "0px",
-    bottom: "0px",
-    right: "0px",
+    // leftMargin: "50%",
+    // right: "50%",
+    // right: "-6%",
+
+    // top: "-39%",
+    // width: "100%",
+    height: "100vh",
+    minHeight: "100%",
+
+    // bottom: "36%",
+    bottom: "14%",
+    // right: "-50%",
     // width: '100%',
     // height: '500px',
     border: "0px",
     // marginTop: " -16%",
     // marginTop: " -97%",
+    // marginBottom: " -97%",
   },
 }))
 
@@ -34,9 +49,9 @@ export default function (props) {
 
   // useEffect(() => {
   //   console.log("IN VIEW WORKS")
-  //   inView("#videoWrapper")
-  //     .on("enter", startInViewShowVideo)
-  //     .on("exit", stopInViewShowVideo)
+  //   inView("#videoWrapper").on("enter", startInViewShowVideo)
+  //   // .on("enter", startInViewShowVideo)
+  //   // .on("exit", stopInViewShowVideo)
   //   inView.threshold(0.2)
   // }, [props.itemInView])
 
@@ -51,15 +66,15 @@ export default function (props) {
   // }
 
   const opts = {
-    width: "100%",
-    height: "100%",
     playerVars: {
       // https://developers.google.com/youtube/player_parameters
-      // autoplay: 1,
+      autoplay: 1,
       enablejsapi: 1,
       rel: 0,
       showinfo: 0,
       controls: 0,
+      fs: 0,
+      playsinline: 1,
       // wmode: "opaque",
       // origin: "http://localhost:8000",
       // autohide:1,
@@ -75,15 +90,15 @@ export default function (props) {
     console.log(" onReady")
   }
 
-  async function onPlay() {
-    await window.YTPlayer.playVideo()
-    console.log(" onPlay")
-  }
+  // async function onPlay() {
+  //   await window.YTPlayer.playVideo()
+  //   console.log(" onPlay")
+  // }
 
-  async function onPause() {
-    await window.YTPlayer.pauseVideo()
-    console.log(" onPause")
-  }
+  // async function onPause() {
+  //   await window.YTPlayer.pauseVideo()
+  //   console.log(" onPause")
+  // }
 
   return (
     <div className={classes.videoWrapper} id="videoWrapper">
@@ -106,6 +121,7 @@ export default function (props) {
         onReady={onReady}
         id="myVideo"
       />
+
       {/* <iframe
               className="myVideo"
               id="myVideo"
@@ -116,6 +132,17 @@ export default function (props) {
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
               allowfullscreen
             ></iframe> */}
+      <div
+        style={{
+          // left: "100%",
+          backgroundColor: "#fafafa",
+          width: "100%",
+          height: "20%",
+          // zIndex: "0",
+          position: "absolute",
+          bottom: "17%",
+        }}
+      ></div>
     </div>
   )
 }

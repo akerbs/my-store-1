@@ -450,16 +450,16 @@ function ProductPageTemplate(props) {
         {/* Middle up hide - but show for little viewport */}
         <Hidden mdUp>
           {/* <Grid container direction="column" spacing={2}> */}
-          <SRLWrapper
+          {/* <SRLWrapper
             options={lightboxOptions}
             // callbacks={lightboxCallbacks}
-          >
-            <MainSwiper
-              thumbsSwiper={thumbsSwiper}
-              setThumbsSwiper={setThumbsSwiper}
-              data={itemInfo}
-            />
-          </SRLWrapper>
+          > */}
+          <MainSwiper
+            thumbsSwiper={thumbsSwiper}
+            setThumbsSwiper={setThumbsSwiper}
+            data={itemInfo}
+          />
+          {/* </SRLWrapper> */}
           <div
             style={{
               margin: "0% 5%",
@@ -592,6 +592,7 @@ function ProductPageTemplate(props) {
           <br /> <br />
           <br /> <br /> <br />
           <VideoYTmob itemInView={itemInView} itemInfo={itemInfo} />
+          <br /> <br /> <br /> <br />
           <div
             style={{
               margin: 0,

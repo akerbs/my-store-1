@@ -7,6 +7,7 @@ import * as yup from "yup"
 import { yupResolver } from "@hookform/resolvers"
 import FormControl from "@material-ui/core/FormControl"
 import { LanguageContext } from "../layout"
+import { useGoogleReCaptcha } from "react-google-recaptcha-v3"
 
 const useStyles = makeStyles(theme => ({
   textFieldEmail: {
@@ -31,6 +32,8 @@ const schema = yup.object().shape({
 })
 
 export default function () {
+  const { executeRecaptcha } = useGoogleReCaptcha()
+  const [token, setToken] = useState("")
   const classes = useStyles()
   const { actLanguage } = useContext(LanguageContext)
   const [loading, setLoading] = useState(false)
@@ -40,7 +43,14 @@ export default function () {
   const errorEmail = errors.hasOwnProperty("email") && errors["email"].message
 
   async function onSubmit(data) {
+    if (!executeRecaptcha) {
+      return
+    }
     try {
+      //   This is the same as grecaptcha.execute on traditional html script tags
+      const result = executeRecaptcha("subscribe_form_footer")
+      setToken(result) //--> grab the generated token by the reCAPTCHA
+
       let response = await fetch(
         "https://my-store-1-mailer.herokuapp.com/subscribe",
         // "http://localhost:3000/subscribe",

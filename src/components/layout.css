@@ -635,3 +635,7 @@ pre tt:after {
     font-size: 100%;
   }
 }
+
+.grecaptcha-badge {
+  z-index: -9 !important;
+}
