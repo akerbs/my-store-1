@@ -420,12 +420,8 @@ function ProductPageTemplate(props) {
                   color="primary"
                   // disabled={loading}
                   onClick={() => {
-                    // addItem(itemInfo, quantityOfItem)
                     setLoading(true)
                     handleDirectPayment()
-                    // setTimeout(function () {
-                    //   document.getElementById("directPay").click()
-                    // }, 500)
                   }}
                 >
                   {loading
@@ -573,20 +569,9 @@ function ProductPageTemplate(props) {
               color="primary"
               // disabled={loading}
               onClick={() => {
-                // addItem(itemInfo, quantityOfItem)
-                // console.log("cartDetails", cartDetails)
-                // handleDrawerCartOpen()
-
-                // handlePayment()
-                redirectToCheckout()
+                setLoading(true)
+                handleDirectPayment()
               }}
-
-              // onClick={() => {
-              //   addItem(itemInfo, quantityOfItem)
-              //   console.log("cartDetails", cartDetails)
-              //   setLoading(true)
-              //   redirectToCheckout()
-              // }}
             >
               {loading
                 ? actLanguage === "DEU"
