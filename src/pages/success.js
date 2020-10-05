@@ -1,15 +1,16 @@
-import React from "react"
+import React, { useEffect } from "react"
 import CssBaseline from "@material-ui/core/CssBaseline"
 // import Link from "gatsby-plugin-transition-link"
 import { Link } from "gatsby"
 import SEO from "../components/seo"
 import { useShoppingCart } from "use-shopping-cart"
-const window = require("global/window")
 
-const SuccessPage = () => {
+export default function () {
   const { clearCart } = useShoppingCart()
 
-  window.onload = clearCart
+  useEffect(() => {
+    clearCart()
+  })
 
   return (
     <>
@@ -21,5 +22,3 @@ const SuccessPage = () => {
     </>
   )
 }
-
-export default SuccessPage

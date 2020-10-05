@@ -637,5 +637,5 @@ pre tt:after {
 }
 
 .grecaptcha-badge {
-  z-index: -99 !important;
+  z-index: -9 !important;
 }

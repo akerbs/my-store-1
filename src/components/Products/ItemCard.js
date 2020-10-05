@@ -66,40 +66,45 @@ export default function (props) {
   return (
     <>
       <div className={classes.root} id="selector">
-        {/* <Slide in={show} timeout={700} direction="up"> */}
-        <div>
-          <Card
-            className={classes.card}
-            id={props.id}
-            onMouseOver={() => props.onMouseOver(props.id, true)}
-            onMouseOut={() => props.onMouseOut(props.id, false)}
-          >
-            <Link to={`/products/${props.sku.linkId}`} className={classes.link}>
-              <img
-                style={{ width: "100%" }}
-                className={classes.img}
-                src={props.sku.hovered ? props.sku.scndImg : props.sku.firstImg}
-                alt={props.sku.name}
-              />
-            </Link>
-            <Box
-              textAlign="center"
-              lineHeight={0.7}
-              style={{ marginBottom: 30 }}
+        <Slide in={show} timeout={700} direction="up">
+          <div>
+            <Card
+              className={classes.card}
+              id={props.id}
+              onMouseOver={() => props.onMouseOver(props.id, true)}
+              onMouseOut={() => props.onMouseOut(props.id, false)}
             >
-              {/* <Typography component="div"> */}
-              <Box fontSize="1rem" fontWeight="fontWeightBold">
-                {props.sku.name}
+              <Link
+                to={`/products/${props.sku.linkId}`}
+                className={classes.link}
+              >
+                <img
+                  style={{ width: "100%" }}
+                  className={classes.img}
+                  src={
+                    props.sku.hovered ? props.sku.scndImg : props.sku.firstImg
+                  }
+                  alt={props.sku.name}
+                />
+              </Link>
+              <Box
+                textAlign="center"
+                lineHeight={0.7}
+                style={{ marginBottom: 30 }}
+              >
+                {/* <Typography component="div"> */}
+                <Box fontSize="1rem" fontWeight="fontWeightBold">
+                  {props.sku.name}
+                </Box>
+                <br />
+                <Box fontSize="0.8rem" fontWeight="fontWeightBold">
+                  {props.sku.currencySign} {(props.sku.price / 100).toFixed(2)}
+                </Box>
+                {/* </Typography> */}
               </Box>
-              <br />
-              <Box fontSize="0.8rem" fontWeight="fontWeightBold">
-                {props.sku.currencySign} {(props.sku.price / 100).toFixed(2)}
-              </Box>
-              {/* </Typography> */}
-            </Box>
-          </Card>
-        </div>
-        {/* </Slide> */}
+            </Card>
+          </div>
+        </Slide>
       </div>
     </>
   )

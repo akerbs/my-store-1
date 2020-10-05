@@ -16,10 +16,10 @@ import { ItemsContextProvider } from "../context/ItemsContext"
 import { GoogleReCaptchaProvider } from "react-google-recaptcha-v3"
 
 const window = require("global/window")
+const document = require("global/document")
 
 const useStyles = makeStyles(theme => ({}))
 
-// const stripePromise = loadStripe(process.env.GATSBY_STRIPE_PUBLISHABLE_KEY)
 const stripePromise = loadStripe(
   "pk_test_51HGUuRHwITO0GSJr0YK6FwbE17LUTst9UCvm2uH0RdjBtAnQJqgPmDn0BSunRc8FIEXRW3HatsFd1uDHkfaGJtUm00IA2780Iw"
 )
@@ -44,7 +44,7 @@ function Layout({ children }) {
 
   useEffect(() => {
     if (typeof window !== `undefined`) {
-      console.log("LANGUAGE: ", window.navigator.language.slice(0, 2))
+      // console.log("LANGUAGE: ", window.navigator.language.slice(0, 2))
 
       if (window.navigator.language.slice(0, 2) === "ru") {
         setActLanguage("RUS")
@@ -104,11 +104,8 @@ function Layout({ children }) {
   }
 
   return (
-    <>
-      <GoogleReCaptchaProvider
-        // reCaptchaKey={process.env.RECAPTCHA_KEY}
-        reCaptchaKey="6LebfdIZAAAAAJ_QgpOdjwdM9zUUNAi7aIFCtjp-"
-      >
+    <div style={{ backgroundColor: "#fafafa" }}>
+      <GoogleReCaptchaProvider reCaptchaKey="6LebfdIZAAAAAJ_QgpOdjwdM9zUUNAi7aIFCtjp-">
         <CurrencyContext.Provider
           value={{
             actCurrency,
@@ -151,7 +148,7 @@ function Layout({ children }) {
           </CartProvider>
         </CurrencyContext.Provider>
       </GoogleReCaptchaProvider>
-    </>
+    </div>
   )
 }
 

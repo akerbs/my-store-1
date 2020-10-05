@@ -54,6 +54,7 @@ import {
   isBrowser,
   isMobile,
 } from "react-device-detect"
+import getStripe from "../utils/stripejs"
 
 const document = require("global/document")
 const window = require("global/window")
@@ -261,6 +262,9 @@ function ProductPageTemplate(props) {
   //////////////////////////////////////////////////////
 
   console.log("DATA:", `/products/${itemInfo.linkId}#reviews`)
+  // console.log("LAST URL??: ", document.referrer)
+  // document.cookie="keyofcookie=valueofcookie"
+  // $.cookie("previousUrl", window.location.href, {path:"/"});
 
   // let sessionId
   // function getJSessionId() {
@@ -281,6 +285,20 @@ function ProductPageTemplate(props) {
 
   //   // await redirectToCheckout(e)
   // }
+  async function handleDirectPayment() {
+    const stripe = await getStripe()
+    const { error } = await stripe.redirectToCheckout({
+      mode: "payment",
+      lineItems: [{ price: itemInfo.sku, quantity: 1 }],
+      successUrl: `http://localhost:8000/success/`,
+      cancelUrl: `http://localhost:8000/`,
+      billingAddressCollection: "required",
+    })
+
+    if (error) {
+      console.warn("Error:", error)
+    }
+  }
 
   return (
     <div className={classes.root} id="root">
@@ -394,6 +412,7 @@ function ProductPageTemplate(props) {
                     : null}
                 </Button>
                 <Button
+                  id="directPay"
                   // data-checkout-mode="payment"
                   // data-price-id={itemInfo.sku}
                   className={classes.btn}
@@ -402,19 +421,12 @@ function ProductPageTemplate(props) {
                   // disabled={loading}
                   onClick={() => {
                     // addItem(itemInfo, quantityOfItem)
-                    // console.log("cartDetails", cartDetails)
-                    // handleDrawerCartOpen()
-
-                    // handlePayment()
-                    redirectToCheckout()
+                    setLoading(true)
+                    handleDirectPayment()
+                    // setTimeout(function () {
+                    //   document.getElementById("directPay").click()
+                    // }, 500)
                   }}
-
-                  // onClick={() => {
-                  //   addItem(itemInfo, quantityOfItem)
-                  //   console.log("cartDetails", cartDetails)
-                  //   setLoading(true)
-                  //   redirectToCheckout()
-                  // }}
                 >
                   {loading
                     ? actLanguage === "DEU"

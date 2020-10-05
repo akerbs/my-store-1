@@ -69,14 +69,14 @@ export default function () {
 
   useEffect(() => {
     inView("#selector").once("enter", startInView)
-    inView.threshold(0)
+    inView.threshold(0.2)
   })
 
   return (
     <div className={classes.root}>
       <CssBaseline />
       <div style={{ overflow: "hidden" }} id="selector">
-        <Slide in={show} timeout={1500} direction="up">
+        <Slide in={show} timeout={1000} direction="up">
           <div>
             <Container maxWidth="md" className={classes.content}>
               <Grid container className={classes.root} spacing={3}>
