@@ -165,13 +165,6 @@ function ProductPageTemplate(props) {
   const [loading, setLoading] = useState(false)
   const [itemInView, setItemInView] = useState(null)
 
-  // const [pageOk, setPageOk] = useState(false)
-
-  // useEffect(() => {
-  //   window.location.reload(false)
-  //   setPageOk(true)
-  // }, [pageOk])
-
   function handleSetItemInView() {
     setItemInView(itemInfo.productId)
   }
@@ -261,30 +254,8 @@ function ProductPageTemplate(props) {
   // console.log("->!!!!->", newArr, sum, quantity, averageRatingValue)
   //////////////////////////////////////////////////////
 
-  console.log("DATA:", `/products/${itemInfo.linkId}#reviews`)
-  // console.log("LAST URL??: ", document.referrer)
-  // document.cookie="keyofcookie=valueofcookie"
-  // $.cookie("previousUrl", window.location.href, {path:"/"});
+  // console.log("DATA:", `/products/${itemInfo.linkId}#reviews`)
 
-  // let sessionId
-  // function getJSessionId() {
-  //   sessionId = document.cookie.match(/JSESSIONID=[^;]+/)
-  //   if (sessionId != null) {
-  //     if (sessionId instanceof Array) sessionId = sessionId[0].substring(11)
-  //     else sessionId = sessionId.substring(11)
-  //   }
-  //   return sessionId
-  // }
-
-  // function handlePayment(e) {
-  //   // setLoading(true)
-  //   addItem(itemInfo, quantityOfItem)
-  //   setTimeout(function () {
-  //     console.log("cartDetails", cartDetails)
-  //   }, 2000)
-
-  //   // await redirectToCheckout(e)
-  // }
   async function handleDirectPayment() {
     const stripe = await getStripe()
     const { error } = await stripe.redirectToCheckout({
@@ -311,10 +282,7 @@ function ProductPageTemplate(props) {
         <Hidden smDown>
           <div id="content" className="clearfix">
             <div className={classes.boxLeft}>
-              <SRLWrapper
-                options={lightboxOptions}
-                // callbacks={lightboxCallbacks}
-              >
+              <SRLWrapper options={lightboxOptions}>
                 <img src={itemInfo.firstImg} className={classes.imgBoxLeft} />
                 <img src={itemInfo.scndImg} className={classes.imgBoxLeft} />
                 <img src={itemInfo.firstImg} className={classes.imgBoxLeft} />
@@ -338,7 +306,6 @@ function ProductPageTemplate(props) {
                 })}
               </Typography>
               <br />
-              {/* <Link to="#reviews"> */}
               <Link
                 to={`/products/${itemInfo.linkId}#reviews`}
                 style={{
@@ -347,8 +314,6 @@ function ProductPageTemplate(props) {
                   color: "black",
                 }}
               >
-                {/* <Link to="/"> */}
-                {/* <bitton onClick={() => alert("click")}>BTN</bitton> */}
                 <div style={{ display: "flex" }}>
                   <RatingEl
                     ratingValue={averageRatingValue}
@@ -396,10 +361,8 @@ function ProductPageTemplate(props) {
                   className={classes.btn}
                   variant="contained"
                   color="secondary"
-                  // className={classes.btn1}
                   onClick={() => {
                     addItem(itemInfo, quantityOfItem)
-                    // console.log("cartDetails", cartDetails)
                     handleDrawerCartOpen()
                   }}
                 >
@@ -413,12 +376,10 @@ function ProductPageTemplate(props) {
                 </Button>
                 <Button
                   id="directPay"
-                  // data-checkout-mode="payment"
-                  // data-price-id={itemInfo.sku}
                   className={classes.btn}
                   variant="contained"
                   color="primary"
-                  // disabled={loading}
+                  disabled={loading}
                   onClick={() => {
                     setLoading(true)
                     handleDirectPayment()
@@ -444,14 +405,12 @@ function ProductPageTemplate(props) {
               <br />
               <br />
               <br />
-              {/* <Accordion data={itemInfo} /> */}
               <Tabs data={itemInfo} />
               <br />
             </div>
           </div>
           <VideoYT itemInView={itemInView} itemInfo={itemInfo} />
           <br />
-          {/* <hr /> */}
           <div id="reviews">
             <Reviews
               reviews={reviews}
@@ -463,11 +422,6 @@ function ProductPageTemplate(props) {
         </Hidden>
         {/* Middle up hide - but show for little viewport */}
         <Hidden mdUp>
-          {/* <Grid container direction="column" spacing={2}> */}
-          {/* <SRLWrapper
-            options={lightboxOptions}
-            // callbacks={lightboxCallbacks}
-          > */}
           <MainSwiper
             thumbsSwiper={thumbsSwiper}
             setThumbsSwiper={setThumbsSwiper}
@@ -504,8 +458,6 @@ function ProductPageTemplate(props) {
                 color: "black",
               }}
             >
-              {/* <Link to="/"> */}
-              {/* <bitton onClick={() => alert("click")}>BTN</bitton> */}
               <div style={{ display: "flex" }}>
                 <RatingEl
                   ratingValue={averageRatingValue}
@@ -546,10 +498,8 @@ function ProductPageTemplate(props) {
               className={classes.btn}
               variant="contained"
               color="secondary"
-              // className={classes.btn1}
               onClick={() => {
                 addItem(itemInfo, quantityOfItem)
-                // console.log("cartDetails", cartDetails)
                 handleDrawerCartOpen()
               }}
             >
@@ -562,12 +512,10 @@ function ProductPageTemplate(props) {
                 : null}
             </Button>
             <Button
-              // data-checkout-mode="payment"
-              // data-price-id={itemInfo.sku}
               className={classes.btn}
               variant="contained"
               color="primary"
-              // disabled={loading}
+              disabled={loading}
               onClick={() => {
                 setLoading(true)
                 handleDirectPayment()
@@ -635,7 +583,3 @@ ProductPageTemplate.propTypes = {
   width: PropTypes.oneOf(["lg", "md", "sm", "xl", "xs"]).isRequired,
 }
 export default withWidth()(ProductPageTemplate)
-
-// <iframe width="560" height="315" src="https://www.youtube.com/embed/-i_94tW_iSM?controls=0" frameborder="0"
-// allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
-// </iframe>
