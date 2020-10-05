@@ -59,23 +59,39 @@ function Layout({ children }) {
   }, [])
 
   useEffect(() => {
-    async function getLocation() {
-      const response = await fetch("https://ipapi.co/json")
+    function getLocation() {
+      window.navigator.geolocation.getCurrentPosition(
+        position => {
+          let latitude = position.coords.latitude
+          let longitude = position.coords.longitude
+          // console.log(latitude, longitude)
+          const url = `http://api.geonames.org/countryCodeJSON?lat=${latitude}&lng=${longitude}&username=anker2702`
 
-      const info = await response.json()
-      const countryCode = info.country_code
-
-      countryCode == "US"
-        ? setActCurrency("USD")
-        : countryCode == "DE"
-        ? setActCurrency("EUR")
-        : countryCode == "RU"
-        ? setActCurrency("RUB")
-        : setActCurrency("USD")
-
-      return countryCode
+          const response = fetch(url)
+            .then(res => {
+              return res.json()
+            })
+            .then(data => {
+              data.countryCode == "US"
+                ? setActCurrency("USD")
+                : data.countryCode == "DE"
+                ? setActCurrency("EUR")
+                : data.countryCode == "RU"
+                ? setActCurrency("RUB")
+                : setActCurrency("USD")
+              // console.log("!!!!!ABC!!!!!", data)
+            })
+            .catch(err => {
+              console.log(err)
+            })
+          // console.log(latitude, longitude)
+        },
+        error => {
+          console.log(error.code)
+        }
+      )
     }
-    getLocation().then(countryCode => console.log("COUNTRY CODE:", countryCode))
+    getLocation()
   }, [])
 
   function handleCurrencyChange(event) {
