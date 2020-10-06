@@ -15,16 +15,15 @@ import Slide from "@material-ui/core/Slide"
 import { Link } from "gatsby"
 import Typography from "@material-ui/core/Typography"
 import Box from "@material-ui/core/Box"
+import Grid from "@material-ui/core/Grid"
 
 const useStyles = makeStyles({
-  root: {
-    overflow: "hidden",
-  },
+  root: {},
   card: {
-    maxWidth: 300,
+    // maxWidth: 300,
     // height: 300,
 
-    margin: 10,
+    margin: "10px 10px",
     // borderRadius: "5px 10px 10px 5px",
     // maskImage: "radial-gradient(white, black)",
     // borderRadius: "100%",
@@ -56,78 +55,52 @@ export default function (props) {
   const { handleDrawerCartOpen } = useContext(DrawerCartContext)
 
   const [show, setShow] = useState(false)
+
   function startInView() {
     setShow(true)
   }
   useEffect(() => {
-    inView("#selector").once("enter", startInView)
+    inView(`#${props.sku.linkId}`).once("enter", startInView)
+    inView.threshold(0.2)
   })
 
   return (
-    <>
-      <div className={classes.root} id="selector">
-        <Slide in={show} timeout={700} direction="up">
+    <div id={props.sku.linkId}>
+      <Card
+        className={classes.card}
+        id={props.id}
+        onMouseOver={() => props.onMouseOver(props.id, true)}
+        onMouseOut={() => props.onMouseOut(props.id, false)}
+        style={{ overflow: "hidden" }}
+      >
+        <Slide in={show} timeout={props.sku.timeoutShow} direction="up">
           <div>
-            <Card
-              className={classes.card}
-              id={props.id}
-              onMouseOver={() => props.onMouseOver(props.id, true)}
-              onMouseOut={() => props.onMouseOut(props.id, false)}
+            <Link to={`/products/${props.sku.linkId}`} className={classes.link}>
+              <img
+                style={{ width: "100%" }}
+                className={classes.img}
+                src={props.sku.hovered ? props.sku.scndImg : props.sku.firstImg}
+                alt={props.sku.name}
+              />
+            </Link>
+            <Box
+              textAlign="center"
+              lineHeight={0.7}
+              style={{ marginBottom: 30 }}
             >
-              <Link
-                to={`/products/${props.sku.linkId}`}
-                className={classes.link}
-              >
-                <img
-                  style={{ width: "100%" }}
-                  className={classes.img}
-                  src={
-                    props.sku.hovered ? props.sku.scndImg : props.sku.firstImg
-                  }
-                  alt={props.sku.name}
-                />
-              </Link>
-              <Box
-                textAlign="center"
-                lineHeight={0.7}
-                style={{ marginBottom: 30 }}
-              >
-                {/* <Typography component="div"> */}
-                <Box fontSize="1rem" fontWeight="fontWeightBold">
-                  {props.sku.name}
-                </Box>
-                <br />
-                <Box fontSize="0.8rem" fontWeight="fontWeightBold">
-                  {props.sku.currencySign} {(props.sku.price / 100).toFixed(2)}
-                </Box>
-                {/* </Typography> */}
+              {/* <Typography component="div"> */}
+              <Box fontSize="1rem" fontWeight="fontWeightBold">
+                {props.sku.name}
               </Box>
-            </Card>
+              <br />
+              <Box fontSize="0.8rem" fontWeight="fontWeightBold">
+                {props.sku.currencySign} {(props.sku.price / 100).toFixed(2)}
+              </Box>
+              {/* </Typography> */}
+            </Box>
           </div>
         </Slide>
-      </div>
-    </>
+      </Card>
+    </div>
   )
 }
-
-/* {props.sku.hovered && (
-                  <Button
-                    className={classes.btnAddToCart}
-                    variant="outlined"
-                    fullWidth
-                    size="small"
-                    onClick={() => {
-                      addItem(props.sku)
-                      handleDrawerCartOpen()
-                      console.log("CLICK", props.sku)
-                    }}
-                  >
-                    {actLanguage === "DEU"
-                      ? "IN DEN WARENKORB LEGEN"
-                      : actLanguage === "RUS"
-                      ? "ДОБАВИТЬ В КОРЗИНУ"
-                      : actLanguage === "ENG"
-                      ? "ADD TO CART"
-                      : "ADD TO CART"}
-                  </Button>
-                )} */

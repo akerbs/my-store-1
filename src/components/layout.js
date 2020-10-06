@@ -18,7 +18,15 @@ import { GoogleReCaptchaProvider } from "react-google-recaptcha-v3"
 const window = require("global/window")
 const document = require("global/document")
 
-const useStyles = makeStyles(theme => ({}))
+const useStyles = makeStyles(theme => ({
+  root: {
+    backgroundColor: "#fafafa",
+    maxWidth: "100vw",
+    margin: 0,
+    padding: 0,
+    overflow: "hidden",
+  },
+}))
 
 const stripePromise = loadStripe(
   "pk_test_51HGUuRHwITO0GSJr0YK6FwbE17LUTst9UCvm2uH0RdjBtAnQJqgPmDn0BSunRc8FIEXRW3HatsFd1uDHkfaGJtUm00IA2780Iw"
@@ -66,7 +74,6 @@ function Layout({ children }) {
           let longitude = position.coords.longitude
           // console.log(latitude, longitude)
           const url = `http://api.geonames.org/countryCodeJSON?lat=${latitude}&lng=${longitude}&username=anker2702`
-
           const response = fetch(url)
             .then(res => {
               return res.json()
@@ -92,6 +99,12 @@ function Layout({ children }) {
       )
     }
     getLocation()
+
+    // setTimeout(function () {
+    //   return () => {
+    //     null
+    //   }
+    // }, 1000)
   }, [])
 
   function handleCurrencyChange(event) {
@@ -104,7 +117,7 @@ function Layout({ children }) {
   }
 
   return (
-    <div style={{ backgroundColor: "#fafafa" }}>
+    <div className={classes.root}>
       <GoogleReCaptchaProvider reCaptchaKey="6LebfdIZAAAAAJ_QgpOdjwdM9zUUNAi7aIFCtjp-">
         <CurrencyContext.Provider
           value={{

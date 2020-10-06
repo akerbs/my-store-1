@@ -57,7 +57,7 @@ export default function (props) {
       </Link>
       <Link
         color="inherit"
-        to="#"
+        to="/products"
         // onClick={handleClick}
         className={classes.links}
       >

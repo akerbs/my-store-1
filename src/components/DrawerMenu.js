@@ -10,7 +10,7 @@ import ChevronRightIcon from "@material-ui/icons/ChevronRight"
 import ListItem from "@material-ui/core/ListItem"
 import ListItemText from "@material-ui/core/ListItemText"
 // import Link from "gatsby-plugin-transition-link"
-import { Link } from "gatsby"
+import { Link, navigate } from "gatsby"
 import Slide from "@material-ui/core/Slide"
 import Fade from "@material-ui/core/Fade"
 const window = require("global/window")
@@ -36,6 +36,11 @@ const useStyles = makeStyles(theme => ({
 
   drawerLink: {
     textDecoration: "none",
+    color: theme.palette.primary.main,
+    // width: "100vw",
+    "&:hover": {
+      color: theme.palette.primary.light,
+    },
   },
 }))
 
@@ -79,10 +84,10 @@ export default function DrawerMenu(props) {
             <Fade in={props.open} timeout={2000}>
               <List>
                 <Link
-                  to="#"
+                  to="/"
                   className={classes.drawerLink}
                   // activeClassName={classes.active}
-                  // onClick={handleDrawerClose}
+                  onClick={props.onClose}
                 >
                   {/* <Slide in={props.open} timeout={1020} direction="up">
               <div>
@@ -101,14 +106,36 @@ export default function DrawerMenu(props) {
             </Slide> */}
                 </Link>
                 <Link
-                  to="#"
+                  to="/products"
                   className={classes.drawerLink}
                   // activeClassName={classes.active}
-                  // onClick={handleDrawerClose}
+                  onClick={props.onClose}
                 >
                   {/* <Slide in={props.open} timeout={1040} direction="up">
               <div>
                 <Fade in={props.open} timeout={2040}> */}
+                  <ListItem button key={"ALL PRODUCTS"}>
+                    <ListItemText
+                      primary={
+                        <Typography align="center" variant="h6">
+                          ALL PRODUCTS
+                        </Typography>
+                      }
+                    />
+                  </ListItem>
+                  {/* </Fade>
+              </div>
+            </Slide> */}
+                </Link>
+                <Link
+                  to="#"
+                  className={classes.drawerLink}
+                  // activeClassName={classes.active}
+                  onClick={props.onClose}
+                >
+                  {/* <Slide in={props.open} timeout={1060} direction="up">
+              <div>
+                <Fade in={props.open} timeout={2060}> */}
                   <ListItem button key={"ABOUT US"}>
                     <ListItemText
                       primary={
@@ -122,34 +149,12 @@ export default function DrawerMenu(props) {
               </div>
             </Slide> */}
                 </Link>
-                <Link
-                  to="#"
-                  className={classes.drawerLink}
-                  // activeClassName={classes.active}
-                  // onClick={handleDrawerClose}
-                >
-                  {/* <Slide in={props.open} timeout={1060} direction="up">
-              <div>
-                <Fade in={props.open} timeout={2060}> */}
-                  <ListItem button key={"TRENDS"}>
-                    <ListItemText
-                      primary={
-                        <Typography align="center" variant="h6">
-                          TRENDS
-                        </Typography>
-                      }
-                    />
-                  </ListItem>
-                  {/* </Fade>
-              </div>
-            </Slide> */}
-                </Link>
 
                 <Link
                   to="#"
                   className={classes.drawerLink}
                   // activeClassName={classes.active}
-                  // onClick={handleDrawerClose}
+                  onClick={props.onClose}
                 >
                   {/* <Slide in={props.open} timeout={1080} direction="up">
               <div>

@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react"
+import React, { useState, useContext, useEffect } from "react"
 import { ItemsContext } from "../../context/ItemsContext"
 import { LanguageContext } from "../layout"
 import { CurrencyContext } from "../layout"
@@ -18,9 +18,9 @@ export default function () {
   const { addItem } = useShoppingCart()
 
   return (
-    <div>
+    <>
       <Grid container spacing={0}>
-        {products.map(item => {
+        {products.map((item, idx) => {
           const newSku = {
             name:
               actLanguage === "ENG"
@@ -40,6 +40,8 @@ export default function () {
                 : null,
             productId: item.productId,
             linkId: item.linkId,
+            timeoutShow: item.timeoutShow,
+            inview: item.inview,
 
             sku:
               actCurrency === "USD"
@@ -80,11 +82,11 @@ export default function () {
           }
 
           return (
-            <Grid item xs={12} sm={6} md={4} key={item.productId}>
+            <Grid item xs={12} sm={6} md={4} lg={3}>
               <ItemCard
                 sku={newSku}
                 key={item.productId}
-                id={item.productId}
+                id={idx}
                 onMouseOver={changeHover}
                 onMouseOut={changeHover}
               />
@@ -92,6 +94,6 @@ export default function () {
           )
         })}
       </Grid>
-    </div>
+    </>
   )
 }

@@ -17,43 +17,30 @@ import SwiperCore, {
 } from "swiper"
 import Grid from "@material-ui/core/Grid"
 import Box from "@material-ui/core/Box"
-
 import { SRLWrapper } from "simple-react-lightbox"
 import withWidth from "@material-ui/core/withWidth"
 import Hidden from "@material-ui/core/Hidden"
 import PropTypes from "prop-types"
 import { useShoppingCart, formatCurrencyString } from "use-shopping-cart"
 import { MainSwiper, ThumbsSwiper } from "../components/Swipers"
-
 import Button from "@material-ui/core/Button"
 import { DrawerCartContext } from "../context/DrawerCartContext"
 import { CurrencyContext } from "../components/layout"
 import { LanguageContext } from "../components/layout"
-
 import ShareIcon from "@material-ui/icons/Share"
 import Typography from "@material-ui/core/Typography"
 import BreadCrumbs from "../components/BreadCrumbs"
-
 import { Link, navigate } from "gatsby"
 import Counter from "../components/CounterBig"
-
 import RatingEl from "../components/Reviews/RatingEl"
 import ReviewForm from "../components/Reviews/ReviewForm"
 import Reviews from "../components/Reviews/Reviews"
-
 import Accordion from "../components/Accordion"
 import Tabs from "../components/Tabs"
 import inView from "in-view"
 import VideoYT from "../components/VideoYT"
 import VideoYTmob from "../components/VideoYTmob"
-
 import Scroll from "../components/ScrollToTopBtn"
-import {
-  BrowserView,
-  MobileView,
-  isBrowser,
-  isMobile,
-} from "react-device-detect"
 import getStripe from "../utils/stripejs"
 
 const document = require("global/document")
