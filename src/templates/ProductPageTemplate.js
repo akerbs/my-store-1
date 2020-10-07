@@ -1,7 +1,6 @@
 import React, { useState, useContext, useEffect, useRef } from "react"
 import CssBaseline from "@material-ui/core/CssBaseline"
 import { makeStyles } from "@material-ui/core/styles"
-import SEO from "../components/seo"
 import Header from "../components/header"
 import Footer from "../components/footer"
 import Container from "@material-ui/core/Container"
@@ -260,7 +259,6 @@ function ProductPageTemplate(props) {
 
   return (
     <div className={classes.root} id="root">
-      <SEO title="Funny bunny" keywords={[`gatsby`, `application`, `react`]} />
       <CssBaseline />
       <Header />
       <Scroll showBelow={250} />

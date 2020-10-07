@@ -33,7 +33,7 @@ const ItemsContextProvider = props => {
       priceRub: 7913000,
       currencyRub: "RUB",
       currencySignRub: "₽",
-      timeoutShow: 1000,
+      timeoutShow: 800,
       reviews: [
         {
           rating: 5,
@@ -80,7 +80,7 @@ const ItemsContextProvider = props => {
       priceRub: 436500,
       currencyRub: "RUB",
       currencySignRub: "₽",
-      timeoutShow: 1100,
+      timeoutShow: 900,
       reviews: [],
     },
     {
@@ -108,7 +108,7 @@ const ItemsContextProvider = props => {
       priceRub: 294000,
       currencyRub: "RUB",
       currencySignRub: "₽",
-      timeoutShow: 1200,
+      timeoutShow: 1000,
       reviews: [],
     },
     // {

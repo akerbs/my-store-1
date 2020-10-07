@@ -79,7 +79,7 @@ export default function () {
         <div className={classes.titleWrapper} id="selector1">
           <Slide in={showTitle} timeout={700} direction="up">
             <div>
-              <h1>Store</h1>
+              <h1>Shop</h1>
             </div>
           </Slide>
         </div>

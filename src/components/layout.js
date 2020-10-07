@@ -66,6 +66,26 @@ function Layout({ children }) {
     }
   }, [])
 
+  // useEffect(() => {
+  //   async function getLocation() {
+  //     const response = await fetch("https://ipapi.co/json")
+
+  //     const info = await response.json()
+  //     const countryCode = info.country_code
+
+  //     countryCode == "US"
+  //       ? setActCurrency("USD")
+  //       : countryCode == "DE"
+  //       ? setActCurrency("EUR")
+  //       : countryCode == "RU"
+  //       ? setActCurrency("RUB")
+  //       : setActCurrency("USD")
+
+  //     return countryCode
+  //   }
+  //   getLocation().then(countryCode => console.log("COUNTRY CODE:", countryCode))
+  // }, [])
+
   useEffect(() => {
     function getLocation() {
       window.navigator.geolocation.getCurrentPosition(
@@ -74,6 +94,7 @@ function Layout({ children }) {
           let longitude = position.coords.longitude
           // console.log(latitude, longitude)
           const url = `http://api.geonames.org/countryCodeJSON?lat=${latitude}&lng=${longitude}&username=anker2702`
+
           const response = fetch(url)
             .then(res => {
               return res.json()
@@ -99,12 +120,6 @@ function Layout({ children }) {
       )
     }
     getLocation()
-
-    // setTimeout(function () {
-    //   return () => {
-    //     null
-    //   }
-    // }, 1000)
   }, [])
 
   function handleCurrencyChange(event) {
